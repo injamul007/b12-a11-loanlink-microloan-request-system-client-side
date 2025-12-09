@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: #0B5FFF;
+  --color-secondary: #0B73FF;
+  --color-accent: #FFB703;
+  --color-neutral: #F7FAFF;
+  --color-text: #0B1736;
+  --color-base-100: #ffffff;
+  --color-base-200: #fafaf9;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+}
+
+* {
+  font-family: "Inter", sans-serif;
+}
+
+.my-btn {
+  background-color: #0B5FFF;
+  border: 2px solid #0B73FF;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.my-btn:hover {
+  background-color: #0B73FF;
+  border-color: #0B5FFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
+.my-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(14, 165, 164, 0.3);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.navbar .active {
+  color: #0B5FFF;
+  font-weight: 600;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  background: #fafaf9;
+  transition: all 0.2s ease-in-out;
+}
+.navbar .active:hover {
+  box-shadow: 0 2px 6px rgba(5, 150, 105, 0.15);
+}
+
+
+.small-swal-popup {
+  width: 250px !important;
+  height: 120px !important;
+  font-size: 8px !important;
+  padding: 6px !important;
+}
+
+.medium-swal-popup {
+  width: 250px !important;
+  height: 150px !important;
+  font-size: 8px !important;
+  padding: 6px !important;
+}
+
+.confirmation-swal-popup {
+  width: 350px !important;
+  height: 300px !important;
+  font-size: 14px !important;
+  padding: 6px !important;
+}
