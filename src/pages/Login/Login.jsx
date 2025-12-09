@@ -4,6 +4,7 @@ import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
 import Swal from "sweetalert2";
+import SocialLogin from "../../components/Shared/SocialLogin/SocialLogin";
 // import useAuth from "../../hook/useAuth";
 
 const Login = () => {
@@ -236,24 +237,13 @@ const Login = () => {
               </div>
 
               {/* Google Signin */}
-              <button
-                type="button"
-                // onClick={handleGoogleSignin}
-                className="flex items-center justify-center gap-3 bg-white text-gray-800 px-5 py-2 rounded-lg w-full font-semibold hover:bg-gray-200 transition-colors cursor-pointer"
-              >
-                <img
-                  src="https://www.svgrepo.com/show/475656/google-color.svg"
-                  alt="google"
-                  className="w-5 h-5"
-                />
-                Login with Google
-              </button>
+              <SocialLogin></SocialLogin>
 
               <p className="text-center text-sm text-white/80 mt-3">
                 New to our Website? Please{" "}
                 <Link
                   to="/register"
-                  className="text-emerald-900 hover:text-white underline"
+                  className="text-accent hover:text-white underline"
                 >
                   Register
                 </Link>

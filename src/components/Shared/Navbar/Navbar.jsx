@@ -9,11 +9,12 @@ import navLogo from "../../../assets/loanLink_logo.png";
 import Swal from "sweetalert2";
 import { ClockLoader } from "react-spinners";
 import { FaSun, FaMoon } from "react-icons/fa";
-// import useAuth from "../../hook/useAuth";
 import MyContainer from "../MyContainer/MyContainer";
+import useAuth from "../../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
-  // const { user, setUser, loading, logOutUserFunc } = useAuth();
+  const { user, setUser, loading, logOutFunc } = useAuth();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   // const navigate = useNavigate();
   const links = (
@@ -29,21 +30,27 @@ const Navbar = () => {
           <TiContacts /> All Loans
         </NavLink>
       </li>
-      <li>
-        <NavLink to={"/about-us"}>
-          <TiContacts /> About Us
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to={"/contact"}>
-          <TiContacts /> Contact
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to={"/dashboard"}>
-          <MdDashboard /> Dashboard
-        </NavLink>
-      </li>
+
+      {user && user?.email ? (
+        <li>
+          <NavLink to={"/dashboard"}>
+            <MdDashboard /> Dashboard
+          </NavLink>
+        </li>
+      ) : (
+        <>
+          <li>
+            <NavLink to={"/about-us"}>
+              <TiContacts /> About Us
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/contact"}>
+              <TiContacts /> Contact
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
@@ -57,26 +64,26 @@ const Navbar = () => {
     setTheme(checked ? "dark" : "light");
   };
 
-  // const handleLogOutUser = () => {
-  //   logOutUserFunc()
-  //     .then(() => {
-  //       Swal.fire({
-  //         position: "top-end",
-  //         icon: "success",
-  //         title: "LogOut Successful",
-  //         showConfirmButton: false,
-  //         timer: 1500,
-  //         customClass: {
-  //           popup: "small-swal-popup",
-  //         },
-  //       });
-  //       setUser(null);
-  //       navigate("/");
-  //     })
-  //     .catch((error) => {
-  //       toast.error(error.message);
-  //     });
-  // };
+  const handleLogOutUser = () => {
+    logOutFunc()
+      .then(() => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "LogOut Successful",
+          showConfirmButton: false,
+          timer: 1500,
+          customClass: {
+            popup: "small-swal-popup",
+          },
+        });
+        setUser(null);
+        // navigate("/");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
 
   return (
     <div className="navbar shadow-sm  dark:bg-[#303233] relative z-1000">
@@ -127,82 +134,81 @@ const Navbar = () => {
               </p>
             </Link>
           </div>
-          {/* <div className="navbar-center hidden md:flex"></div> */}
+          <div className="navbar-center hidden md:flex">
+            <ul className="menu menu-horizontal px-1 gap-2">{links}</ul>
+          </div>
           <div className="navbar-end gap-3 mr-3">
-            <div className="flex">
-              <div className="hidden md:flex">
-                <ul className="menu menu-horizontal px-1 gap-2">{links}</ul>
-              </div>
-            </div>
-            {/* {loading ? ( */}
-            {/* <ClockLoader color="#0B5FFF" size={34} /> */}
-            {/* ) : user ? ( */}
-            <>
-              <div className="dropdown dropdown-end z-50 hidden">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn btn-ghost btn-circle avatar"
-                >
-                  <div className="w-10 h-10 border-2 border-gray-300 rounded-full">
-                    <img
-                      alt="Tailwind CSS Navbar component"
-                      referrerPolicy="no-referrer"
-                      src={
-                        // user.photoURL ||
-                        "https://i.ibb.co.com/xtMvGXq4/FB-IMG-1728123707089.jpg"
-                      }
-                    />
+            <div className="flex"></div>
+            {loading ? (
+              <ClockLoader color="#0B5FFF" size={34} />
+            ) : user ? (
+              <>
+                <div className="dropdown dropdown-end z-50">
+                  <div
+                    tabIndex={0}
+                    role="button"
+                    className="btn btn-ghost btn-circle avatar"
+                  >
+                    <div className="w-10 h-10 border-2 border-gray-300 rounded-full">
+                      <img
+                        alt="Tailwind CSS Navbar component"
+                        referrerPolicy="no-referrer"
+                        src={
+                          user.photoURL ||
+                          "https://i.ibb.co.com/HLPwdmsS/User-Profile-PNG-Picture.png"
+                        }
+                      />
+                    </div>
                   </div>
+                  <ul
+                    tabIndex="-1"
+                    className="menu  menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-fit p-2 shadow"
+                  >
+                    <div className=" pb-3 border-b border-b-gray-200">
+                      <li className="text-sm font-bold">{user.displayName}</li>
+                      <li className="text-xs">{user.email}</li>
+                    </div>
+                    <li className="my-2">
+                      <NavLink to={"/dashboard/my-profile"}>
+                        <FaUser /> Profile
+                      </NavLink>
+                    </li>
+                    <li>
+                      <button
+                        onClick={handleLogOutUser}
+                        className="btn btn-sm my-btn flex lg:hidden"
+                      >
+                        <IoLogOut /> Logout
+                      </button>
+                    </li>
+                  </ul>
                 </div>
-                <ul
-                  tabIndex="-1"
-                  className="menu  menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-fit p-2 shadow"
+                <button
+                  onClick={handleLogOutUser}
+                  className="btn my-btn hidden lg:flex"
                 >
-                  <div className=" pb-3 border-b border-b-gray-200">
-                    {/* <li className="text-sm font-bold">{user.displayName}</li> */}
-                    {/* <li className="text-xs">{user.email}</li> */}
-                  </div>
-                  <li className="my-2">
-                    <NavLink to={"/dashboard/my-profile"}>
-                      <FaUser /> Profile
-                    </NavLink>
-                  </li>
-                  <li>
-                    <button
-                      // onClick={handleLogOutUser}
-                      className="btn btn-sm my-btn flex lg:hidden"
-                    >
-                      <IoLogOut /> Logout
-                    </button>
-                  </li>
-                </ul>
-              </div>
-              <button
-              // onClick={handleLogOutUser}
-              // className="btn my-btn hidden lg:flex"
-              >
-                {/* <IoLogOut /> Logout */}
-              </button>
-            </>
-            {/* ) : ( */}
-            <>
-              <Link
-                to={"/login"}
-                className="btn btn-sm md:btn-md lg:btn-md my-btn"
-              >
-                {" "}
-                <IoLogIn /> Login
-              </Link>
-              <Link
-                to={"/register"}
-                className="btn btn-sm md:btn-md lg:btn-md my-btn md:flex hidden"
-              >
-                {" "}
-                <IoLogIn /> Register
-              </Link>
-            </>
-            {/* )} */}
+                  <IoLogOut /> Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to={"/login"}
+                  className="btn btn-sm md:btn-md lg:btn-md my-btn"
+                >
+                  {" "}
+                  <IoLogIn /> Login
+                </Link>
+
+                <Link
+                  to={"/register"}
+                  className="btn btn-sm md:btn-md hidden lg:flex lg:btn-md my-btn"
+                >
+                  {" "}
+                  <IoLogIn /> Register
+                </Link>
+              </>
+            )}
           </div>
           {/* daisyUi swap theme */}
           <label className="swap swap-rotate">

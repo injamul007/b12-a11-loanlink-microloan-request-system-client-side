@@ -11,7 +11,7 @@
   name: "light";
   default: true;
   --color-primary: #0B5FFF;
-  --color-secondary: #0B73FF;
+  --color-secondary: #4DA3FF;
   --color-accent: #FFB703;
   --color-neutral: #F7FAFF;
   --color-text: #0B1736;
@@ -36,7 +36,8 @@
 }
 
 .my-btn:hover {
-  background-color: #0B73FF;
+  background-color: #FFB703;
+  color: black;
   border-color: #0B5FFF;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
