@@ -79,7 +79,7 @@ const Navbar = () => {
   // };
 
   return (
-    <div className="navbar shadow-sm glass-card relative z-1000">
+    <div className="navbar shadow-sm  dark:bg-[#303233] relative z-1000">
       <MyContainer>
         <div className="flex justify-between items-center py-1">
           <div className="navbar-start">
@@ -116,10 +116,10 @@ const Navbar = () => {
               to="/"
               className="flex items-center gap-1 font-extrabold text-2xl sm:text-3xl group select-none"
             >
-              <p className="text-primary group-hover:text-accent transition-colors duration-300 flex items-center text-xl md:text-2xl lg:text-3xl">
+              <p className="text-primary group-hover:text-[#0B73FF] transition-colors duration-300 flex items-center text-xl md:text-2xl lg:text-3xl hover:text-accent dark:hover:text-[#FFB703]">
                 <img className="w-9" src={navLogo} alt="navLogo" />
                 Micro
-                <span className="text-secondary relative transition-all duration-300 group-hover:scale-110">
+                <span className="text-secondary relative transition-all duration-300 group-hover:scale-110 dark:text-[#FFB703] dark:hover:text-primary">
                   Loan
                   {/* subtle glowing underline */}
                   <span className="absolute left-0 bottom-0 w-full h-[3px] bg-[#FFB703] opacity-0 group-hover:opacity-100 rounded-full transition-opacity duration-300"></span>

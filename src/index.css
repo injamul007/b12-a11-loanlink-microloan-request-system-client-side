@@ -47,12 +47,12 @@
   box-shadow: 0 0 0 3px rgba(14, 165, 164, 0.3);
 }
 
-.glass-card {
+/* .glass-card {
   background: rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-}
+} */
 
 .navbar .active {
   color: #0B5FFF;
