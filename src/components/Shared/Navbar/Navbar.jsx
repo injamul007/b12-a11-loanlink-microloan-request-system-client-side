@@ -117,7 +117,7 @@ const Navbar = () => {
               className="flex items-center gap-1 font-extrabold text-2xl sm:text-3xl group select-none"
             >
               <p className="text-primary group-hover:text-[#0B73FF] transition-colors duration-300 flex items-center text-xl md:text-2xl lg:text-3xl hover:text-accent dark:hover:text-[#FFB703]">
-                <img className="w-9" src={navLogo} alt="navLogo" />
+                <img className="lg:w-10 w-9" src={navLogo} alt="navLogo" />
                 Micro
                 <span className="text-secondary relative transition-all duration-300 group-hover:scale-110 dark:text-[#FFB703] dark:hover:text-primary">
                   Loan
@@ -127,93 +127,98 @@ const Navbar = () => {
               </p>
             </Link>
           </div>
-          <div className="navbar-center hidden md:flex">
-          </div>
-          <div className="navbar-end gap-3">
+          {/* <div className="navbar-center hidden md:flex"></div> */}
+          <div className="navbar-end gap-3 mr-3">
             <div className="flex">
-            <div className="hidden md:flex">
-            <ul className="menu menu-horizontal px-1 gap-2">{links}</ul>
-            </div>
-              {/* daisyUi swap theme */}
-              <label className="swap swap-rotate">
-                <input
-                  type="checkbox"
-                  checked={theme === "dark"}
-                  onChange={(e) => handleTheme(e.target.checked)}
-                  aria-label="Toggle theme"
-                />
-
-                {/* swap-on (dark mode) */}
-                <FaSun className="swap-on w-6 h-6" />
-
-                {/* swap-off (light mode) */}
-                <FaMoon className="swap-off w-6 h-6" />
-              </label>
+              <div className="hidden md:flex">
+                <ul className="menu menu-horizontal px-1 gap-2">{links}</ul>
+              </div>
             </div>
             {/* {loading ? ( */}
-              {/* <ClockLoader color="#0B5FFF" size={34} /> */}
+            {/* <ClockLoader color="#0B5FFF" size={34} /> */}
             {/* ) : user ? ( */}
-              <>
-                <div className="dropdown dropdown-end z-50 hidden">
-                  <div
-                    tabIndex={0}
-                    role="button"
-                    className="btn btn-ghost btn-circle avatar"
-                  >
-                    <div className="w-10 h-10 border-2 border-gray-300 rounded-full">
-                      <img
-                        alt="Tailwind CSS Navbar component"
-                        referrerPolicy="no-referrer"
-                        src={
-                          // user.photoURL ||
-                          "https://i.ibb.co.com/xtMvGXq4/FB-IMG-1728123707089.jpg"
-                        }
-                      />
-                    </div>
-                  </div>
-                  <ul
-                    tabIndex="-1"
-                    className="menu  menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-fit p-2 shadow"
-                  >
-                    <div className=" pb-3 border-b border-b-gray-200">
-                      {/* <li className="text-sm font-bold">{user.displayName}</li> */}
-                      {/* <li className="text-xs">{user.email}</li> */}
-                    </div>
-                    <li className="my-2">
-                      <NavLink to={"/dashboard/my-profile"}>
-                        <FaUser /> Profile
-                      </NavLink>
-                    </li>
-                    <li>
-                      <button
-                        // onClick={handleLogOutUser}
-                        className="btn btn-sm my-btn flex lg:hidden"
-                      >
-                        <IoLogOut /> Logout
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-                <button
-                  // onClick={handleLogOutUser}
-                  // className="btn my-btn hidden lg:flex"
+            <>
+              <div className="dropdown dropdown-end z-50 hidden">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
                 >
-                  {/* <IoLogOut /> Logout */}
-                </button>
-              </>
+                  <div className="w-10 h-10 border-2 border-gray-300 rounded-full">
+                    <img
+                      alt="Tailwind CSS Navbar component"
+                      referrerPolicy="no-referrer"
+                      src={
+                        // user.photoURL ||
+                        "https://i.ibb.co.com/xtMvGXq4/FB-IMG-1728123707089.jpg"
+                      }
+                    />
+                  </div>
+                </div>
+                <ul
+                  tabIndex="-1"
+                  className="menu  menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-fit p-2 shadow"
+                >
+                  <div className=" pb-3 border-b border-b-gray-200">
+                    {/* <li className="text-sm font-bold">{user.displayName}</li> */}
+                    {/* <li className="text-xs">{user.email}</li> */}
+                  </div>
+                  <li className="my-2">
+                    <NavLink to={"/dashboard/my-profile"}>
+                      <FaUser /> Profile
+                    </NavLink>
+                  </li>
+                  <li>
+                    <button
+                      // onClick={handleLogOutUser}
+                      className="btn btn-sm my-btn flex lg:hidden"
+                    >
+                      <IoLogOut /> Logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              <button
+              // onClick={handleLogOutUser}
+              // className="btn my-btn hidden lg:flex"
+              >
+                {/* <IoLogOut /> Logout */}
+              </button>
+            </>
             {/* ) : ( */}
-              <>
-                <Link to={"/login"} className="btn btn-sm md:btn-md lg:btn-md my-btn">
-                  {" "}
-                  <IoLogIn /> Login
-                </Link>
-                <Link to={"/register"} className="btn btn-sm md:btn-md lg:btn-md my-btn md:flex hidden">
-                  {" "}
-                  <IoLogIn /> Register
-                </Link>
-              </>
+            <>
+              <Link
+                to={"/login"}
+                className="btn btn-sm md:btn-md lg:btn-md my-btn"
+              >
+                {" "}
+                <IoLogIn /> Login
+              </Link>
+              <Link
+                to={"/register"}
+                className="btn btn-sm md:btn-md lg:btn-md my-btn md:flex hidden"
+              >
+                {" "}
+                <IoLogIn /> Register
+              </Link>
+            </>
             {/* )} */}
           </div>
+          {/* daisyUi swap theme */}
+          <label className="swap swap-rotate">
+            <input
+              type="checkbox"
+              checked={theme === "dark"}
+              onChange={(e) => handleTheme(e.target.checked)}
+              aria-label="Toggle theme"
+            />
+
+            {/* swap-on (dark mode) */}
+            <FaSun className="swap-on w-6 h-6" />
+
+            {/* swap-off (light mode) */}
+            <FaMoon className="swap-off w-6 h-6" />
+          </label>
         </div>
       </MyContainer>
     </div>
