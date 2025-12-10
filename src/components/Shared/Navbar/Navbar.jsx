@@ -169,7 +169,7 @@ const Navbar = () => {
                       <li className="text-xs">{user.email}</li>
                     </div>
                     <li className="my-2">
-                      <NavLink to={"/dashboard/my-profile"}>
+                      <NavLink to={"/dashboard/profile"}>
                         <FaUser /> Profile
                       </NavLink>
                     </li>

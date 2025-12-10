@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router";
+import { Link } from "react-router";
 import { FiMenu } from "react-icons/fi";
 import { IoLogOut } from "react-icons/io5";
 import { BsSun, BsMoon } from "react-icons/bs";
 import useAuth from "../../hooks/useAuth";
 import MyContainer from "../Shared/MyContainer/MyContainer";
-import dashboardLogo from '../../assets/loanLink_logo.png'
+import dashboardLogo from "../../assets/loanLink_logo.png";
+import Swal from "sweetalert2";
 
 const DashboardNavbar = ({ onOpenSidebar }) => {
-  const { user, logOutUserFunc } = useAuth();
+  const { user, logOutFunc, setUser} = useAuth();
   const [theme, setTheme] = useState(() => {
     try {
       return localStorage.getItem("MicroLoan_theme") || "dark";
@@ -27,7 +28,18 @@ const DashboardNavbar = ({ onOpenSidebar }) => {
 
   const handleLogout = async () => {
     try {
-      await logOutUserFunc();
+      await logOutFunc();
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "LogOut Successful",
+        showConfirmButton: false,
+        timer: 1500,
+        customClass: {
+          popup: "small-swal-popup",
+        },
+      });
+      setUser(null);
     } catch (err) {
       console.error(err);
     }
@@ -47,8 +59,12 @@ const DashboardNavbar = ({ onOpenSidebar }) => {
             </button>
 
             <Link to="/" className="flex items-center gap-3">
-              <span className="font-extrabold text-lg flex items-center">
-                <img src={dashboardLogo} alt="dashboardLogo" className="lg:w-10 w-8" />
+              <span className="font-extrabold lg:text-xl md:text-xl text-[16px] flex items-center">
+                <img
+                  src={dashboardLogo}
+                  alt="dashboardLogo"
+                  className="lg:w-10 w-7"
+                />
                 <span className="text-[#4DA3FF]">Micro</span>
                 <span className="text-[#FFB703]">Loan</span>
               </span>
@@ -90,7 +106,7 @@ const DashboardNavbar = ({ onOpenSidebar }) => {
 
                 <button
                   onClick={handleLogout}
-                  className="ml-2 inline-flex items-center gap-2 bg-[#059669] hover:bg-[#FFB703] cursor-pointer px-3 py-2 rounded-full text-sm font-semibold"
+                  className="ml-2 inline-flex items-center gap-2 bg-[#0B5FFF] hover:bg-[#FFB703] cursor-pointer px-3 py-2 rounded-full text-sm font-semibold"
                 >
                   <IoLogOut /> Logout
                 </button>
