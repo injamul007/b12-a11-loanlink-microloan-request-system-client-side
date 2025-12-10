@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { GoHomeFill } from "react-icons/go";
-import { IoLogIn, IoLogOut } from "react-icons/io5";
-import { FaUser } from "react-icons/fa6";
-import { TiContacts } from "react-icons/ti";
-import { MdDashboard } from "react-icons/md";
+import { IoLogIn } from "react-icons/io5";
+import { FaUser, FaUsers } from "react-icons/fa6";
+import { MdContacts, MdDashboard } from "react-icons/md";
 import navLogo from "../../../assets/loanLink_logo.png";
 import Swal from "sweetalert2";
 import { ClockLoader } from "react-spinners";
@@ -12,6 +11,10 @@ import { FaSun, FaMoon } from "react-icons/fa";
 import MyContainer from "../MyContainer/MyContainer";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
+import { SiGnuprivacyguard } from "react-icons/si";
+import { GrDocumentStore } from "react-icons/gr";
+import { RiLogoutBoxRLine } from "react-icons/ri";
+import { FcAbout } from "react-icons/fc";
 
 const Navbar = () => {
   const { user, setUser, loading, logOutFunc } = useAuth();
@@ -21,32 +24,32 @@ const Navbar = () => {
     <>
       <li>
         <NavLink to={"/"}>
-          <GoHomeFill />
+          <GoHomeFill size={22} />
           Home
         </NavLink>
       </li>
       <li>
         <NavLink to={"/all-loans"}>
-          <TiContacts /> All Loans
+          <GrDocumentStore size={20} /> All Loans
         </NavLink>
       </li>
 
       {user && user?.email ? (
         <li>
           <NavLink to={"/dashboard"}>
-            <MdDashboard /> Dashboard
+            <MdDashboard size={24} /> Dashboard
           </NavLink>
         </li>
       ) : (
         <>
           <li>
             <NavLink to={"/about-us"}>
-              <TiContacts /> About Us
+              <FaUsers  size={24} /> About Us
             </NavLink>
           </li>
           <li>
             <NavLink to={"/contact"}>
-              <TiContacts /> Contact
+              <MdContacts size={22} /> Contact
             </NavLink>
           </li>
         </>
@@ -114,7 +117,7 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex="-1"
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-fit p-2 shadow absolute gap-2"
+                className="menu menu-sm dropdown-content bg-base-100 dark:bg-gray-700 rounded-box z-50 mt-3 w-40 p-2 shadow absolute gap-2"
               >
                 {links}
               </ul>
@@ -123,8 +126,8 @@ const Navbar = () => {
               to="/"
               className="flex items-center gap-1 font-extrabold text-2xl sm:text-3xl group select-none"
             >
-              <p className="text-primary group-hover:text-[#0B73FF] transition-colors duration-300 flex items-center text-xl md:text-2xl lg:text-3xl hover:text-accent dark:hover:text-[#FFB703]">
-                <img className="lg:w-10 w-9" src={navLogo} alt="navLogo" />
+              <p className="text-primary group-hover:text-[#0B73FF] transition-colors duration-300 flex items-center text-xl lg:text-3xl hover:text-accent dark:hover:text-[#FFB703]">
+                <img className="lg:w-10 w-9 md:hidden lg:block" src={navLogo} alt="navLogo" />
                 Micro
                 <span className="text-secondary relative transition-all duration-300 group-hover:scale-110 dark:text-[#FFB703] dark:hover:text-primary">
                   Loan
@@ -170,7 +173,7 @@ const Navbar = () => {
                     </div>
                     <li className="my-2">
                       <NavLink to={"/dashboard/profile"}>
-                        <FaUser /> Profile
+                        <FaUser size={16} /> Profile
                       </NavLink>
                     </li>
                     <li>
@@ -178,7 +181,7 @@ const Navbar = () => {
                         onClick={handleLogOutUser}
                         className="btn btn-sm my-btn flex lg:hidden"
                       >
-                        <IoLogOut /> Logout
+                        <RiLogoutBoxRLine size={20} /> Logout
                       </button>
                     </li>
                   </ul>
@@ -187,7 +190,7 @@ const Navbar = () => {
                   onClick={handleLogOutUser}
                   className="btn my-btn hidden lg:flex"
                 >
-                  <IoLogOut /> Logout
+                  <RiLogoutBoxRLine size={22} /> Logout
                 </button>
               </>
             ) : (
@@ -197,15 +200,15 @@ const Navbar = () => {
                   className="btn btn-sm md:btn-md lg:btn-md my-btn"
                 >
                   {" "}
-                  <IoLogIn /> Login
+                  <IoLogIn size={24} /> Login
                 </Link>
 
                 <Link
                   to={"/register"}
-                  className="btn btn-sm md:btn-md hidden lg:flex lg:btn-md my-btn"
+                  className="btn btn-sm md:btn-md hidden lg:flex lg:btn-md bg-secondary hover:bg-[#FFB703] rounded-xl dark:bg-[#4DA3FF]"
                 >
                   {" "}
-                  <IoLogIn /> Register
+                  <SiGnuprivacyguard size={20} /> Register
                 </Link>
               </>
             )}

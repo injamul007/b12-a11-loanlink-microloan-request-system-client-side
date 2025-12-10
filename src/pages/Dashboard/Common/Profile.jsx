@@ -1,7 +1,7 @@
-import { IoLogOut } from "react-icons/io5";
 import MyContainer from "../../../components/Shared/MyContainer/MyContainer";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { RiLogoutBoxRLine } from "react-icons/ri";
 // import useRole from '../../../hooks/useRole'
 
 const Profile = () => {
@@ -80,7 +80,7 @@ const Profile = () => {
                     onClick={handleLogout}
                     className="inline-flex justify-center items-center gap-2 bg-[#4DA3FF] hover:bg-primary cursor-pointer px-7 py-1 rounded-lg text-white font-bold dark:hover:bg-[#FFB703]"
                   >
-                    <IoLogOut /> Logout
+                    <RiLogoutBoxRLine size={22} /> Logout
                   </button>
                 </div>
               </div>
