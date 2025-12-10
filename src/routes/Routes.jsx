@@ -16,11 +16,11 @@ import ManageLoans from "../pages/Dashboard/Manager/ManageLoans";
 import PendingApplications from "../pages/Dashboard/Manager/PendingAplpications";
 import ApprovedApplications from "../pages/Dashboard/Manager/ApprovedApplications";
 import MyLoans from "../pages/Dashboard/Borrower/MyLoans";
-
+import DashboardErrorPage from "../pages/DashboardErrorPage/DashboardErrorPage";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <MainLayout></MainLayout>,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
@@ -47,51 +47,60 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/dashboard',
-    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
     children: [
       {
-        path: '/dashboard/manage-users',
-        element: <ManageUsers></ManageUsers>
+        index: false,
+        path: "*",
+        element: <DashboardErrorPage></DashboardErrorPage>,
       },
       {
-        path: '/dashboard/all-loan',
-        element: <AllLoans></AllLoans>
+        path: "/dashboard/manage-users",
+        element: <ManageUsers></ManageUsers>,
       },
       {
-        path: '/dashboard/loan-applications',
-        element: <LoanApplications></LoanApplications>
+        path: "/dashboard/all-loan",
+        element: <AllLoans></AllLoans>,
       },
       {
-        path: '/dashboard/add-loan',
-        element: <AddLoan></AddLoan>
+        path: "/dashboard/loan-applications",
+        element: <LoanApplications></LoanApplications>,
       },
       {
-        path: '/dashboard/manage-loans',
-        element: <ManageLoans></ManageLoans>
+        path: "/dashboard/add-loan",
+        element: <AddLoan></AddLoan>,
       },
       {
-        path: '/dashboard/pending-loans',
-        element: <PendingApplications></PendingApplications>
+        path: "/dashboard/manage-loans",
+        element: <ManageLoans></ManageLoans>,
       },
       {
-        path: '/dashboard/approved-loans',
-        element: <ApprovedApplications></ApprovedApplications>
+        path: "/dashboard/pending-loans",
+        element: <PendingApplications></PendingApplications>,
       },
       {
-        path: '/dashboard/my-loans',
-        element: <MyLoans></MyLoans>
+        path: "/dashboard/approved-loans",
+        element: <ApprovedApplications></ApprovedApplications>,
       },
       {
-        path: '/dashboard/profile',
-        element: <Profile></Profile>
+        path: "/dashboard/my-loans",
+        element: <MyLoans></MyLoans>,
       },
       {
-        path: '/dashboard/settings',
-        element: <Settings></Settings>
+        path: "/dashboard/profile",
+        element: <Profile></Profile>,
       },
-    ]
-  }
-])
+      {
+        path: "/dashboard/settings",
+        element: <Settings></Settings>,
+      },
+    ],
+  },
+]);
 
 export default router;
