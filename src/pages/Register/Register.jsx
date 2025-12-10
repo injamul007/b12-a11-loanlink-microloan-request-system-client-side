@@ -196,7 +196,7 @@ const Register = () => {
                     required: { value: true, message: "Role is Required" },
                   })}
                 >
-                  <option className="text-gray-500" value={""}>
+                  <option disabled className="text-gray-500" value={""}>
                     Select Role
                   </option>
                   <option className="text-gray-500" value="borrower">
