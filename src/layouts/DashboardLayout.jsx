@@ -14,6 +14,8 @@ const DashboardLayout = () => {
 
   return (
     <div className="min-h-screen  flex flex-col">
+      <title>MicroLoan || Dashboard</title>
+
       <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
 
       <div className="flex flex-1">

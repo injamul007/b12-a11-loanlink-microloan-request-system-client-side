@@ -106,7 +106,7 @@ const DashboardNavbar = ({ onOpenSidebar }) => {
 
                 <button
                   onClick={handleLogout}
-                  className="ml-2 inline-flex items-center gap-2 bg-[#0B5FFF] hover:bg-[#FFB703] cursor-pointer px-3 py-2 rounded-full text-sm font-semibold"
+                  className="ml-2 inline-flex items-center gap-2 bg-[#4DA3FF] hover:bg-[#FFB703] cursor-pointer px-4 py-2 rounded-full text-sm font-semibold"
                 >
                   <IoLogOut /> Logout
                 </button>
