@@ -5,6 +5,7 @@ import DashboardNavbar from "../components/DashboardNavbar/DashboardNavbar";
 import DashboardSidebar from "../components/DashboardSidebar/DashboardSidebar";
 import useAuth from "../hooks/useAuth";
 import dashboardLogo from '../assets/loanLink_logo.png'
+import DashboardFooter from "../components/DashboardFooter/DashboardFooter";
 
 const DashboardLayout = () => {
   const [open, setOpen] = useState(false);
@@ -47,7 +48,7 @@ const DashboardLayout = () => {
             <div className="flex items-center justify-between gap-4 mb-6">
               <div>
                 <h2 className="text-2xl font-bold">Dashboard</h2>
-                <p className="text-sm">Welcome back{user && `, ${user?.displayName || ""}`} — manage your courses and students here.</p>
+                <p className="text-sm">Welcome back{user && `, ${user?.displayName || ""}`} — Track your loan applications and payment status.</p>
               </div>
             </div>
 
@@ -57,6 +58,7 @@ const DashboardLayout = () => {
           </div>
         </main>
       </div>
+        <DashboardFooter></DashboardFooter>
     </div>
   );
 }

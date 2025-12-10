@@ -1,8 +1,8 @@
 import React from "react";
 
-const BigLoadSpinner = () => {
+const BigLoadSpinnerWhite = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen bg-[#071422]">
+    <div className="flex justify-center items-center min-h-screen bg-white">
       <img
         className="w-20 animate-spin"
         src={"https://i.ibb.co.com/4wCJZ08Y/react-JS-Logo.png"}
@@ -12,4 +12,4 @@ const BigLoadSpinner = () => {
   );
 };
 
-export default BigLoadSpinner;
+export default BigLoadSpinnerWhite;
