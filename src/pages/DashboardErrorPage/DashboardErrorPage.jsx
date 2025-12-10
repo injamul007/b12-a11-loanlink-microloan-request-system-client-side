@@ -56,7 +56,7 @@ const DashboardErrorPage = () => {
           <div className="pb-3 text-gray-300">{error?.message}</div>
 
           <div>
-            <Link to={"/dashboard"}>
+            <Link to={"/"}>
               <button
                 className="btn bg-linear-to-r from-[#0B5FFF] to-[#0B73FF] text-white px-6 
               hover:shadow-[2px_4px_6px_rgba(78,77,77,0.5),-2px_-4px_6px_rgba(65,64,64,0.6)]
