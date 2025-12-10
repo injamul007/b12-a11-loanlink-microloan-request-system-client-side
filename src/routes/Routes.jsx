@@ -16,7 +16,7 @@ import ManageLoans from "../pages/Dashboard/Manager/ManageLoans";
 import PendingApplications from "../pages/Dashboard/Manager/PendingAplpications";
 import ApprovedApplications from "../pages/Dashboard/Manager/ApprovedApplications";
 import MyLoans from "../pages/Dashboard/Borrower/MyLoans";
-import DashboardErrorPage from "../pages/DashboardErrorPage/DashboardErrorPage";
+import DashboardErrorPage from "../pages/Dashboard/DashboardErrorPage/DashboardErrorPage";
 
 const router = createBrowserRouter([
   {

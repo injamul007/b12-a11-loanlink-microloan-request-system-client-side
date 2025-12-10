@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link, Outlet } from "react-router";
 import { FiX } from "react-icons/fi";
-import DashboardNavbar from "../components/DashboardNavbar/DashboardNavbar";
-import DashboardSidebar from "../components/DashboardSidebar/DashboardSidebar";
 import useAuth from "../hooks/useAuth";
 import dashboardLogo from "../assets/loanLink_logo.png";
-import DashboardFooter from "../components/DashboardFooter/DashboardFooter";
 import MyContainer from "../components/Shared/MyContainer/MyContainer";
+import DashboardNavbar from "../components/Dashboard/DashboardNavbar";
+import DashboardSidebar from "../components/Dashboard/DashboardSidebar";
+import DashboardFooter from "../components/Dashboard/DashboardFooter";
 
 const DashboardLayout = () => {
   const [open, setOpen] = useState(false);

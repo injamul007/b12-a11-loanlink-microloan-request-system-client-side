@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useRouteError } from "react-router";
-import pageNotFound from "../../assets/error-404.png";
-import MyContainer from "../../components/Shared/MyContainer/MyContainer";
+import pageNotFound from "../../../assets/error-404.png";
+import MyContainer from "../../../components/Shared/MyContainer/MyContainer";
 
 const DashboardErrorPage = () => {
   const error = useRouteError();
