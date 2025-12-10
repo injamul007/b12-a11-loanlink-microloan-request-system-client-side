@@ -15,6 +15,7 @@ import AddLoan from "../pages/Dashboard/Manager/AddLoan";
 import ManageLoans from "../pages/Dashboard/Manager/ManageLoans";
 import PendingApplications from "../pages/Dashboard/Manager/PendingAplpications";
 import ApprovedApplications from "../pages/Dashboard/Manager/ApprovedApplications";
+import MyLoans from "../pages/Dashboard/Borrower/MyLoans";
 
 
 const router = createBrowserRouter([
@@ -78,8 +79,8 @@ const router = createBrowserRouter([
         element: <ApprovedApplications></ApprovedApplications>
       },
       {
-        path: '/dashboard/profile',
-        element: <Profile></Profile>
+        path: '/dashboard/my-loans',
+        element: <MyLoans></MyLoans>
       },
       {
         path: '/dashboard/profile',
