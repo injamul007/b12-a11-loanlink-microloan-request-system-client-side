@@ -8,13 +8,14 @@ import SocialLogin from "../../components/Shared/SocialLogin/SocialLogin";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   // const location = useLocation();
   // const navigate = useNavigate();
 
-  const {signInFunc } = useAuth();
+  const { signInFunc, loading } = useAuth();
 
   const {
     register,
@@ -27,7 +28,7 @@ const Login = () => {
       const { email, password } = data;
 
       const result = await signInFunc(email, password);
-      console.log(result.user)
+      console.log(result.user);
 
       Swal.fire({
         position: "top-end",
@@ -46,7 +47,6 @@ const Login = () => {
       toast.error(err?.response?.data?.message);
     }
   };
-
 
   return (
     <div className="flex items-center justify-center bg-linear-to-br from-[#4DA3FF] to-[#0B5FFF] dark:bg-linear-to-br dark:from-[#1d232a] dark:to-[#1d232a]">
@@ -87,7 +87,9 @@ const Login = () => {
                   })}
                 />
                 {errors?.email?.message && (
-                  <p className="text-error text-xs">{errors.email.message}</p>
+                  <p className="text-error text-xs font-bold">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
 
@@ -103,7 +105,9 @@ const Login = () => {
                   })}
                 />
                 {errors?.password?.message && (
-                  <p className="text-error text-xs">{errors.email.message}</p>
+                  <p className="text-error text-xs font-bold">
+                    {errors.password.message}
+                  </p>
                 )}
                 <span
                   onClick={() => setShowPassword(!showPassword)}
@@ -125,7 +129,11 @@ const Login = () => {
                 type="submit"
                 className="my-btn w-full cursor-pointer active:scale-105"
               >
-                Login
+                {loading ? (
+                  <TbFidgetSpinner className="animate-spin m-auto" />
+                ) : (
+                  "Login"
+                )}
               </button>
 
               {/* Divider */}
@@ -142,7 +150,7 @@ const Login = () => {
                 New to our Website? Please{" "}
                 <Link
                   to="/register"
-                  className="text-accent hover:text-white underline"
+                  className="text-accent dark:text-[#4DA3FF] hover:text-white underline"
                 >
                   Register
                 </Link>

@@ -134,7 +134,7 @@ const Register = () => {
                   className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-orange-400"
                 />
                 {errors.name?.message && (
-                  <p className="text-error text-xs">{errors.name.message}</p>
+                  <p className="text-error text-xs font-bold">{errors.name.message}</p>
                 )}
               </div>
               {/* Image */}
@@ -178,7 +178,7 @@ const Register = () => {
                   })}
                 />
                 {errors.image?.message && (
-                  <p className="text-red-500">{errors.image.message}</p>
+                  <p className="text-error text-xs font-bold">{errors.image.message}</p>
                 )}
                 <p className="mt-1 text-xs text-gray-400">
                   PNG, JPG, WEBP or JPEG (max 2MB)
@@ -207,7 +207,7 @@ const Register = () => {
                   </option>
                 </select>
                 {errors.role?.message && (
-                  <p className="text-error text-xs">{errors.role.message}</p>
+                  <p className="text-error text-xs font-bold">{errors.role.message}</p>
                 )}
               </div>
 
@@ -226,7 +226,7 @@ const Register = () => {
                   })}
                 />
                 {errors.email?.message && (
-                  <p className="text-error text-xs">{errors.email.message}</p>
+                  <p className="text-error text-xs font-bold">{errors.email.message}</p>
                 )}
               </div>
 
@@ -248,7 +248,7 @@ const Register = () => {
                   })}
                 />
                 {errors.password?.message && (
-                  <p className="text-error text-xs">
+                  <p className="text-error text-xs font-bold">
                     {errors.password.message}
                   </p>
                 )}
@@ -264,7 +264,7 @@ const Register = () => {
                 type="submit"
                 className="my-btn w-full cursor-pointer active:scale-105 mt-2"
               >
-                {loading ? (
+              {loading ? (
                 <TbFidgetSpinner className="animate-spin m-auto" />
               ) : (
                 "Register"
@@ -285,7 +285,7 @@ const Register = () => {
                 Already have an account? Please{" "}
                 <Link
                   to="/login"
-                  className="text-secondary hover:text-white underline"
+                  className="text-secondary dark:text-[#FFB703] hover:text-white underline"
                 >
                   Login
                 </Link>
