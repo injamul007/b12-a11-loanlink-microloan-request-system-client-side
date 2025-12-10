@@ -78,7 +78,7 @@ const Profile = () => {
                   </button>
                   <button
                     onClick={handleLogout}
-                    className="inline-flex justify-center items-center gap-2 bg-[#4DA3FF] hover:bg-primary cursor-pointer px-7 py-1 rounded-lg font-semibold text-white dark:hover:bg-[#FFB703]"
+                    className="inline-flex justify-center items-center gap-2 bg-[#4DA3FF] hover:bg-primary cursor-pointer px-7 py-1 rounded-lg text-white font-bold dark:hover:bg-[#FFB703]"
                   >
                     <IoLogOut /> Logout
                   </button>

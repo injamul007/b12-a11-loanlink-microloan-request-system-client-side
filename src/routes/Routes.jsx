@@ -8,6 +8,9 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "../pages/Dashboard/Common/Profile";
 import Settings from "../pages/Dashboard/Common/Settings";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
+import AllLoans from "../pages/Dashboard/Admin/AllLoans";
+import LoanApplications from "../pages/Dashboard/Admin/LoanApplications";
 
 
 const router = createBrowserRouter([
@@ -42,6 +45,38 @@ const router = createBrowserRouter([
     path: '/dashboard',
     element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
     children: [
+      {
+        path: '/dashboard/profile',
+        element: <Profile></Profile>
+      },
+      {
+        path: '/dashboard/manage-users',
+        element: <ManageUsers></ManageUsers>
+      },
+      {
+        path: '/dashboard/all-loan',
+        element: <AllLoans></AllLoans>
+      },
+      {
+        path: '/dashboard/loan-applications',
+        element: <LoanApplications></LoanApplications>
+      },
+      {
+        path: '/dashboard/profile',
+        element: <Profile></Profile>
+      },
+      {
+        path: '/dashboard/profile',
+        element: <Profile></Profile>
+      },
+      {
+        path: '/dashboard/profile',
+        element: <Profile></Profile>
+      },
+      {
+        path: '/dashboard/profile',
+        element: <Profile></Profile>
+      },
       {
         path: '/dashboard/profile',
         element: <Profile></Profile>
