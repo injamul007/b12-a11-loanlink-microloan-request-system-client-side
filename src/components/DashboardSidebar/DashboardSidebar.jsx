@@ -25,7 +25,7 @@ const DashboardSidebar = ({ onClose }) => {
           className={({ isActive }) => `${baseLink} ${isActive ? activeClass : "text-white/90"}`}
           onClick={onClose}
         >
-          <MdDashboard className="text-xl" />
+          <MdDashboard size={28}/>
           <span>My Dashboard</span>
         </NavLink>
 
@@ -34,7 +34,7 @@ const DashboardSidebar = ({ onClose }) => {
           className={({ isActive }) => `${baseLink} ${isActive ? activeClass : "text-white/90"}`}
           onClick={onClose}
         >
-          <GiTakeMyMoney  className="text-xl" />
+          <GiTakeMyMoney  size={30}/>
           <span>My Loans</span>
         </NavLink>
 
@@ -43,7 +43,7 @@ const DashboardSidebar = ({ onClose }) => {
           className={({ isActive }) => `${baseLink} ${isActive ? activeClass : "text-white/90"}`}
           onClick={onClose}
         >
-          <BiBookAdd className="text-xl" />
+          <BiBookAdd size={30}/>
           <span>Add Loan</span>
         </NavLink>
 
@@ -52,7 +52,7 @@ const DashboardSidebar = ({ onClose }) => {
           className={({ isActive }) => `${baseLink} ${isActive ? activeClass : "text-white/90"}`}
           onClick={onClose}
         >
-          <GrDocumentConfig className="text-xl" />
+          <GrDocumentConfig size={28}/>
           <span>Manage Loans</span>
         </NavLink>
 
@@ -61,7 +61,7 @@ const DashboardSidebar = ({ onClose }) => {
           className={({ isActive }) => `${baseLink} ${isActive ? activeClass : "text-white/90"}`}
           onClick={onClose}
         >
-          <MdOutlinePendingActions className="text-xl" />
+          <MdOutlinePendingActions  size={30} />
           <span>Pending Applications</span>
         </NavLink>
 
@@ -70,7 +70,7 @@ const DashboardSidebar = ({ onClose }) => {
           className={({ isActive }) => `${baseLink} ${isActive ? activeClass : "text-white/90"}`}
           onClick={onClose}
         >
-          <BsClipboard2CheckFill  className="text-xl" />
+          <BsClipboard2CheckFill  size={26}/>
           <span>Approved Applications</span>
         </NavLink>
 
@@ -79,7 +79,7 @@ const DashboardSidebar = ({ onClose }) => {
           className={({ isActive }) => `${baseLink} ${isActive ? activeClass : "text-white/90"}`}
           onClick={onClose}
         >
-          <FaUsersCog className="text-xl" />
+          <FaUsersCog  size={28}/>
           <span>Manage Users</span>
         </NavLink>
 
@@ -88,7 +88,7 @@ const DashboardSidebar = ({ onClose }) => {
           className={({ isActive }) => `${baseLink} ${isActive ? activeClass : "text-white/90"}`}
           onClick={onClose}
         >
-          <MdOutlinePostAdd className="text-xl" />
+          <MdOutlinePostAdd size={30}/>
           <span>All Loan</span>
         </NavLink>
 
@@ -97,7 +97,7 @@ const DashboardSidebar = ({ onClose }) => {
           className={({ isActive }) => `${baseLink} ${isActive ? activeClass : "text-white/90"}`}
           onClick={onClose}
         >
-          <HiDocumentCurrencyDollar className="text-xl" />
+          <HiDocumentCurrencyDollar size={28}/>
           <span>Loan Applications</span>
         </NavLink>
 
@@ -108,7 +108,7 @@ const DashboardSidebar = ({ onClose }) => {
           className={({ isActive }) => `${baseLink} ${isActive ? activeClass : "text-white/90"}`}
           onClick={onClose}
         >
-          <AiOutlineUser className="text-xl" />
+          <AiOutlineUser size={28}/>
           <span>Profile</span>
         </NavLink>
 
@@ -117,7 +117,7 @@ const DashboardSidebar = ({ onClose }) => {
           className={({ isActive }) => `${baseLink} ${isActive ? activeClass : "text-white/90"}`}
           onClick={onClose}
         >
-          <span className=" w-5 h-5 border rounded-sm text-xs flex items-center justify-center">⚙</span>
+          <span className=" w-7 h-7 border rounded-sm text-xl flex items-center justify-center">⚙</span>
           <span>Settings</span>
         </NavLink>
       </nav>
