@@ -1,0 +1,82 @@
+[
+  {
+    "id": "LN-FB-001",
+    "userName": "John Doe",
+    "user_email": "john.doe@example.com",
+    "user_photoURL": "https://randomuser.me/api/portraits/men/10.jpg",
+    "loanType": "Small Business Loan",
+    "rating": 4.5,
+    "review": "The loan approval process was very smooth and fast. Customer support was professional and helpful.",
+    "date": "2024-05-08T14:30:00.000Z"
+  },
+  {
+    "id": "LN-FB-002",
+    "userName": "Jane Smith",
+    "user_email": "jane.smith@example.com",
+    "user_photoURL": "https://randomuser.me/api/portraits/women/25.jpg",
+    "loanType": "Emergency Loan",
+    "rating": 3.8,
+    "review": "It took slightly longer than expected, but overall the loan process was transparent and fair.",
+    "date": "2024-06-10T10:15:00.000Z"
+  },
+  {
+    "id": "LN-FB-003",
+    "userName": "Alex Brown",
+    "user_email": "alex.brown@example.com",
+    "user_photoURL": "https://randomuser.me/api/portraits/men/34.jpg",
+    "loanType": "Personal Loan",
+    "rating": 5.0,
+    "review": "Excellent service! I received my loan fast with minimal documentation. Highly recommended!",
+    "date": "2024-07-01T08:50:00.000Z"
+  },
+  {
+    "id": "LN-FB-004",
+    "userName": "Lisa White",
+    "user_email": "lisa.white@example.com",
+    "user_photoURL": "https://randomuser.me/api/portraits/women/12.jpg",
+    "loanType": "Student Loan",
+    "rating": 4.2,
+    "review": "Very responsive support team and easy repayment tracking system. Loved the dashboard experience.",
+    "date": "2024-07-15T09:10:00.000Z"
+  },
+  {
+    "id": "LN-FB-005",
+    "userName": "David Lee",
+    "user_email": "david.lee@example.com",
+    "user_photoURL": "https://randomuser.me/api/portraits/men/19.jpg",
+    "loanType": "Quick Cash Loan",
+    "rating": 2.9,
+    "review": "The system works, but approval was delayed and I did not receive enough updates during verification.",
+    "date": "2024-08-02T16:45:00.000Z"
+  },
+  {
+    "id": "LN-FB-006",
+    "userName": "Nina Khan",
+    "user_email": "nina.khan@example.com",
+    "user_photoURL": "https://randomuser.me/api/portraits/women/8.jpg",
+    "loanType": "Business Startup Loan",
+    "rating": 4.9,
+    "review": "Superb experience! The entire loan journey from application to approval was fully digital and smooth.",
+    "date": "2024-08-10T12:00:00.000Z"
+  },
+  {
+    "id": "LN-FB-007",
+    "userName": "Michael Jordan",
+    "user_email": "michael.jordan@example.com",
+    "user_photoURL": "https://randomuser.me/api/portraits/men/22.jpg",
+    "loanType": "Home Renovation Loan",
+    "rating": 3.3,
+    "review": "Decent platform, but document verification could be faster. The UI is clean and easy to use.",
+    "date": "2024-08-14T18:20:00.000Z"
+  },
+  {
+    "id": "LN-FB-008",
+    "userName": "Emma Watson",
+    "user_email": "emma.watson@example.com",
+    "user_photoURL": "https://randomuser.me/api/portraits/women/5.jpg",
+    "loanType": "Micro Loan for Freelancers",
+    "rating": 4.7,
+    "review": "Fast, safe, and very user-friendly loan service. Perfect for freelancers and small earners like me.",
+    "date": "2024-08-20T07:30:00.000Z"
+  }
+]
