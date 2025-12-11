@@ -10,6 +10,7 @@ import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { imageUpload } from "../../utills";
 import { TbFidgetSpinner } from "react-icons/tb";
+import registerPageImg from "../../assets/register_page_image.png"
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -102,8 +103,8 @@ const Register = () => {
           {/* Left section */}
           <div className="max-w-lg text-center lg:text-left">
             <img
-              src="https://i.ibb.co.com/4RmM0P9r/regiter-page-loans-pic.png"
-              alt=""
+              src={registerPageImg}
+              alt="registerPageImg"
             />
           </div>
 

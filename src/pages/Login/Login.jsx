@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import { TbFidgetSpinner } from "react-icons/tb";
+import loginPageImg from "../../assets/login_page_image.png"
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -56,8 +57,8 @@ const Login = () => {
           {/* Left section */}
           <div className="max-w-lg text-center lg:text-left">
             <img
-              src={"https://i.ibb.co.com/Gfb7Sdj0/loan-related-image.png"}
-              alt=""
+              src={loginPageImg}
+              alt="loginPageImg"
             />
           </div>
 
