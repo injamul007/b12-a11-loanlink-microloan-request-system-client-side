@@ -21,12 +21,12 @@ const CustomerFeedbackCard = ({ feedback }) => {
 
       {/* Profile */}
       <div className="flex items-center gap-4">
-        <div className="w-10 h-10 rounded-full bg-primary overflow-hidden">
-          <img src={user_photoURL} alt="" />
+        <div className="w-10 h-10 rounded-full bg-primary overflow-hidden lg:block md:block hidden">
+          <img src={user_photoURL} alt="customerImg" />
         </div>
         <div>
           <h3 className="font-semibold text-lg">{userName}</h3>
-          <p className="text-sm text-gray-500">{date}</p>
+          <p className="text-sm text-gray-500 lg:block md:block hidden">{date}</p>
         </div>
       </div>
     </div>

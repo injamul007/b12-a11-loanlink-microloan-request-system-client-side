@@ -29,17 +29,17 @@ export default function HowItWorks() {
     <section className="py-36">
       <MyContainer>
         <div className="px-6">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <h2 className="text-3xl font-extrabold text-text">
+          <div className="text-center max-w-2xl mx-auto lg:mb-14 mb-10">
+            <h2 className="text-3xl font-bold text-text">
               How Microloan Works
             </h2>
-            <p className="mt-3 text-sm text-gray-500 dark:text-gray-400 font-semibold">
+            <p className="mt-6 text-md text-gray-500 dark:text-gray-400 font-semibold">
               A simple, secure, and fast five-step process to get microloans —
               from browsing offers to repayment and support.
             </p>
           </div>
 
-          <div className="grid gap-6 md:gap-4 md:grid-cols-3 lg:grid-cols-5 items-start ">
+          <div className="grid gap-6 md:gap-4 md:grid-cols-3 lg:grid-cols-5 items-start">
             {/* Step 1 */}
             <div className="md:col-span-1 bg-white dark:bg-[#292d35] rounded-2xl p-6 shadow-sm">
               <Step

@@ -18,12 +18,12 @@ const CustomerFeedback = ({customersFeedbackData}) => {
             What Our Customers Are Saying
           </h2>
           <img className="mx-auto w-50" src={customersTopImg} alt="" />
-          <p className="text-center max-w-3xl mx-auto mb-6 text-gray-500 font-semibold">
+          <p className="text-center max-w-3xl mx-auto mt-4 mb-6 text-gray-500 font-semibold">
             Real experiences from borrowers who trusted our microloan system for
             fast, secure, and transparent financial support.
           </p>
         </div>
-        <div className="mb-22">
+        <div className="mb-22 mt-14">
           <Swiper
             effect={"coverflow"}
             grabCursor={true}
