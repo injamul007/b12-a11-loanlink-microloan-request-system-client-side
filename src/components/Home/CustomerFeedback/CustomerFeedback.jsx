@@ -12,7 +12,7 @@ const CustomerFeedback = ({customersFeedbackData}) => {
   const customersFeedbacks = use(customersFeedbackData);
   return (
     <MyContainer>
-      <>
+      <div className="px-6">
         <div>
           <h2 className="text-3xl text-center font-bold my-6">
             What Our Customers Are Saying
@@ -51,7 +51,7 @@ const CustomerFeedback = ({customersFeedbackData}) => {
             ))}
           </Swiper>
         </div>
-      </>
+      </div>
     </MyContainer>
   );
 };
