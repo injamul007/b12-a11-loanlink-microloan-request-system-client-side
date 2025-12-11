@@ -2,6 +2,7 @@ import MyContainer from "../../../components/Shared/MyContainer/MyContainer";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { RiLogoutBoxRLine } from "react-icons/ri";
+import profileCoverImg from "../../../assets/profile_cover_img.png"
 // import useRole from '../../../hooks/useRole'
 
 const Profile = () => {
@@ -34,7 +35,7 @@ const Profile = () => {
         <div className=" dark:bg-[#2b3138] shadow-lg rounded-2xl md:w-4/5 lg:w-3/5">
           <img
             alt="cover photo"
-            src="https://i.ibb.co.com/JFCpXg3Y/profile-cover-img.png"
+            src={profileCoverImg}
             className="w-full mb-4 rounded-t-lg h-56"
           />
           <div className="flex flex-col items-center justify-center p-4 -mt-16">
