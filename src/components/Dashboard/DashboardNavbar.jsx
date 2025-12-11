@@ -4,7 +4,7 @@ import { FiMenu } from "react-icons/fi";
 import { BsSun, BsMoon } from "react-icons/bs";
 import useAuth from "../../hooks/useAuth";
 import MyContainer from "../Shared/MyContainer/MyContainer";
-import dashboardLogo from "../../assets/loanLink_logo.png";
+import dashboardLogo from "../../assets/microloan_logo.png";
 import Swal from "sweetalert2";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 

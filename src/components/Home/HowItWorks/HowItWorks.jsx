@@ -2,11 +2,11 @@ import React from "react";
 import MyContainer from "../../Shared/MyContainer/MyContainer";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { Link } from "react-router";
-import loanOptionImg from "../../../assets/loan_options_img.png"
-import quickApplicationImg from "../../../assets/quick_complete_img.png"
-import secureLoanImg from "../../../assets/secure_verification_img.png"
-import fastPaymentImg from "../../../assets/fast_payment_img.png"
-import repaymentImg from "../../../assets/repayment_img.png"
+import loanOptionImg from "../../../assets/how it works images/loan_options_img.png"
+import quickApplicationImg from "../../../assets/how it works images/quick_complete_img.png"
+import secureLoanImg from "../../../assets/how it works images/secure_verification_img.png"
+import fastPaymentImg from "../../../assets/how it works images/fast_payment_img.png"
+import repaymentImg from "../../../assets/how it works images/repayment_img.png"
 
 const Step = ({ number, title, text, img }) => (
   <div className="flex gap-2 items-start">

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router";
-import footerLogo from "../../../assets/loanLink_logo.png";
+import footerLogo from "../../../assets/microloan_logo.png";
 import {
   FaFacebookF,
   FaLinkedinIn,

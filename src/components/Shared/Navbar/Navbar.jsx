@@ -4,7 +4,7 @@ import { GoHomeFill } from "react-icons/go";
 import { IoLogIn } from "react-icons/io5";
 import { FaUser, FaUsers } from "react-icons/fa6";
 import { MdContacts, MdDashboard } from "react-icons/md";
-import navLogo from "../../../assets/loanLink_logo.png";
+import navLogo from "../../../assets/microloan_logo.png";
 import Swal from "sweetalert2";
 import { ClockLoader } from "react-spinners";
 import { FaSun, FaMoon } from "react-icons/fa";
@@ -14,7 +14,6 @@ import toast from "react-hot-toast";
 import { SiGnuprivacyguard } from "react-icons/si";
 import { GrDocumentStore } from "react-icons/gr";
 import { RiLogoutBoxRLine } from "react-icons/ri";
-import { FcAbout } from "react-icons/fc";
 
 const Navbar = () => {
   const { user, setUser, loading, logOutFunc } = useAuth();
