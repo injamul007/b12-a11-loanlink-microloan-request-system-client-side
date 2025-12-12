@@ -1,9 +1,13 @@
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import BannerImg1 from "../../../assets/banner image/banner1.png";
-import BannerImg2 from "../../../assets/banner image/banner2.png";
-import BannerImg3 from "../../../assets/banner image/banner3.png";
+import BannerImg1 from "../../../assets/banner image/banner (1).png";
+import BannerImg2 from "../../../assets/banner image/banner (2).png";
+import BannerImg3 from "../../../assets/banner image/banner (3).png";
+import BannerImg4 from "../../../assets/banner image/banner (4).png";
+import BannerImg5 from "../../../assets/banner image/banner (5).png";
+import BannerImg6 from "../../../assets/banner image/banner (6).png";
+import BannerImg7 from "../../../assets/banner image/banner (7).png";
 import { Link } from "react-router";
 
 const Banner = () => {
@@ -28,6 +32,26 @@ const Banner = () => {
         </div>
         <div className="h-[560px]">
           <img src={BannerImg3} className="h-full w-full " />
+
+          <div className="absolute inset-0 bg-linear-to-b from-black/70 to-black/70"></div>
+        </div>
+        <div className="h-[560px]">
+          <img src={BannerImg4} className="h-full w-full " />
+
+          <div className="absolute inset-0 bg-linear-to-b from-black/70 to-black/70"></div>
+        </div>
+        <div className="h-[560px]">
+          <img src={BannerImg5} className="h-full w-full " />
+
+          <div className="absolute inset-0 bg-linear-to-b from-black/70 to-black/70"></div>
+        </div>
+        <div className="h-[560px]">
+          <img src={BannerImg6} className="h-full w-full " />
+
+          <div className="absolute inset-0 bg-linear-to-b from-black/70 to-black/70"></div>
+        </div>
+        <div className="h-[560px]">
+          <img src={BannerImg7} className="h-full w-full " />
 
           <div className="absolute inset-0 bg-linear-to-b from-black/70 to-black/70"></div>
         </div>
