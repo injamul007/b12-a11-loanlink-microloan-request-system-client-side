@@ -2,11 +2,11 @@ import React from "react";
 import MyContainer from "../../Shared/MyContainer/MyContainer";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { Link } from "react-router";
-import loanOptionImg from "../../../assets/how it works images/loan_options_img.png"
-import quickApplicationImg from "../../../assets/how it works images/quick_complete_img.png"
-import secureLoanImg from "../../../assets/how it works images/secure_verification_img.png"
-import fastPaymentImg from "../../../assets/how it works images/fast_payment_img.png"
-import repaymentImg from "../../../assets/how it works images/repayment_img.png"
+import loanOptionImg from "../../../assets/how it works images/loan_options_img.png";
+import quickApplicationImg from "../../../assets/how it works images/quick_complete_img.png";
+import secureLoanImg from "../../../assets/how it works images/secure_verification_img.png";
+import fastPaymentImg from "../../../assets/how it works images/fast_payment_img.png";
+import repaymentImg from "../../../assets/how it works images/repayment_img.png";
 
 const Step = ({ number, title, text, img }) => (
   <div className="flex gap-2 items-start">
@@ -17,16 +17,18 @@ const Step = ({ number, title, text, img }) => (
     </div>
 
     <div>
-      <img className="w-30 dark:bg-gray-900 rounded-2xl" src={img} alt="howItWorksImages" />
+      <img className="w-30 rounded-2xl" src={img} alt="howItWorksImages" />
       <h4 className="mt-2 text-lg font-bold text-text">{title}</h4>
-      <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 font-semibold">{text}</p>
+      <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 font-semibold">
+        {text}
+      </p>
     </div>
   </div>
 );
 
 export default function HowItWorks() {
   return (
-    <section className="py-36">
+    <section className="lg:pt-36 pt-22 lg:pb-18 pb-8">
       <MyContainer>
         <div className="px-6">
           <div className="text-center max-w-2xl mx-auto lg:mb-14 mb-10">
@@ -47,12 +49,13 @@ export default function HowItWorks() {
                 img={loanOptionImg}
                 title="Explore Loan Options"
                 text="Browse curated loan packages — compare limits, interest, and repayment plans. Use filters to find the best fit."
-                />
+              />
             </div>
 
             {/* Connector for large screens */}
             <div className="hidden md:flex md:items-center min-h-[50vh] md:justify-center">
-              <div className="w-full h-0.5 bg-[#0B5FFF]/10 rounded-full"></div><FaLongArrowAltRight className="text-[#0B5FFF]/50" />
+              <div className="w-full h-0.5 bg-[#0B5FFF]/10 rounded-full"></div>
+              <FaLongArrowAltRight className="text-[#0B5FFF]/50" />
             </div>
 
             {/* Step 2 */}
@@ -62,11 +65,12 @@ export default function HowItWorks() {
                 img={quickApplicationImg}
                 title="Complete Quick Application"
                 text="Fill a short online form with basic info and upload required documents — takes just a few minutes."
-                />
+              />
             </div>
 
             <div className="hidden md:flex md:items-center md:justify-center min-h-[50vh]">
-              <div className="w-full h-0.5 bg-[#0B5FFF]/10 rounded-full"></div><FaLongArrowAltRight className="text-[#0B5FFF]/50" />
+              <div className="w-full h-0.5 bg-[#0B5FFF]/10 rounded-full"></div>
+              <FaLongArrowAltRight className="text-[#0B5FFF]/50" />
             </div>
 
             {/* Step 3 */}
@@ -76,11 +80,12 @@ export default function HowItWorks() {
                 img={secureLoanImg}
                 title="Secure Verification"
                 text="We securely verify identity and documents. Status updates are sent by email and shown in your dashboard."
-                />
+              />
             </div>
 
             <div className="hidden md:flex md:items-center md:justify-center min-h-[50vh]">
-              <div className="w-full h-0.5 bg-[#0B5FFF]/10 rounded-full"></div><FaLongArrowAltRight className="text-[#0B5FFF]/50" />
+              <div className="w-full h-0.5 bg-[#0B5FFF]/10 rounded-full"></div>
+              <FaLongArrowAltRight className="text-[#0B5FFF]/50" />
             </div>
 
             {/* Step 4 */}
@@ -90,11 +95,12 @@ export default function HowItWorks() {
                 img={fastPaymentImg}
                 title="Fast Approval & Disbursement"
                 text="Once approved, funds are disbursed directly to your chosen account — usually within 24–72 hours."
-                />
+              />
             </div>
 
             <div className="hidden md:flex md:items-center md:justify-center min-h-[50vh]">
-              <div className="w-full h-0.5 bg-[#0B5FFF]/10 rounded-full"></div><FaLongArrowAltRight className="text-[#0B5FFF]/50" />
+              <div className="w-full h-0.5 bg-[#0B5FFF]/10 rounded-full"></div>
+              <FaLongArrowAltRight className="text-[#0B5FFF]/50" />
             </div>
 
             {/* Step 5 */}
@@ -111,7 +117,7 @@ export default function HowItWorks() {
           {/* CTA Button*/}
           <div className="mt-10 text-center">
             <Link
-            to={'/apply-loan'}
+              to={"/apply-loan"}
               className="cta_btn"
               aria-label="Start application"
             >
