@@ -3,12 +3,14 @@ import CustomerFeedback from '../../components/Home/CustomerFeedback/CustomerFee
 import HowItWorks from '../../components/Home/HowItWorks/HowItWorks';
 import LoanEligibilitySection from '../../components/Home/LoanEligibilitySection/LoanEligibilitySection';
 import LoanComparison from '../../components/Home/LoanComparisonSection/LoanComparison';
+import Banner from '../../components/Home/Banner/Banner';
 
 const customersFeedbackData = fetch('/CustomerFeedback.json').then(res=>res.json())
 
 const Home = () => {
   return (
     <div>
+      <Banner></Banner>
       <HowItWorks></HowItWorks>
       <CustomerFeedback customersFeedbackData={customersFeedbackData}></CustomerFeedback>
       <LoanEligibilitySection></LoanEligibilitySection>

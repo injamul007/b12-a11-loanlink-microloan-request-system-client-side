@@ -112,7 +112,7 @@ export default function HowItWorks() {
           <div className="mt-10 text-center">
             <Link
             to={'/apply-loan'}
-              className="inline-flex items-center gap-3 px-6 py-3 rounded-lg shadow-md bg-primary text-base-100 font-medium hover:bg-accent hover:text-black transition dark:hover:bg-[#FFB703]"
+              className="cta_btn"
               aria-label="Start application"
             >
               Start Your Application

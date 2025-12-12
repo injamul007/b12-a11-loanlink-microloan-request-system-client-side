@@ -57,9 +57,15 @@ body {
   border-radius: 20px;
   background: #fafaf9;
   transition: all 0.2s ease-in-out;
+  @apply dark:bg-gray-300
 }
 .navbar .active:hover {
-  box-shadow: 0 2px 6px rgba(5, 150, 105, 0.15);
+  box-shadow: 0 2px 6px rgba(41, 67, 155, 0.15);
+}
+
+/* CTA Button CSS */
+.cta_btn {
+  @apply inline-flex items-center gap-3 px-6 py-3 rounded-lg shadow-md bg-primary text-base-100 font-medium hover:bg-accent hover:text-black transition dark:hover:bg-[#FFB703]
 }
 
 
