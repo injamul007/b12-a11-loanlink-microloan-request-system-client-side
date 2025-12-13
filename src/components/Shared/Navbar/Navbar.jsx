@@ -88,7 +88,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar shadow-sm  dark:bg-[#303233] relative z-1000">
+    <div className="navbar shadow-sm bg-base-200 dark:bg-[#303233] fixed top-0 left-0 w-full z-1000">
       <MyContainer>
         <div className="flex justify-between items-center py-1">
           <div className="navbar-start">
