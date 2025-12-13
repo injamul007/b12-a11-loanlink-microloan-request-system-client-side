@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
 import { FaEye } from "react-icons/fa6";
 import { IoEyeOff } from "react-icons/io5";
-import { Link, Navigate } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import SocialLogin from "../../components/Shared/SocialLogin/SocialLogin";
 import { useForm } from "react-hook-form";
@@ -10,39 +10,39 @@ import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { imageUpload } from "../../utills";
 import { TbFidgetSpinner } from "react-icons/tb";
-import registerPageImg from "../../assets/register_page_image.png"
+import registerPageImg from "../../assets/register_page_image.png";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-
-  const DEFAULT_AVATAR =
-    "https://i.ibb.co.com/HLPwdmsS/User-Profile-PNG-Picture.png";
-
-  const {
-    // user,
-    // setUser,
-    // setLoading,
-    loading,
-    createUserFunc,
-    updateUserProfileFunc,
-    // logOutFunc,
-  } = useAuth();
-
-  // if (user) {
-  //   return <Navigate to={"/"}></Navigate>;
-  // }
-
+  const location = useLocation();
+  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm();
 
+  const DEFAULT_AVATAR =
+    "https://i.ibb.co.com/HLPwdmsS/User-Profile-PNG-Picture.png";
+
+  const { user, loading, setLoading, createUserFunc, updateUserProfileFunc } =
+    useAuth();
+
+  const from = location?.state ? location.state : "/";
+
+  if (user && user?.email) {
+    return <Navigate to={from} replace={true}></Navigate>;
+  }
+
   const handleRegister = async (data) => {
     try {
-      const { name, image, 
+      const {
+        name,
+        image,
         // role,
-         email, password } = data;
+        email,
+        password,
+      } = data;
       const imageFile = image?.[0] ?? null;
 
       //? client side image upload validation validation
@@ -77,6 +77,8 @@ const Register = () => {
       await updateUserProfileFunc(name, imageURL);
       // console.log(result.user);
 
+      navigate(from, { replace: true });
+
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -87,11 +89,30 @@ const Register = () => {
           popup: "small-swal-popup",
         },
       });
-    } catch (err) {
-      console.log(err);
-      console.log(err?.response?.data?.message);
-      toast.error(err?.message);
-      toast.error(err?.response?.data?.message);
+    } catch (error) {
+      console.log(error);
+      console.log(error?.response?.data?.message);
+      // toast.error(err?.message);
+      // toast.error(err?.response?.data?.message);
+      if (error.code === "auth/email-already-in-use") {
+        toast.error("This email is already registered. Please log in instead.");
+      } else if (error.code === "auth/weak-password") {
+        toast.error("Password must be at least 6 characters long.");
+      } else if (error.code === "auth/invalid-email") {
+        toast.error("Invalid email format. Please check your email.");
+      } else if (error.code === "auth/missing-email") {
+        toast.error("Email is required. Please enter your email.");
+      } else if (error.code === "auth/missing-password") {
+        toast.error("Password is required. Please enter your password.");
+      } else if (error.code === "auth/operation-not-allowed") {
+        toast.error("Email/password registration is currently disabled.");
+      } else if (error.code === "auth/network-request-failed") {
+        toast.error("Network error. Please check your internet connection.");
+      } else {
+        toast.error("Registration failed. Please try again.");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -102,10 +123,7 @@ const Register = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-10 p-6 lg:p-10 text-white">
           {/* Left section */}
           <div className="max-w-lg text-center lg:text-left">
-            <img
-              src={registerPageImg}
-              alt="registerPageImg"
-            />
+            <img src={registerPageImg} alt="registerPageImg" />
           </div>
 
           {/* Register card */}
@@ -135,7 +153,9 @@ const Register = () => {
                   className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-orange-400"
                 />
                 {errors.name?.message && (
-                  <p className="text-error text-xs font-bold">{errors.name.message}</p>
+                  <p className="text-error text-xs font-bold">
+                    {errors.name.message}
+                  </p>
                 )}
               </div>
               {/* Image */}
@@ -155,12 +175,12 @@ const Register = () => {
       file:mr-4 file:py-2 file:px-4
       file:rounded-md file:border-0
       file:text-sm file:font-semibold
-      file:bg-lime-50 file:text-primary
+      file:bg-blue-100 file:text-primary
       hover:file:bg-blue-100
       bg-white/20
-       border border-dashed border-accent rounded-md cursor-pointer
+       border border-dashed border-primary rounded-md cursor-pointer
       focus:outline-none focus:ring-2 focus:ring-secondary focus:border-accent
-      py-2"
+      py-1"
                   {...register("image", {
                     validate: (files) => {
                       if (!files || files.length === 0) return true;
@@ -179,7 +199,9 @@ const Register = () => {
                   })}
                 />
                 {errors.image?.message && (
-                  <p className="text-error text-xs font-bold">{errors.image.message}</p>
+                  <p className="text-error text-xs font-bold">
+                    {errors.image.message}
+                  </p>
                 )}
                 <p className="mt-1 text-xs text-gray-400">
                   PNG, JPG, WEBP or JPEG (max 2MB)
@@ -208,7 +230,9 @@ const Register = () => {
                   </option>
                 </select>
                 {errors.role?.message && (
-                  <p className="text-error text-xs font-bold">{errors.role.message}</p>
+                  <p className="text-error text-xs font-bold">
+                    {errors.role.message}
+                  </p>
                 )}
               </div>
 
@@ -227,7 +251,9 @@ const Register = () => {
                   })}
                 />
                 {errors.email?.message && (
-                  <p className="text-error text-xs font-bold">{errors.email.message}</p>
+                  <p className="text-error text-xs font-bold">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
 
@@ -265,11 +291,11 @@ const Register = () => {
                 type="submit"
                 className="my-btn w-full cursor-pointer active:scale-105 mt-2"
               >
-              {loading ? (
-                <TbFidgetSpinner className="animate-spin m-auto" />
-              ) : (
-                "Register"
-              )}
+                {loading ? (
+                  <TbFidgetSpinner className="animate-spin m-auto" />
+                ) : (
+                  "Register"
+                )}
               </button>
 
               {/* Divider */}
@@ -285,6 +311,7 @@ const Register = () => {
               <p className="text-center text-sm text-white/80 mt-3">
                 Already have an account? Please{" "}
                 <Link
+                  state={from}
                   to="/login"
                   className="text-secondary dark:text-[#FFB703] hover:text-white underline"
                 >

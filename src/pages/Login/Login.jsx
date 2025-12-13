@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
@@ -9,20 +9,24 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import { TbFidgetSpinner } from "react-icons/tb";
-import loginPageImg from "../../assets/login_page_image.png"
+import loginPageImg from "../../assets/login_page_image.png";
 
 const Login = () => {
+  const { user, signInFunc, loading, setLoading } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
-  // const location = useLocation();
-  // const navigate = useNavigate();
-
-  const { signInFunc, loading } = useAuth();
-
+  const location = useLocation();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const from = location?.state ? location.state : "/";
+
+  if (user && user?.email) {
+    return <Navigate to={from} replace={true}></Navigate>;
+  }
 
   const handleLogin = async (data) => {
     try {
@@ -30,6 +34,8 @@ const Login = () => {
 
       const result = await signInFunc(email, password);
       console.log(result.user);
+
+      navigate(from, { replace: true });
 
       Swal.fire({
         position: "top-end",
@@ -41,11 +47,34 @@ const Login = () => {
           popup: "small-swal-popup",
         },
       });
-    } catch (err) {
-      console.log(err);
-      console.log(err?.response?.data?.message);
-      toast.error(err?.message);
-      toast.error(err?.response?.data?.message);
+    } catch (error) {
+      console.log(error);
+      console.log(error?.response?.data?.message);
+      // toast.error(err?.message);
+      // toast.error(err?.response?.data?.message);
+      if (
+        error.code === "auth/invalid-credential" ||
+        error.code === "auth/user-not-found" ||
+        error.code === "auth/wrong-password"
+      ) {
+        toast.error("Invalid email or password. Please try again.");
+      } else if (error.code === "auth/invalid-email") {
+        toast.error("Invalid email format. Please check your email.");
+      } else if (error.code === "auth/missing-email") {
+        toast.error("Email is required. Please enter your email.");
+      } else if (error.code === "auth/missing-password") {
+        toast.error("Password is required. Please enter your password.");
+      } else if (error.code === "auth/too-many-requests") {
+        toast.error("Too many login attempts. Please try again later.");
+      } else if (error.code === "auth/user-disabled") {
+        toast.error("This account has been disabled. Contact support.");
+      } else if (error.code === "auth/network-request-failed") {
+        toast.error("Network error. Please check your internet connection.");
+      } else {
+        toast.error("Login failed. Please try again.");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -56,10 +85,7 @@ const Login = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-10 p-6 lg:p-10 text-white">
           {/* Left section */}
           <div className="max-w-lg text-center lg:text-left">
-            <img
-              src={loginPageImg}
-              alt="loginPageImg"
-            />
+            <img src={loginPageImg} alt="loginPageImg" />
           </div>
 
           {/* Right section */}
@@ -150,6 +176,7 @@ const Login = () => {
               <p className="text-center text-sm text-white/80 mt-3">
                 New to our Website? Please{" "}
                 <Link
+                  state={from}
                   to="/register"
                   className="text-accent dark:text-[#4DA3FF] hover:text-white underline"
                 >

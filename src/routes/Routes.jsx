@@ -9,7 +9,7 @@ import PrivateRoute from "./PrivateRoute";
 import Profile from "../pages/Dashboard/Common/Profile";
 import Settings from "../pages/Dashboard/Common/Settings";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
-import AllLoans from "../pages/Dashboard/Admin/AllLoans";
+import AllLoan from "../pages/Dashboard/Admin/AllLoan";
 import LoanApplications from "../pages/Dashboard/Admin/LoanApplications";
 import AddLoan from "../pages/Dashboard/Manager/AddLoan";
 import ManageLoans from "../pages/Dashboard/Manager/ManageLoans";
@@ -17,6 +17,7 @@ import PendingApplications from "../pages/Dashboard/Manager/PendingAplpications"
 import ApprovedApplications from "../pages/Dashboard/Manager/ApprovedApplications";
 import MyLoans from "../pages/Dashboard/Borrower/MyLoans";
 import DashboardErrorPage from "../pages/Dashboard/DashboardErrorPage/DashboardErrorPage";
+import AllLoans from "../pages/AllLoans/AllLoans";
 
 const router = createBrowserRouter([
   {
@@ -32,10 +33,10 @@ const router = createBrowserRouter([
         path: "/home",
         element: <Home></Home>,
       },
-      // {
-      //   path: "/all-loans",
-      //   element: ,
-      // },
+      {
+        path: "/all-loans",
+        element: <AllLoans></AllLoans>,
+      },
       {
         path: "/login",
         element: <Login></Login>,
@@ -65,7 +66,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/all-loan",
-        element: <AllLoans></AllLoans>,
+        element: <AllLoan></AllLoan>,
       },
       {
         path: "/dashboard/loan-applications",
