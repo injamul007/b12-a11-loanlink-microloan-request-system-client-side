@@ -19,6 +19,7 @@ import MyLoans from "../pages/Dashboard/Borrower/MyLoans";
 import DashboardErrorPage from "../pages/Dashboard/DashboardErrorPage/DashboardErrorPage";
 import AllLoans from "../pages/AllLoans/AllLoans";
 import AboutUs from "../pages/AboutUS/AboutUs";
+import Contact from "../pages/Contact/Contact";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/about-us",
         element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
       },
       {
         path: "/login",
