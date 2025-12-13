@@ -3,8 +3,16 @@ import MyContainer from "../../components/Shared/MyContainer/MyContainer";
 import { FiAtSign } from "react-icons/fi";
 import { BsFillTelephoneForwardFill } from "react-icons/bs";
 import { FaLocationCrosshairs } from "react-icons/fa6";
+import toast from "react-hot-toast";
 
 const Contact = () => {
+  const handleSubmitDummy = (e) => {
+    e.preventDefault();
+    toast("Hello Sir/Madam ! This Section will Update Soon...", {
+      icon: "⏳",
+    });
+  };
+
   return (
     <section className="py-16">
       <MyContainer>
@@ -76,7 +84,10 @@ const Contact = () => {
                   Send us a message
                 </h3>
 
-                <form className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <form
+                  onSubmit={handleSubmitDummy}
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                >
                   <input
                     type="text"
                     placeholder="Your name"
@@ -99,7 +110,7 @@ const Contact = () => {
                   />
 
                   <button
-                    type="button"
+                    type="submit"
                     className="cta_btn sm:col-span-2 inline-flex items-center justify-center cursor-pointer"
                   >
                     Send Message
