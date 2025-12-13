@@ -125,8 +125,8 @@ const Navbar = () => {
               to="/"
               className="flex items-center gap-1 font-extrabold text-2xl sm:text-3xl group select-none"
             >
-              <p className="text-primary group-hover:text-[#0B73FF] transition-colors duration-300 flex items-center text-xl lg:text-3xl hover:text-accent dark:hover:text-[#FFB703]">
-                <img className="lg:w-10 w-9 md:hidden lg:block" src={navLogo} alt="navLogo" />
+                <img className="lg:w-10 w-9 hidden md:hidden lg:block" src={navLogo} alt="navLogo" />
+              <p className="text-primary group-hover:text-[#0B73FF] transition-colors duration-300 flex items-center text-xl lg:text-3xl hover:text-accent dark:hover:text-[#FFB703] -ml-1">
                 Micro
                 <span className="text-secondary relative transition-all duration-300 group-hover:scale-110 dark:text-[#FFB703] dark:hover:text-primary">
                   Loan
@@ -136,11 +136,11 @@ const Navbar = () => {
               </p>
             </Link>
           </div>
-          <div className="navbar-center hidden md:flex">
+          
+          <div className="navbar-center gap-3">
+            <div className="lg:flex md:flex items-center hidden">
             <ul className="menu menu-horizontal px-1 gap-2">{links}</ul>
-          </div>
-          <div className="navbar-end gap-3 mr-3">
-            <div className="flex"></div>
+            </div>
             {loading ? (
               <ClockLoader color="#0B5FFF" size={34} />
             ) : user ? (
@@ -211,8 +211,8 @@ const Navbar = () => {
                 </Link>
               </>
             )}
-          </div>
-          {/* daisyUi swap theme */}
+
+            {/* daisyUi swap theme */}
           <label className="swap swap-rotate">
             <input
               type="checkbox"
@@ -227,6 +227,7 @@ const Navbar = () => {
             {/* swap-off (light mode) */}
             <FaMoon className="swap-off w-6 h-6" />
           </label>
+          </div>
         </div>
       </MyContainer>
     </div>

@@ -54,7 +54,7 @@ body {
   color: #0B5FFF;
   font-weight: 600;
   border: 1px solid #e5e7eb;
-  border-radius: 20px;
+  border-radius: 14px;
   background: #fafaf9;
   transition: all 0.2s ease-in-out;
   @apply dark:bg-gray-300
