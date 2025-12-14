@@ -2,13 +2,16 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
 import toast from "react-hot-toast";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import BigLoadSpinnerWhite from "../../components/Shared/BigLoadSpinnerWhite/BigLoadSpinnerWhite";
 import ErrorPage from "../Error404Page/ErrorPage";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
+import useAuth from "../../hooks/useAuth";
 
 const LoanDetails = () => {
   const { id } = useParams();
+  const {user} = useAuth();
+  const navigate = useNavigate()
 
   const {
     data: singleLoan = {},
@@ -40,6 +43,16 @@ const LoanDetails = () => {
     required_documents,
     show_on_home
   } = singleLoan || {};
+
+  const handleApplyNow = (loanData) => {
+    const LoanInfoWithUserEmail = {
+      userEmail: user?.email || "",
+      loan_title: loanData?.loan_title,
+      interest_rate: loanData?.interest_rate
+    }
+
+    navigate('/loan-application-form', {state:{LoanInfoWithUserEmail}})
+  }
 
   if (isLoading) return <BigLoadSpinnerWhite></BigLoadSpinnerWhite>;
   if (isError) return <ErrorPage></ErrorPage>;
@@ -112,7 +125,9 @@ const LoanDetails = () => {
           </div>
 
           {/* Action Button */}
-          <button className="w-full cta_btn inline-flex justify-center cursor-pointer">
+          <button
+          onClick={()=>handleApplyNow(singleLoan)}
+          className="w-full cta_btn inline-flex justify-center cursor-pointer">
             Apply Now
           </button>
         </div>

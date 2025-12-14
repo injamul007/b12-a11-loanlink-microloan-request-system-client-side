@@ -21,6 +21,7 @@ import AllLoans from "../pages/AllLoans/AllLoans";
 import AboutUs from "../pages/AboutUS/AboutUs";
 import Contact from "../pages/Contact/Contact";
 import LoanDetails from "../pages/LoanDetails/LoanDetails";
+import LoanApplicationForm from "../pages/LoanApplicationForm/LoanApplicationForm";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: `/all-loans/:id`,
         element: <PrivateRoute><LoanDetails></LoanDetails></PrivateRoute>,
+      },
+      {
+        path: "/loan-application-form",
+        element: <PrivateRoute><LoanApplicationForm></LoanApplicationForm></PrivateRoute>,
       },
       {
         path: "/about-us",
