@@ -23,7 +23,7 @@ const CustomerFeedback = ({customersFeedbackData}) => {
             fast, secure, and transparent financial support.
           </p>
         </div>
-        <div className="mb-22 mt-14">
+        <div className="lg:mb-22 mt-14">
           <Swiper
             effect={"coverflow"}
             grabCursor={true}

@@ -4,7 +4,7 @@ import MyContainer from "../../Shared/MyContainer/MyContainer";
 
 const LoanEligibilitySection = () => {
   return (
-    <section className="py-18">
+    <section className="lg:pt-18 md:pt-18 pt-12 lg:pb-18">
       <MyContainer>
         <div className="px-6">
           <div className="text-center lg:mb-12 mb-8">
