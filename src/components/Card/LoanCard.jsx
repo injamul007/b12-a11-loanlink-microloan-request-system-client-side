@@ -27,7 +27,7 @@ const LoanCard = ({ loan }) => {
             ${
               show_on_home
                 ? "bg-primary text-white"
-                : "bg-secondary text-white"
+                : "bg-[#FFB703] text-gray-800"
             }`}
           >
             {category}
