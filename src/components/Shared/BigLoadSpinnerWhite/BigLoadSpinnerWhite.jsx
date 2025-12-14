@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import reactSpinnerLogo from "../../../assets/React_Logo_Spinner.png"
 
 const BigLoadSpinnerWhite = () => {
   const [theme] = useState(
@@ -24,8 +25,8 @@ const BigLoadSpinnerWhite = () => {
     >
       <img
         className="w-20 animate-spin"
-        src={"https://i.ibb.co.com/4wCJZ08Y/react-JS-Logo.png"}
-        alt="animateSpin"
+        src={reactSpinnerLogo}
+        alt="animateSpinner"
       />
     </div>
   );

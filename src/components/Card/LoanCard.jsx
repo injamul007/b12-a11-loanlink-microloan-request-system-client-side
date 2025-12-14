@@ -65,7 +65,7 @@ const LoanCard = ({ loan }) => {
             </div>
 
             <Link
-              to={`/available-loans/${_id}`}
+              to={`/all-loans/${_id}`}
               className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-[#FFB703] transition"
               aria-label={`View details for ${loan_title}`}
             >
