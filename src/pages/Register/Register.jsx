@@ -8,7 +8,7 @@ import SocialLogin from "../../components/Shared/SocialLogin/SocialLogin";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
-import { imageUpload } from "../../utills";
+import { imageUpload, saveOrUpdateUsers } from "../../utills";
 import { TbFidgetSpinner } from "react-icons/tb";
 import registerPageImg from "../../assets/register_page_image.png";
 
@@ -39,7 +39,7 @@ const Register = () => {
       const {
         name,
         image,
-        // role,
+        role,
         email,
         password,
       } = data;
@@ -64,8 +64,7 @@ const Register = () => {
       }
 
       //2. User Registration
-      const result = await createUserFunc(email, password);
-      console.log(result.user);
+      await createUserFunc(email, password);
 
       let imageURL = DEFAULT_AVATAR;
 
@@ -73,9 +72,18 @@ const Register = () => {
         imageURL = (await imageUpload(imageFile)) || DEFAULT_AVATAR;
       }
 
+      const userData = {
+        name,
+        email,
+        role,
+        photo: imageURL
+      }
+
+      // save it on db
+      await saveOrUpdateUsers(userData)
+
       //3. Save username & profile photo
       await updateUserProfileFunc(name, imageURL);
-      // console.log(result.user);
 
       navigate(from, { replace: true });
 

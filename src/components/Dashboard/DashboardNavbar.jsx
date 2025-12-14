@@ -63,7 +63,7 @@ const DashboardNavbar = ({ onOpenSidebar }) => {
                 <img
                   src={dashboardLogo}
                   alt="dashboardLogo"
-                  className="lg:w-10 w-7"
+                  className="lg:w-10 w-7 lg:block md:block hidden"
                 />
                 <span className="text-[#4DA3FF]">Micro</span>
                 <span className="text-[#FFB703]">Loan</span>

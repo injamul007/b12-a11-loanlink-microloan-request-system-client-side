@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router";
+import { saveOrUpdateUsers } from "../../../utills";
 
 const SocialLogin = () => {
   const { signInWithGoogleFunc, setLoading } = useAuth();
@@ -17,7 +18,6 @@ const SocialLogin = () => {
     try {
       //User Registration using google
       const result = await signInWithGoogleFunc();
-      console.log(result.user);
 
       navigate(from, { replace: true });
 
@@ -32,13 +32,14 @@ const SocialLogin = () => {
         },
       });
 
-      // const userData = {
-      //   name: result.user?.displayName,
-      //   email: result.user?.email,
-      //   photo: result.user?.photoURL,
-      // }
+      const userData = {
+        name: result.user?.displayName,
+        email: result.user?.email,
+        photo: result.user?.photoURL,
+      }
 
-      // await saveOrUpdateUser(userData);
+      await saveOrUpdateUsers(userData)
+
     } catch (error) {
       console.log(error);
       console.log(error?.response?.data?.message);

@@ -4,12 +4,12 @@ import axios from 'axios'
 import useAuth from './useAuth'
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_SERVER_API_URL_KEY,
   withCredentials: true,
 }) 
 
 const useAxiosSecure = () => {
-  const { user, logOut, loading } = useAuth()
+  const { user, logOutFunc, loading } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const useAxiosSecure = () => {
         res => res,
         err => {
           if (err?.response?.status === 401 || err?.response?.status === 403) {
-            logOut()
+            logOutFunc()
               .then(() => {
                 console.log('Logged out successfully.')
               })
@@ -44,7 +44,7 @@ const useAxiosSecure = () => {
         axiosInstance.interceptors.response.eject(responseInterceptor)
       }
     }
-  }, [user, loading, logOut, navigate])
+  }, [user, loading, logOutFunc, navigate])
 
   return axiosInstance
 }

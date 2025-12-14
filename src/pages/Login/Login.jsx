@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import { TbFidgetSpinner } from "react-icons/tb";
 import loginPageImg from "../../assets/login_page_image.png";
+import { saveOrUpdateUsers } from "../../utills";
 
 const Login = () => {
   const { user, signInFunc, loading, setLoading } = useAuth();
@@ -33,7 +34,6 @@ const Login = () => {
       const { email, password } = data;
 
       const result = await signInFunc(email, password);
-      console.log(result.user);
 
       navigate(from, { replace: true });
 
@@ -47,6 +47,15 @@ const Login = () => {
           popup: "small-swal-popup",
         },
       });
+
+      const userData = {
+        name: result.user?.displayName,
+        email: result.user?.email,
+        photo: result.user?.photoURL
+      }
+
+      await saveOrUpdateUsers(userData)
+
     } catch (error) {
       console.log(error);
       console.log(error?.response?.data?.message);
