@@ -16,6 +16,7 @@ const LoanApplicationForm = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    reset,
   } = useForm();
 
   useEffect(() => {
@@ -60,7 +61,7 @@ const LoanApplicationForm = () => {
       };
 
       const result = await Swal.fire({
-        title: "are you sure to submit?",
+        title: "Are you sure to submit?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -82,8 +83,12 @@ const LoanApplicationForm = () => {
             title: "Submitted!",
             text: "Your loan application has been submitted successfully.",
             icon: "success",
+            customClass: {
+              popup: "confirmation-swal-popup",
+            },
           });
         }
+        reset();
       }
     } catch (error) {
       console.log(error.message);
