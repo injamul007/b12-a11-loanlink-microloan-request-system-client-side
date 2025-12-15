@@ -3,6 +3,9 @@ import loanApplicationFormImg from "../../assets/loan_application_form_image.png
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
 import { useLocation } from "react-router";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const LoanApplicationForm = () => {
   const location = useLocation();
@@ -23,8 +26,69 @@ const LoanApplicationForm = () => {
     }
   }, [prefilledData, setValue]);
 
-  const handleLoanApplicationSubmit = (data) => {
-    console.log(data);
+  const handleLoanApplicationSubmit = async (data) => {
+    try {
+      const {
+        userEmail,
+        loan_title,
+        interest_rate,
+        first_name,
+        last_name,
+        contact_number,
+        nid_or_passport_number,
+        income_source,
+        monthly_income,
+        loan_amount,
+        reason_for_loan,
+        address,
+        extra_notes,
+      } = data;
+
+      const loanApplicationData = {
+        userEmail,
+        loan_title,
+        interest_rate,
+        borrower_name: `${first_name} ${last_name}`,
+        contact_number,
+        nid_or_passport_number,
+        income_source,
+        monthly_income: Number(monthly_income),
+        loan_amount: Number(loan_amount),
+        reason_for_loan,
+        address,
+        extra_notes,
+      };
+
+      const result = await Swal.fire({
+        title: "are you sure to submit?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Submit it!",
+        customClass: {
+          popup: "confirmation-swal-popup",
+        },
+      });
+
+      if (result.isConfirmed) {
+        const res = await axios.post(
+          `${import.meta.env.VITE_SERVER_API_URL_KEY}/loan-application`,
+          loanApplicationData
+        );
+
+        if (res.data.result?.insertedId) {
+          await Swal.fire({
+            title: "Submitted!",
+            text: "Your loan application has been submitted successfully.",
+            icon: "success",
+          });
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+    }
   };
 
   return (
