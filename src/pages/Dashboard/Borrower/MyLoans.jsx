@@ -56,11 +56,11 @@ const MyLoans = () => {
                     <th>{idx + 1}</th>
 
                     {/* Loan ID */}
-                    <td className="md:table-cell break-all max-w-[180px]">
-                      {loan._id}
+                    <td className="md:table-cell max-w-[180px]">
+                      {loan.loan_id}
                     </td>
 
-                    {/* Borrower Info */}
+                    {/* Loan Info */}
                     <td className="max-w-[200px]">
                       <div className="flex flex-col">
                         <span className="font-medium">
@@ -75,7 +75,7 @@ const MyLoans = () => {
                     {/* Amount */}
                     <td className="whitespace-nowrap">৳{loan.loan_amount}</td>
 
-                    {/* Date hidden on tablet & mobile */}
+                    {/* Status */}
                     <td className="lg:table-cell whitespace-nowrap">
                       {loan.status}
                     </td>

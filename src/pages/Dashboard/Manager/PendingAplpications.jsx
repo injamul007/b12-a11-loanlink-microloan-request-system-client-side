@@ -75,8 +75,8 @@ const PendingApplications = () => {
                     <th>{idx + 1}</th>
 
                     {/* Loan ID */}
-                    <td className="md:table-cell break-all max-w-[180px]">
-                      {pending._id}
+                    <td className="md:table-cell max-w-[180px]">
+                      {pending.loan_id}
                     </td>
 
                     {/* Borrower Info */}
@@ -94,8 +94,8 @@ const PendingApplications = () => {
                     {/* Amount */}
                     <td className="whitespace-nowrap font-semibold">৳{pending.loan_amount}</td>
 
-                    {/* Date hidden on tablet & mobile */}
-                    <td className="md:table-cell break-all max-w-[180px]">
+                    {/* Date */}
+                    <td className="md:table-cell max-w-[180px]">
                       {pending.created_at}
                     </td>
 

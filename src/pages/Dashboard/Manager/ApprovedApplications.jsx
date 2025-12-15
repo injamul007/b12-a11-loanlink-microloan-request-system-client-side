@@ -19,7 +19,6 @@ const ApprovedApplications = () => {
     queryFn: async () => {
       try {
         const res = await axiosInstance.get("/approved-application");
-        console.log(res.data.result);
         return res.data.result;
       } catch (error) {
         console.log(error.message);
@@ -50,7 +49,7 @@ const ApprovedApplications = () => {
                   <th>Loan ID</th>
                   <th>Borrower Name and Email</th>
                   <th>Amount</th>
-                  <th>Date</th>
+                  <th>Approved Date</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -60,8 +59,8 @@ const ApprovedApplications = () => {
                     <th>{idx + 1}</th>
 
                     {/* Loan ID */}
-                    <td className="md:table-cell break-all max-w-[180px]">
-                      {approved._id}
+                    <td className="md:table-cell max-w-[180px]">
+                      {approved.loan_id}
                     </td>
 
                     {/* Borrower Info */}
@@ -79,8 +78,8 @@ const ApprovedApplications = () => {
                     {/* Amount */}
                     <td className="whitespace-nowrap font-semibold">৳{approved.loan_amount}</td>
 
-                    {/* Date hidden on tablet & mobile */}
-                    <td className="md:table-cell break-all max-w-[180px]">
+                    {/* Date */}
+                    <td className="md:table-cell max-w-[180px]">
                       {approved.created_at}
                     </td>
 

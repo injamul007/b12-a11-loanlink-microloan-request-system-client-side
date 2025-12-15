@@ -47,6 +47,7 @@ const LoanDetails = () => {
   const handleApplyNow = (loanData) => {
     const LoanInfoWithUserEmail = {
       userEmail: user?.email || "",
+      loan_id: loanData?.loanId,
       loan_title: loanData?.loan_title,
       interest_rate: loanData?.interest_rate
     }

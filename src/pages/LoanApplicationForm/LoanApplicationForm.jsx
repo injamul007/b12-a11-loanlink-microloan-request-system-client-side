@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import loanApplicationFormImg from "../../assets/loan_application_form_image.png";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
@@ -9,6 +9,7 @@ import axios from "axios";
 
 const LoanApplicationForm = () => {
   const location = useLocation();
+  const navigate = useNavigate()
   const prefilledData = location.state?.LoanInfoWithUserEmail;
 
   const {
@@ -22,6 +23,7 @@ const LoanApplicationForm = () => {
   useEffect(() => {
     if (prefilledData) {
       setValue("userEmail", prefilledData.userEmail);
+      setValue("loan_id", prefilledData.loan_id);
       setValue("loan_title", prefilledData.loan_title);
       setValue("interest_rate", prefilledData.interest_rate);
     }
@@ -31,6 +33,7 @@ const LoanApplicationForm = () => {
     try {
       const {
         userEmail,
+        loan_id,
         loan_title,
         interest_rate,
         first_name,
@@ -48,6 +51,7 @@ const LoanApplicationForm = () => {
       const loanApplicationData = {
         borrower_name: `${first_name} ${last_name}`,
         borrower_email: userEmail,
+        loan_id,
         loan_title,
         interest_rate,
         contact_number,
@@ -79,14 +83,8 @@ const LoanApplicationForm = () => {
         );
 
         if (res.data.result?.insertedId) {
-          await Swal.fire({
-            title: "Submitted!",
-            text: "Your loan application has been submitted successfully.",
-            icon: "success",
-            customClass: {
-              popup: "confirmation-swal-popup",
-            },
-          });
+          toast.success('Your Loan Application Form is Submitted!')
+          navigate('/dashboard/my-loans')
         }
         reset();
       }
@@ -122,7 +120,7 @@ const LoanApplicationForm = () => {
               onSubmit={handleSubmit(handleLoanApplicationSubmit)}
               className="grid grid-cols-1 md:grid-cols-2 gap-6"
             >
-              {/* ================= Auto Filled (Read Only) ================= */}
+              {/*  ------------- Auto Filled (Read Only) --------- */}
               {/* User Email */}
               <div>
                 <label className="label">
@@ -131,6 +129,19 @@ const LoanApplicationForm = () => {
                 <input
                   type="email"
                   {...register("userEmail")}
+                  readOnly
+                  className="input input-bordered w-full bg-base-200 cursor-not-allowed"
+                />
+              </div>
+
+              {/* Loan Id */}
+              <div>
+                <label className="label">
+                  <span className="label-text font-medium">Loan Id</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("loan_id")}
                   readOnly
                   className="input input-bordered w-full bg-base-200 cursor-not-allowed"
                 />
@@ -162,7 +173,7 @@ const LoanApplicationForm = () => {
                 />
               </div>
 
-              {/* ================= User Inputs ================= */}
+              {/*  -------------- User Inputs ------------------- */}
               {/* First Name */}
               <div>
                 <label className="label">
@@ -345,7 +356,7 @@ const LoanApplicationForm = () => {
               </div>
 
               {/* Reason for Loan */}
-              <div className="lg:col-span-2 md:col-span-2 col-span-1">
+              <div>
                 <label className="label">
                   <span className="label-text font-medium">
                     Reason for Loan
