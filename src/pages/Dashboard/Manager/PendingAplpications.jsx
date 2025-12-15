@@ -3,11 +3,11 @@ import MyContainer from "../../../components/Shared/MyContainer/MyContainer";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import BigLoadSpinnerWhite from "../../../components/Shared/BigLoadSpinnerWhite/BigLoadSpinnerWhite";
 import DashboardErrorPage from "../DashboardErrorPage/DashboardErrorPage";
 import { LuView } from "react-icons/lu";
 import { GiCrossMark } from "react-icons/gi";
 import { MdDoneOutline } from "react-icons/md";
+import SpinnerForDashboardRoute from "../../../components/Shared/SpinnerForDashboardRoute/SpinnerForDashboardRoute";
 
 const PendingApplications = () => {
   const axiosInstance = useAxiosSecure();
@@ -30,7 +30,7 @@ const PendingApplications = () => {
     },
   });
 
-  if (isLoading) return <BigLoadSpinnerWhite></BigLoadSpinnerWhite>;
+  if (isLoading) return <SpinnerForDashboardRoute></SpinnerForDashboardRoute>;
   if (isError) return <DashboardErrorPage></DashboardErrorPage>;
 
   return (

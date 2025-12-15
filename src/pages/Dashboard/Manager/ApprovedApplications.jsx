@@ -4,8 +4,8 @@ import { LuView } from 'react-icons/lu';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import BigLoadSpinnerWhite from '../../../components/Shared/BigLoadSpinnerWhite/BigLoadSpinnerWhite';
 import DashboardErrorPage from '../DashboardErrorPage/DashboardErrorPage';
+import SpinnerForDashboardRoute from '../../../components/Shared/SpinnerForDashboardRoute/SpinnerForDashboardRoute';
 
 const ApprovedApplications = () => {
   const axiosInstance = useAxiosSecure();
@@ -28,7 +28,7 @@ const ApprovedApplications = () => {
     },
   });
 
-  if (isLoading) return <BigLoadSpinnerWhite></BigLoadSpinnerWhite>;
+  if (isLoading) return <SpinnerForDashboardRoute></SpinnerForDashboardRoute>;
   if (isError) return <DashboardErrorPage></DashboardErrorPage>;
 
 

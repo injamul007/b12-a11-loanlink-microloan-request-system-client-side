@@ -5,8 +5,8 @@ import MyContainer from "../../../components/Shared/MyContainer/MyContainer";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import BigLoadSpinner from "../../../components/Shared/BigLoadSpinner/BigLoadSpinner";
 import DashboardErrorPage from "../DashboardErrorPage/DashboardErrorPage";
+import SpinnerForDashboardRoute from "../../../components/Shared/SpinnerForDashboardRoute/SpinnerForDashboardRoute";
 
 const MyLoans = () => {
   const { user } = useAuth();
@@ -24,7 +24,8 @@ const MyLoans = () => {
     },
   });
 
-  if (isLoading) return <BigLoadSpinner></BigLoadSpinner>;
+
+  if (isLoading) return <SpinnerForDashboardRoute></SpinnerForDashboardRoute>;
   if (isError) return <DashboardErrorPage></DashboardErrorPage>;
 
   return (
