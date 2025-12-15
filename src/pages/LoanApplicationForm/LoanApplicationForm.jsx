@@ -46,10 +46,10 @@ const LoanApplicationForm = () => {
       } = data;
 
       const loanApplicationData = {
-        userEmail,
+        borrower_name: `${first_name} ${last_name}`,
+        borrower_email: userEmail,
         loan_title,
         interest_rate,
-        borrower_name: `${first_name} ${last_name}`,
         contact_number,
         nid_or_passport_number,
         income_source,
