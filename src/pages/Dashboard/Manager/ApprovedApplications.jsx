@@ -1,10 +1,108 @@
 import React from 'react';
+import MyContainer from '../../../components/Shared/MyContainer/MyContainer';
+import { LuView } from 'react-icons/lu';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+import BigLoadSpinnerWhite from '../../../components/Shared/BigLoadSpinnerWhite/BigLoadSpinnerWhite';
+import DashboardErrorPage from '../DashboardErrorPage/DashboardErrorPage';
 
 const ApprovedApplications = () => {
+  const axiosInstance = useAxiosSecure();
+
+  const {
+    data: approvedApplication = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["approved-application"],
+    queryFn: async () => {
+      try {
+        const res = await axiosInstance.get("/approved-application");
+        console.log(res.data.result);
+        return res.data.result;
+      } catch (error) {
+        console.log(error.message);
+        toast.error(error.message);
+      }
+    },
+  });
+
+  if (isLoading) return <BigLoadSpinnerWhite></BigLoadSpinnerWhite>;
+  if (isError) return <DashboardErrorPage></DashboardErrorPage>;
+
+
   return (
-    <div>
-      <h2>Approved Applications</h2>
-    </div>
+    <MyContainer>
+      <title>MicroLoan || Approved Application</title>
+      <div>
+        <h1 className="text-3xl font-bold text-center my-10">
+          All the Approved Loan Applications: {approvedApplication.length}
+        </h1>
+
+        <div>
+          <div className="w-full overflow-x-auto rounded-box border border-base-content/5 bg-base-200 mb-8 shadow-lg dark:shadow-sm dark:shadow-gray-600">
+            <table className="table">
+              {/* head */}
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Loan ID</th>
+                  <th>Borrower Name and Email</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {approvedApplication.map((approved, idx) => (
+                  <tr key={approved._id}>
+                    <th>{idx + 1}</th>
+
+                    {/* Loan ID */}
+                    <td className="md:table-cell break-all max-w-[180px]">
+                      {approved._id}
+                    </td>
+
+                    {/* Borrower Info */}
+                    <td className="max-w-[200px]">
+                      <div className="flex flex-col">
+                        <span className="font-medium">
+                          {approved.borrower_name}
+                        </span>
+                        <span className="text-sm text-gray-500 break-all">
+                          {approved.borrower_email}
+                        </span>
+                      </div>
+                    </td>
+
+                    {/* Amount */}
+                    <td className="whitespace-nowrap font-semibold">৳{approved.loan_amount}</td>
+
+                    {/* Date hidden on tablet & mobile */}
+                    <td className="md:table-cell break-all max-w-[180px]">
+                      {approved.created_at}
+                    </td>
+
+                    {/* Actions */}
+                    <td>
+                      <div className="flex flex-wrap gap-2">
+                        <button
+                          className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
+                          title="View"
+                        >
+                          <LuView size={18} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </MyContainer>
   );
 };
 
