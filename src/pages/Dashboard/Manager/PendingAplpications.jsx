@@ -16,12 +16,12 @@ const PendingApplications = () => {
     data: pendingApplication = [],
     isLoading,
     isError,
+    refetch,
   } = useQuery({
     queryKey: ["pending-application"],
     queryFn: async () => {
       try {
         const res = await axiosInstance.get("/pending-application");
-        console.log(res.data.result);
         return res.data.result;
       } catch (error) {
         console.log(error.message);
@@ -29,6 +29,20 @@ const PendingApplications = () => {
       }
     },
   });
+
+  const handleApproved = async(id) => {
+    try {
+      console.log(id)
+      const res = await axiosInstance.patch(`/pending-application/${id}`)
+      if(res.data.result.modifiedCount) {
+        toast.success('Application Approved')
+        refetch();
+      }
+    } catch (error) {
+      console.log(error.message)
+      toast.error(error.message)
+    }
+  }
 
   if (isLoading) return <SpinnerForDashboardRoute></SpinnerForDashboardRoute>;
   if (isError) return <DashboardErrorPage></DashboardErrorPage>;
@@ -89,6 +103,7 @@ const PendingApplications = () => {
                     <td>
                       <div className="flex flex-wrap gap-2">
                         <button
+                        onClick={()=>handleApproved(pending._id)}
                           className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
                           title="Approve"
                         >
