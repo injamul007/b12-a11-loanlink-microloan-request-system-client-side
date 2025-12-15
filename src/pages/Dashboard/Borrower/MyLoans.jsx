@@ -1,5 +1,5 @@
 import React from "react";
-import { GiCancel, GiPayMoney } from "react-icons/gi";
+import { GiCancel, GiCrossMark, GiPayMoney } from "react-icons/gi";
 import { LuView } from "react-icons/lu";
 import MyContainer from "../../../components/Shared/MyContainer/MyContainer";
 import { useQuery } from "@tanstack/react-query";
@@ -9,19 +9,23 @@ import BigLoadSpinner from "../../../components/Shared/BigLoadSpinner/BigLoadSpi
 import DashboardErrorPage from "../DashboardErrorPage/DashboardErrorPage";
 
 const MyLoans = () => {
-  const {user} = useAuth();
+  const { user } = useAuth();
   const axiosInstance = useAxiosSecure();
 
-  const {data: myLoans=[], isLoading, isError} = useQuery({
-    queryKey:['my-loans', user?.email],
-    queryFn: async() => {
-      const res = await axiosInstance.get(`/my-loans`)
+  const {
+    data: myLoans = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["my-loans", user?.email],
+    queryFn: async () => {
+      const res = await axiosInstance.get(`/my-loans`);
       return res.data.result;
-    }
-  })
+    },
+  });
 
-  if(isLoading) return <BigLoadSpinner></BigLoadSpinner>
-  if(isError) return <DashboardErrorPage></DashboardErrorPage>
+  if (isLoading) return <BigLoadSpinner></BigLoadSpinner>;
+  if (isError) return <DashboardErrorPage></DashboardErrorPage>;
 
   return (
     <MyContainer>
@@ -32,7 +36,7 @@ const MyLoans = () => {
         </h1>
 
         <div>
-          <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-200 mb-8 shadow-lg dark:shadow-sm dark:shadow-gray-600">
+          <div className="w-full overflow-x-auto rounded-box border border-base-content/5 bg-base-200 mb-8 shadow-lg dark:shadow-sm dark:shadow-gray-600">
             <table className="table">
               {/* head */}
               <thead>
@@ -46,41 +50,62 @@ const MyLoans = () => {
                 </tr>
               </thead>
               <tbody>
-                {
-                  myLoans.map((loan,idx) => <tr key={loan._id}>
-                  <th>{idx + 1}</th>
-                  <td>{loan._id}</td>
-                  <td>{loan.loan_title}</td>
-                  <td>
-                    {loan.loan_amount}
-                  </td>
-                  <td>{loan.status}</td>
-                  <td>
-                    {/* actions div */}
-                    <div className="lg:space-x-2 space-x-3">
-                      <button
-                        className="btn btn-square dark:bg-gray-800 hover:bg-[#4DA3FF]"
-                        title="View"
-                      >
+                {myLoans.map((loan, idx) => (
+                  <tr key={loan._id}>
+                    <th>{idx + 1}</th>
+
+                    {/* Loan ID */}
+                    <td className="md:table-cell break-all max-w-[180px]">
+                      {loan._id}
+                    </td>
+
+                    {/* Borrower Info */}
+                    <td className="max-w-[200px]">
+                      <div className="flex flex-col">
+                        <span className="font-medium">
+                          {loan.loan_title}
+                        </span>
+                        <span className="text-sm text-gray-500 break-all">
+                          {loan.interest_rate}
+                        </span>
+                      </div>
+                    </td>
+
+                    {/* Amount */}
+                    <td className="whitespace-nowrap">৳{loan.loan_amount}</td>
+
+                    {/* Date hidden on tablet & mobile */}
+                    <td className="lg:table-cell whitespace-nowrap">
+                      {loan.status}
+                    </td>
+
+                    {/* Actions */}
+                    <td>
+                      <div className="flex flex-wrap gap-2">
+                        <button
+                          className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
+                          title="View"
+                        >
                         <LuView size={22} />
-                      </button>
-                      <button
-                        className="btn btn-square dark:bg-gray-800 hover:bg-error"
-                        title="Cancel"
-                      >
-                        <GiCancel size={22} />
-                      </button>
-                      <button
-                        className="btn btn-square dark:bg-gray-800 hover:bg-[#FFB703]"
-                        title="Pay"
-                        // onClick={() => handleParcelDelete(parcel._id)}
-                      >
-                        <GiPayMoney size={22} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>)
-                }
+                        </button>
+
+                        <button
+                          className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-error"
+                          title="Cancel"
+                        >
+                          <GiCrossMark size={22} />
+                        </button>
+
+                        <button
+                          className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
+                          title="Pay"
+                        >
+                          <GiPayMoney size={22} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
