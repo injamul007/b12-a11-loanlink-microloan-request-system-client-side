@@ -33,7 +33,7 @@ const PendingApplications = () => {
   const handleApproved = async(id) => {
     try {
       console.log(id)
-      const res = await axiosInstance.patch(`/pending-application/${id}`)
+      const res = await axiosInstance.patch(`/pending-application/approved/${id}`)
       if(res.data.result.modifiedCount) {
         toast.success('Application Approved')
         refetch();

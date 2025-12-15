@@ -24,7 +24,6 @@ const MyLoans = () => {
     },
   });
 
-
   if (isLoading) return <SpinnerForDashboardRoute></SpinnerForDashboardRoute>;
   if (isError) return <DashboardErrorPage></DashboardErrorPage>;
 
@@ -63,9 +62,7 @@ const MyLoans = () => {
                     {/* Loan Info */}
                     <td className="max-w-[200px]">
                       <div className="flex flex-col">
-                        <span className="font-medium">
-                          {loan.loan_title}
-                        </span>
+                        <span className="font-medium">{loan.loan_title}</span>
                         <span className="text-sm text-gray-500 break-all">
                           {loan.interest_rate}
                         </span>
@@ -76,7 +73,15 @@ const MyLoans = () => {
                     <td className="whitespace-nowrap">৳{loan.loan_amount}</td>
 
                     {/* Status */}
-                    <td className="lg:table-cell whitespace-nowrap">
+                    <td
+                      className={`lg:table-cell whitespace-nowrap font-semibold ${
+                        loan.status === "approved"
+                          ? "text-success"
+                          : loan.status === "rejected"
+                          ? "text-error"
+                          : "text-[#FFB703]"
+                      }`}
+                    >
                       {loan.status}
                     </td>
 
@@ -87,7 +92,7 @@ const MyLoans = () => {
                           className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
                           title="View"
                         >
-                        <LuView size={22} />
+                          <LuView size={22} />
                         </button>
 
                         <button
