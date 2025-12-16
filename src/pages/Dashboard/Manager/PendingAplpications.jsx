@@ -30,19 +30,35 @@ const PendingApplications = () => {
     },
   });
 
-  const handleApproved = async(id) => {
+  const handleApproved = async (id) => {
     try {
-      console.log(id)
-      const res = await axiosInstance.patch(`/pending-application/approved/${id}`)
-      if(res.data.result.modifiedCount) {
-        toast.success('Application Approved')
+      const res = await axiosInstance.patch(
+        `/pending-application/approved/${id}`
+      );
+      if (res.data.result.modifiedCount) {
+        toast.success("Application Approved");
         refetch();
       }
     } catch (error) {
-      console.log(error.message)
-      toast.error(error.message)
+      console.log(error.message);
+      toast.error(error.message);
     }
-  }
+  };
+
+  const handleRejected = async (id) => {
+    try {
+      const res = await axiosInstance.patch(
+        `/pending-application/rejected/${id}`
+      );
+      if (res.data.result.modifiedCount) {
+        toast.success("Application Rejected");
+        refetch();
+      }
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+    }
+  };
 
   if (isLoading) return <SpinnerForDashboardRoute></SpinnerForDashboardRoute>;
   if (isError) return <DashboardErrorPage></DashboardErrorPage>;
@@ -92,7 +108,9 @@ const PendingApplications = () => {
                     </td>
 
                     {/* Amount */}
-                    <td className="whitespace-nowrap font-semibold">৳{pending.loan_amount}</td>
+                    <td className="whitespace-nowrap font-semibold">
+                      ৳{pending.loan_amount}
+                    </td>
 
                     {/* Date */}
                     <td className="md:table-cell max-w-[180px]">
@@ -103,7 +121,7 @@ const PendingApplications = () => {
                     <td>
                       <div className="flex flex-wrap gap-2">
                         <button
-                        onClick={()=>handleApproved(pending._id)}
+                          onClick={() => handleApproved(pending._id)}
                           className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
                           title="Approve"
                         >
@@ -111,6 +129,7 @@ const PendingApplications = () => {
                         </button>
 
                         <button
+                          onClick={() => handleRejected(pending._id)}
                           className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-error"
                           title="Reject"
                         >
