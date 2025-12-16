@@ -193,7 +193,7 @@ export default function Footer() {
                     href="mailto:support@microloan.example"
                     className="text-primary dark:text-primary hover:underline"
                   >
-                    support@microloan.example
+                    support@microloan.com.bd
                   </a>
                 </div>
                 <div>
