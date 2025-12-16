@@ -60,7 +60,7 @@ const Banner = () => {
       {/* buttons positions centered */}
       <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none flex-col">
         <div className="px-6 text-center">
-          <h1 className="text-4xl font-extrabold leading-tight text-white dark:text-gray-200">
+          <h1 className="text-4xl font-extrabold leading-tight text-primary dark:text-gray-200">
             Get the microloan you need — fast, secure & simple.
           </h1>
 
