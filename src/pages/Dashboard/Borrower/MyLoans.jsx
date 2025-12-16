@@ -74,7 +74,7 @@ const MyLoans = () => {
           <h1 className="text-2xl font-bold text-center my-10">
             All My Loan Applications
           </h1>
-          <p className="bg-[#4DA3FF] p-1 font-semibold rounded-lg">
+          <p className="bg-[#4DA3FF] p-1 text-sm font-semibold rounded-lg">
             Showing: <span>{myLoans.length}</span>
           </p>
         </div>

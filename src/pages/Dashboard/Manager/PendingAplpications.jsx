@@ -13,13 +13,13 @@ import PendingLoanViewModal from "../../../components/Modal/PendingLoanViewModal
 
 const PendingApplications = () => {
   const axiosInstance = useAxiosSecure();
-  const [isOpen , setIsOpen] = useState(false)
-  const [selectedLoan, setSelectedLoan] = useState(null)
-  
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedLoan, setSelectedLoan] = useState(null);
+
   const closeModal = () => {
-    setSelectedLoan(null)
-    setIsOpen(false)
-  }
+    setSelectedLoan(null);
+    setIsOpen(false);
+  };
 
   const {
     data: pendingApplication = [],
@@ -108,7 +108,7 @@ const PendingApplications = () => {
           <h1 className="text-2xl font-bold text-center my-10">
             All the Pending Loan Applications
           </h1>
-          <p className="bg-[#4DA3FF] p-1 font-semibold rounded-lg">
+          <p className="bg-[#4DA3FF] p-1 text-sm font-semibold rounded-lg">
             Showing: <span>{pendingApplication.length}</span>
           </p>
         </div>
@@ -167,7 +167,7 @@ const PendingApplications = () => {
                           className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
                           title="Approve"
                         >
-                          <MdDoneOutline size={18} />
+                          <MdDoneOutline size={22} />
                         </button>
 
                         <button
@@ -175,18 +175,18 @@ const PendingApplications = () => {
                           className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-error"
                           title="Reject"
                         >
-                          <GiCrossMark size={18} />
+                          <GiCrossMark size={22} />
                         </button>
 
                         <button
-                        onClick={()=> {
-                          setSelectedLoan(pending)
-                          setIsOpen(true)
-                        }}
+                          onClick={() => {
+                            setSelectedLoan(pending);
+                            setIsOpen(true);
+                          }}
                           className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
                           title="View"
                         >
-                          <LuView size={18} />
+                          <LuView size={22} />
                         </button>
                       </div>
                     </td>
@@ -196,11 +196,10 @@ const PendingApplications = () => {
             </table>
             {/* Pending loan application details by Modal */}
             <PendingLoanViewModal
-            isOpen={isOpen}
-            closeModal={closeModal}
-            pendingLoan={selectedLoan}
-            >
-            </PendingLoanViewModal>
+              isOpen={isOpen}
+              closeModal={closeModal}
+              pendingLoan={selectedLoan}
+            ></PendingLoanViewModal>
           </div>
         </div>
       </div>

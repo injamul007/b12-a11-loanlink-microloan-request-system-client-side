@@ -14,7 +14,7 @@ const PendingLoanViewModal = ({ isOpen, closeModal, pendingLoan }) => {
           </DialogTitle>
 
           <p className="text-center text-sm text-gray-500 dark:text-gray-300 mt-1">
-            Loan Application Details
+            <span className="font-semibold text-[#FFB703]">Pending</span> Loan Application Details
           </p>
 
           <div className="mt-6 space-y-3 text-sm">

@@ -1,14 +1,22 @@
-import React from 'react';
-import MyContainer from '../../../components/Shared/MyContainer/MyContainer';
-import { LuView } from 'react-icons/lu';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import { useQuery } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
-import DashboardErrorPage from '../DashboardErrorPage/DashboardErrorPage';
-import SpinnerForDashboardRoute from '../../../components/Shared/SpinnerForDashboardRoute/SpinnerForDashboardRoute';
+import React, { useState } from "react";
+import MyContainer from "../../../components/Shared/MyContainer/MyContainer";
+import { LuView } from "react-icons/lu";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import DashboardErrorPage from "../DashboardErrorPage/DashboardErrorPage";
+import SpinnerForDashboardRoute from "../../../components/Shared/SpinnerForDashboardRoute/SpinnerForDashboardRoute";
+import ApprovedLoanViewModal from "../../../components/Modal/ApprovedLoanViewModal";
 
 const ApprovedApplications = () => {
   const axiosInstance = useAxiosSecure();
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedLoan, setSelectedLoan] = useState(null);
+
+  const closeModal = () => {
+    setSelectedLoan(null);
+    setIsOpen(false);
+  };
 
   const {
     data: approvedApplication = [],
@@ -30,14 +38,18 @@ const ApprovedApplications = () => {
   if (isLoading) return <SpinnerForDashboardRoute></SpinnerForDashboardRoute>;
   if (isError) return <DashboardErrorPage></DashboardErrorPage>;
 
-
   return (
     <MyContainer>
       <title>MicroLoan || Approved Application</title>
       <div>
-        <h1 className="text-3xl font-bold text-center my-10">
-          All the Approved Loan Applications: {approvedApplication.length}
-        </h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-center my-10">
+            All the Approved Loan Applications
+          </h1>
+          <p className="bg-[#4DA3FF] p-1 font-semibold text-sm rounded-lg">
+            Showing: <span>{approvedApplication.length}</span>
+          </p>
+        </div>
 
         <div>
           <div className="w-full overflow-x-auto rounded-box border border-base-content/5 bg-base-200 mb-8 shadow-lg dark:shadow-sm dark:shadow-gray-600">
@@ -76,7 +88,9 @@ const ApprovedApplications = () => {
                     </td>
 
                     {/* Amount */}
-                    <td className="whitespace-nowrap font-semibold">৳{approved.loan_amount}</td>
+                    <td className="whitespace-nowrap font-semibold">
+                      ৳{approved.loan_amount}
+                    </td>
 
                     {/* Date */}
                     <td className="md:table-cell max-w-[180px]">
@@ -87,10 +101,14 @@ const ApprovedApplications = () => {
                     <td>
                       <div className="flex flex-wrap gap-2">
                         <button
-                          className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
+                          onClick={() => {
+                            setSelectedLoan(approved);
+                            setIsOpen(true);
+                          }}
+                          className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
                           title="View"
                         >
-                          <LuView size={18} />
+                          <LuView size={22} />
                         </button>
                       </div>
                     </td>
@@ -98,6 +116,12 @@ const ApprovedApplications = () => {
                 ))}
               </tbody>
             </table>
+            {/* //? Approved loan details view with Modal */}
+            <ApprovedLoanViewModal
+              isOpen={isOpen}
+              closeModal={closeModal}
+              approvedLoan={selectedLoan}
+            ></ApprovedLoanViewModal>
           </div>
         </div>
       </div>

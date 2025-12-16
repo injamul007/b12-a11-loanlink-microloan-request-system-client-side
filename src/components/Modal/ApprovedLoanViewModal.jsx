@@ -1,6 +1,6 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 
-const MyLoanViewModal = ({ isOpen, closeModal, loan }) => {
+const ApprovedLoanViewModal = ({ isOpen, closeModal, approvedLoan }) => {
   return (
     <Dialog open={isOpen} onClose={closeModal} className="relative z-50">
       {/* Overlay */}
@@ -14,20 +14,20 @@ const MyLoanViewModal = ({ isOpen, closeModal, loan }) => {
           </DialogTitle>
 
           <p className="text-center text-sm text-gray-500 dark:text-gray-300 mt-1">
-            My {loan?.status === 'approved' ? <span className="font-semibold text-success">Approved</span> : loan?.status === 'rejected' ? <span className="font-semibold text-error">Rejected</span> : <span className="font-semibold text-[#FFB703]">Pending</span>} Loan Application Details
+            <span className="font-semibold text-success">Approved</span> Loan Application Details
           </p>
 
           <div className="mt-6 space-y-3 text-sm">
-            <InfoRow label="Loan ID" value={loan?.loan_id} />
-            <InfoRow label="Title" value={loan?.loan_title} />
-            <InfoRow label="Requested Amount" value={`৳${loan?.loan_amount}`} />
-            <InfoRow label="Interest" value={loan?.interest_rate} />
-            <InfoRow label="Borrower Name" value={loan?.borrower_name} />
-            <InfoRow label="Borrower Email" value={loan?.borrower_email} />
-            <InfoRow label="Borrower NID/Passport" value={loan?.nid_or_passport_number} />
-            <InfoRow label="Borrower Monthly Income" value={loan?.monthly_income} />
-            <InfoRow label="Reason For Loan" value={loan?.reason_for_loan} />
-            <InfoRow label="Status" value={loan?.status} />
+            <InfoRow label="Loan ID" value={approvedLoan?.loan_id} />
+            <InfoRow label="Title" value={approvedLoan?.loan_title} />
+            <InfoRow label="Requested Amount" value={`৳${approvedLoan?.loan_amount}`} />
+            <InfoRow label="Interest" value={approvedLoan?.interest_rate} />
+            <InfoRow label="Borrower Name" value={approvedLoan?.borrower_name} />
+            <InfoRow label="Borrower Email" value={approvedLoan?.borrower_email} />
+            <InfoRow label="Borrower NID/Passport" value={approvedLoan?.nid_or_passport_number} />
+            <InfoRow label="Borrower Monthly Income" value={approvedLoan?.monthly_income} />
+            <InfoRow label="Reason For Loan" value={approvedLoan?.reason_for_loan} />
+            <InfoRow label="Status" value={approvedLoan?.status} />
           </div>
 
           <div className="mt-6 flex justify-end">
@@ -51,4 +51,4 @@ const InfoRow = ({ label, value }) => (
   </div>
 );
 
-export default MyLoanViewModal;
+export default ApprovedLoanViewModal;
