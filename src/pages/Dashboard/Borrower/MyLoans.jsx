@@ -1,5 +1,5 @@
 import React from "react";
-import { GiCancel, GiCrossMark, GiPayMoney } from "react-icons/gi";
+import { GiCrossMark } from "react-icons/gi";
 import { LuView } from "react-icons/lu";
 import MyContainer from "../../../components/Shared/MyContainer/MyContainer";
 import { useQuery } from "@tanstack/react-query";
@@ -7,6 +7,9 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import DashboardErrorPage from "../DashboardErrorPage/DashboardErrorPage";
 import SpinnerForDashboardRoute from "../../../components/Shared/SpinnerForDashboardRoute/SpinnerForDashboardRoute";
+import toast from "react-hot-toast";
+import paymentIcon from "../../../assets/payment_icon.png";
+import Swal from "sweetalert2";
 
 const MyLoans = () => {
   const { user } = useAuth();
@@ -16,6 +19,7 @@ const MyLoans = () => {
     data: myLoans = [],
     isLoading,
     isError,
+    refetch,
   } = useQuery({
     queryKey: ["my-loans", user?.email],
     queryFn: async () => {
@@ -23,6 +27,33 @@ const MyLoans = () => {
       return res.data.result;
     },
   });
+
+  const handleCancelPending = async (id) => {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure to remove it?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Remove it!",
+        customClass: {
+          popup: "confirmation-swal-popup",
+        },
+      });
+
+      if (result.isConfirmed) {
+        const res = await axiosInstance.delete(`/my-loans/canceled/${id}`);
+        if (res.data.result?.deletedCount) {
+          toast.success("Pending Loan Application Removed");
+          refetch();
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+    }
+  };
 
   if (isLoading) return <SpinnerForDashboardRoute></SpinnerForDashboardRoute>;
   if (isError) return <DashboardErrorPage></DashboardErrorPage>;
@@ -95,18 +126,21 @@ const MyLoans = () => {
                           <LuView size={22} />
                         </button>
 
-                        <button
-                          className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-error"
-                          title="Cancel"
-                        >
-                          <GiCrossMark size={22} />
-                        </button>
+                        {loan.status === "pending" && (
+                          <button
+                            onClick={() => handleCancelPending(loan._id)}
+                            className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-error"
+                            title="Remove"
+                          >
+                            <GiCrossMark size={22} />
+                          </button>
+                        )}
 
                         <button
                           className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
                           title="Pay"
                         >
-                          <GiPayMoney size={22} />
+                          <img src={paymentIcon} alt="paymentIcon" />
                         </button>
                       </div>
                     </td>
