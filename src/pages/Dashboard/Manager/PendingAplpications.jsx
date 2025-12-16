@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MyContainer from "../../../components/Shared/MyContainer/MyContainer";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -8,9 +8,18 @@ import { LuView } from "react-icons/lu";
 import { GiCrossMark } from "react-icons/gi";
 import { MdDoneOutline } from "react-icons/md";
 import SpinnerForDashboardRoute from "../../../components/Shared/SpinnerForDashboardRoute/SpinnerForDashboardRoute";
+import Swal from "sweetalert2";
+import PendingLoanViewModal from "../../../components/Modal/PendingLoanViewModal";
 
 const PendingApplications = () => {
   const axiosInstance = useAxiosSecure();
+  const [isOpen , setIsOpen] = useState(false)
+  const [selectedLoan, setSelectedLoan] = useState(null)
+  
+  const closeModal = () => {
+    setSelectedLoan(null)
+    setIsOpen(false)
+  }
 
   const {
     data: pendingApplication = [],
@@ -32,12 +41,26 @@ const PendingApplications = () => {
 
   const handleApproved = async (id) => {
     try {
-      const res = await axiosInstance.patch(
-        `/pending-application/approved/${id}`
-      );
-      if (res.data.result.modifiedCount) {
-        toast.success("Application Approved");
-        refetch();
+      const result = await Swal.fire({
+        title: "Are you sure to Approve?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Approve it!",
+        customClass: {
+          popup: "confirmation-swal-popup",
+        },
+      });
+
+      if (result.isConfirmed) {
+        const res = await axiosInstance.patch(
+          `/pending-application/approved/${id}`
+        );
+        if (res.data.result.modifiedCount) {
+          toast.success("Application Approved");
+          refetch();
+        }
       }
     } catch (error) {
       console.log(error.message);
@@ -47,12 +70,26 @@ const PendingApplications = () => {
 
   const handleRejected = async (id) => {
     try {
-      const res = await axiosInstance.patch(
-        `/pending-application/rejected/${id}`
-      );
-      if (res.data.result.modifiedCount) {
-        toast.success("Application Rejected");
-        refetch();
+      const result = await Swal.fire({
+        title: "Are you sure to Reject?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Reject it!",
+        customClass: {
+          popup: "confirmation-swal-popup",
+        },
+      });
+
+      if (result.isConfirmed) {
+        const res = await axiosInstance.patch(
+          `/pending-application/rejected/${id}`
+        );
+        if (res.data.result.modifiedCount) {
+          toast.success("Application Rejected");
+          refetch();
+        }
       }
     } catch (error) {
       console.log(error.message);
@@ -67,9 +104,14 @@ const PendingApplications = () => {
     <MyContainer>
       <title>MicroLoan || Pending Application</title>
       <div>
-        <h1 className="text-3xl font-bold text-center my-10">
-          All the Pending Loan Applications: {pendingApplication.length}
-        </h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-center my-10">
+            All the Pending Loan Applications
+          </h1>
+          <p className="bg-[#4DA3FF] p-1 font-semibold rounded-lg">
+            Showing: <span>{pendingApplication.length}</span>
+          </p>
+        </div>
 
         <div>
           <div className="w-full overflow-x-auto rounded-box border border-base-content/5 bg-base-200 mb-8 shadow-lg dark:shadow-sm dark:shadow-gray-600">
@@ -137,6 +179,10 @@ const PendingApplications = () => {
                         </button>
 
                         <button
+                        onClick={()=> {
+                          setSelectedLoan(pending)
+                          setIsOpen(true)
+                        }}
                           className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
                           title="View"
                         >
@@ -148,6 +194,13 @@ const PendingApplications = () => {
                 ))}
               </tbody>
             </table>
+            {/* Pending loan application details by Modal */}
+            <PendingLoanViewModal
+            isOpen={isOpen}
+            closeModal={closeModal}
+            pendingLoan={selectedLoan}
+            >
+            </PendingLoanViewModal>
           </div>
         </div>
       </div>
