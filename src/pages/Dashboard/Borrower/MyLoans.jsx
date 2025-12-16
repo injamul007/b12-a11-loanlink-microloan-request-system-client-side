@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { GiCrossMark } from "react-icons/gi";
 import { LuView } from "react-icons/lu";
 import MyContainer from "../../../components/Shared/MyContainer/MyContainer";
@@ -10,10 +10,18 @@ import SpinnerForDashboardRoute from "../../../components/Shared/SpinnerForDashb
 import toast from "react-hot-toast";
 import paymentIcon from "../../../assets/payment_icon.png";
 import Swal from "sweetalert2";
+import MyLoanViewModal from "../../../components/Modal/MyLoanViewModal";
 
 const MyLoans = () => {
   const { user } = useAuth();
   const axiosInstance = useAxiosSecure();
+  const [selectedLoan, setSelectedLoan] = useState(null);
+  let [isOpen, setIsOpen] = useState(false);
+
+  const closeModal = () => {
+    setIsOpen(false);
+    setSelectedLoan(null);
+  };
 
   const {
     data: myLoans = [],
@@ -62,9 +70,14 @@ const MyLoans = () => {
     <MyContainer>
       <title>MicroLoan || MyLoans</title>
       <div>
-        <h1 className="text-3xl font-bold text-center my-10">
-          All My Loan Applications: {myLoans.length}
-        </h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-center my-10">
+            All My Loan Applications
+          </h1>
+          <p className="bg-[#4DA3FF] p-1 font-semibold rounded-lg">
+            Showing: <span>{myLoans.length}</span>
+          </p>
+        </div>
 
         <div>
           <div className="w-full overflow-x-auto rounded-box border border-base-content/5 bg-base-200 mb-8 shadow-lg dark:shadow-sm dark:shadow-gray-600">
@@ -120,6 +133,10 @@ const MyLoans = () => {
                     <td>
                       <div className="flex flex-wrap gap-2">
                         <button
+                          onClick={() => {
+                            setSelectedLoan(loan);
+                            setIsOpen(true);
+                          }}
                           className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
                           title="View"
                         >
@@ -140,7 +157,7 @@ const MyLoans = () => {
                           className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
                           title="Pay"
                         >
-                          <img src={paymentIcon} alt="paymentIcon" />
+                          <img src={paymentIcon} alt="paymentIcon" className="dark:invert" />
                         </button>
                       </div>
                     </td>
@@ -148,6 +165,12 @@ const MyLoans = () => {
                 ))}
               </tbody>
             </table>
+            {/* //? My Loan View Modal */}
+            <MyLoanViewModal
+              isOpen={isOpen}
+              closeModal={closeModal}
+              loan={selectedLoan}
+            ></MyLoanViewModal>
           </div>
         </div>
       </div>
