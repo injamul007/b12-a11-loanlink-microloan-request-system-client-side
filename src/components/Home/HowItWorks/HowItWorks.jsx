@@ -117,11 +117,11 @@ export default function HowItWorks() {
           {/* CTA Button*/}
           <div className="mt-10 text-center">
             <Link
-              to={"/apply-loan"}
+              to={"/all-loans"}
               className="cta_btn"
               aria-label="Start application"
             >
-              Start Your Application
+              See Our Loans
               <FaLongArrowAltRight />
             </Link>
           </div>

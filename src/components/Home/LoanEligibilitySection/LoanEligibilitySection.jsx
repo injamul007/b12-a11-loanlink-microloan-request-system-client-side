@@ -85,7 +85,7 @@ const LoanEligibilitySection = () => {
           {/* CTA Button*/}
           <div className="mt-10 text-center">
             <Link
-              to={"/apply-loan"}
+              to={"/all-loans"}
               className="cta_btn"
               aria-label="Start application"
             >

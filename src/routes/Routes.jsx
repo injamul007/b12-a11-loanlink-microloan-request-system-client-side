@@ -22,6 +22,7 @@ import AboutUs from "../pages/AboutUS/AboutUs";
 import Contact from "../pages/Contact/Contact";
 import LoanDetails from "../pages/LoanDetails/LoanDetails";
 import LoanApplicationForm from "../pages/LoanApplicationForm/LoanApplicationForm";
+import TermsAndPrivacy from "../pages/TermsAndCondition/TermsAndPrivacy";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/terms",
+        element: <TermsAndPrivacy></TermsAndPrivacy>,
       },
     ],
   },

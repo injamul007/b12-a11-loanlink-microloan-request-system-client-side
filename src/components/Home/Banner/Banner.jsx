@@ -73,11 +73,11 @@ const Banner = () => {
         </div>
         <div className="pointer-events-auto flex space-x-3 mt-4">
           <Link
-            to={'/apply-loan'}
+            to={'/loan-application-form'}
               className="cta_btn"
               aria-label="Start application"
             >
-              Apply Now
+              Apply for Loan
             </Link>
             <Link
             to={'/all-loans'}
