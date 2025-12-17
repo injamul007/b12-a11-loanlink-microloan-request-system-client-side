@@ -135,7 +135,7 @@ const Register = () => {
           </div>
 
           {/* Register card */}
-          <div className="w-full max-w-md backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl rounded-2xl p-7">
+          <div className="w-full max-w-md backdrop-blur-lg shadow-2xl rounded-2xl p-7">
             <form onSubmit={handleSubmit(handleRegister)} className="space-y-3">
               <h2 className="text-2xl font-semibold mb-2 text-center text-white">
                 Register Here!
