@@ -32,7 +32,9 @@ const AvailableLoans = () => {
             Available Loans
           </h2>
           <p className="mt-6 text-md text-gray-500 font-semibold max-w-2xl mx-auto">
-            Explore our top {availableLoans.length} microloans
+            {
+            availableLoans.length ? `Explore our top ${availableLoans.length}` : 'No data found'
+            }
           </p>
         </div>
 

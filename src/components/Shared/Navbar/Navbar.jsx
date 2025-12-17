@@ -172,10 +172,11 @@ const Navbar = () => {
                     className="menu  menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-fit p-2 shadow"
                   >
                     <div className=" pb-3 border-b border-b-gray-200 text-center">
-                      <div className="w-20 h-20 mx-auto border-2 border-gray-600">
+                      <div className="w-18 h-18 mx-auto border-2 border-gray-600">
                         <img
                           alt="Tailwind CSS Navbar component"
                           referrerPolicy="no-referrer"
+                          className="w-full h-full"
                           src={
                             user.photoURL ||
                             "https://i.ibb.co.com/HLPwdmsS/User-Profile-PNG-Picture.png"
