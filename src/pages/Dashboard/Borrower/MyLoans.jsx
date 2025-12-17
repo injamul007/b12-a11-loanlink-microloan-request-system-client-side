@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import paymentIcon from "../../../assets/payment_icon.png";
 import Swal from "sweetalert2";
 import MyLoanViewModal from "../../../components/Modal/MyLoanViewModal";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 const MyLoans = () => {
   const { user } = useAuth();
@@ -75,9 +76,9 @@ const MyLoans = () => {
             All My Loan Applications
           </h1>
           <p className="bg-[#4DA3FF] p-1 text-sm font-semibold rounded-lg">
-            {
-              myLoans.length ? `Showing: <span>${myLoans.length}</span>` : 'No Data Found'
-            }
+            {myLoans.length
+              ? `Showing: ${myLoans.length} data`
+              : "No Data Found"}
           </p>
         </div>
 
@@ -134,33 +135,52 @@ const MyLoans = () => {
                     {/* Actions */}
                     <td>
                       <div className="flex flex-wrap gap-2">
-                        <button
-                          onClick={() => {
-                            setSelectedLoan(loan);
-                            setIsOpen(true);
-                          }}
-                          className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
-                          title="View"
+                        <div
+                          className="tooltip before:bg-blue-400 before:text-black
+    dark:before:bg-blue-400 dark:before:text-white"
+                          data-tip="View"
                         >
-                          <LuView size={22} />
-                        </button>
+                          <button
+                            onClick={() => {
+                              setSelectedLoan(loan);
+                              setIsOpen(true);
+                            }}
+                            className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
+                          >
+                            <MdOutlineRemoveRedEye size={24} />
+                          </button>
+                        </div>
 
                         {loan.status === "pending" && (
-                          <button
-                            onClick={() => handleCancelPending(loan._id)}
-                            className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-error"
-                            title="Remove"
+                          <div
+                            className="tooltip before:bg-red-400 before:text-black
+    dark:before:bg-red-400 dark:before:text-white"
+                            data-tip="Reject"
                           >
-                            <GiCrossMark size={22} />
-                          </button>
+                            <button
+                              onClick={() => handleCancelPending(loan._id)}
+                              className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-error"
+                            >
+                              <GiCrossMark size={22} />
+                            </button>
+                          </div>
                         )}
 
-                        <button
-                          className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
-                          title="Pay"
+                        <div
+                          className="tooltip before:bg-yellow-400 before:text-black
+    dark:before:bg-yellow-400 dark:before:text-white"
+                          data-tip="Please Pay"
                         >
-                          <img src={paymentIcon} alt="paymentIcon" className="dark:invert" />
-                        </button>
+                          <button
+                            className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
+                          >
+                            <img
+                              src={paymentIcon}
+                              alt="paymentIcon"
+                              className="dark:invert"
+                            />
+                          </button>
+                        </div>
                       </div>
                     </td>
                   </tr>

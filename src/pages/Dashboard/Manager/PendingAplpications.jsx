@@ -6,7 +6,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import DashboardErrorPage from "../DashboardErrorPage/DashboardErrorPage";
 import { LuView } from "react-icons/lu";
 import { GiCrossMark } from "react-icons/gi";
-import { MdDoneOutline } from "react-icons/md";
+import { MdDoneOutline, MdOutlineRemoveRedEye } from "react-icons/md";
 import SpinnerForDashboardRoute from "../../../components/Shared/SpinnerForDashboardRoute/SpinnerForDashboardRoute";
 import Swal from "sweetalert2";
 import PendingLoanViewModal from "../../../components/Modal/PendingLoanViewModal";
@@ -109,9 +109,9 @@ const PendingApplications = () => {
             All the Pending Loan Applications
           </h1>
           <p className="bg-[#4DA3FF] p-1 text-sm font-semibold rounded-lg">
-            {
-              pendingApplication.length ? `Showing: <span>${pendingApplication.length}</span>` : 'No Data Found'
-            }
+            {pendingApplication.length
+              ? `Showing: ${pendingApplication.length} data`
+              : "No Data Found"}
           </p>
         </div>
 
@@ -164,32 +164,48 @@ const PendingApplications = () => {
                     {/* Actions */}
                     <td>
                       <div className="flex flex-wrap gap-2">
-                        <button
-                          onClick={() => handleApproved(pending._id)}
-                          className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
-                          title="Approve"
+                        <div
+                          className="tooltip before:bg-blue-400 before:text-black
+    dark:before:bg-blue-400 dark:before:text-white"
+                          data-tip="Approve"
                         >
-                          <MdDoneOutline size={22} />
-                        </button>
+                          <button
+                            onClick={() => handleApproved(pending._id)}
+                            className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
+                          >
+                            <MdDoneOutline size={22} />
+                          </button>
+                        </div>
 
-                        <button
-                          onClick={() => handleRejected(pending._id)}
-                          className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-error"
-                          title="Reject"
+                        <div
+                          className="tooltip before:bg-red-400 before:text-black
+    dark:before:bg-red-400 dark:before:text-white"
+                          data-tip="Reject"
                         >
-                          <GiCrossMark size={22} />
-                        </button>
+                          <button
+                            onClick={() => handleRejected(pending._id)}
+                            className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-error"
+                          >
+                            <GiCrossMark size={22} />
+                          </button>
+                        </div>
 
-                        <button
-                          onClick={() => {
-                            setSelectedLoan(pending);
-                            setIsOpen(true);
-                          }}
-                          className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
-                          title="View"
+                        <div
+                          className="tooltip before:bg-yellow-400 before:text-black
+    dark:before:bg-yellow-400 dark:before:text-white"
+                          data-tip="View"
                         >
-                          <LuView size={22} />
-                        </button>
+                          <button
+                            onClick={() => {
+                              setSelectedLoan(pending);
+                              setIsOpen(true);
+                            }}
+                            className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
+                            title="View"
+                          >
+                            <MdOutlineRemoveRedEye size={24} />
+                          </button>
+                        </div>
                       </div>
                     </td>
                   </tr>

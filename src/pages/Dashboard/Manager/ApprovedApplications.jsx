@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import DashboardErrorPage from "../DashboardErrorPage/DashboardErrorPage";
 import SpinnerForDashboardRoute from "../../../components/Shared/SpinnerForDashboardRoute/SpinnerForDashboardRoute";
 import ApprovedLoanViewModal from "../../../components/Modal/ApprovedLoanViewModal";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 const ApprovedApplications = () => {
   const axiosInstance = useAxiosSecure();
@@ -47,9 +48,9 @@ const ApprovedApplications = () => {
             All the Approved Loan Applications
           </h1>
           <p className="bg-[#4DA3FF] p-1 font-semibold text-sm rounded-lg">
-            {
-              approvedApplication.length ? `Showing: <span>${approvedApplication.length}</span>` : 'No Data Found'
-            }
+            {approvedApplication.length
+              ? `Showing: ${approvedApplication.length} data`
+              : "No Data Found"}
           </p>
         </div>
 
@@ -102,16 +103,21 @@ const ApprovedApplications = () => {
                     {/* Actions */}
                     <td>
                       <div className="flex flex-wrap gap-2">
-                        <button
-                          onClick={() => {
-                            setSelectedLoan(approved);
-                            setIsOpen(true);
-                          }}
-                          className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
-                          title="View"
+                        <div
+                          className="tooltip before:bg-blue-400 before:text-black
+    dark:before:bg-blue-400 dark:before:text-white"
+                          data-tip="View"
                         >
-                          <LuView size={22} />
-                        </button>
+                          <button
+                            onClick={() => {
+                              setSelectedLoan(approved);
+                              setIsOpen(true);
+                            }}
+                            className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
+                          >
+                            <MdOutlineRemoveRedEye size={24} />
+                          </button>
+                        </div>
                       </div>
                     </td>
                   </tr>
