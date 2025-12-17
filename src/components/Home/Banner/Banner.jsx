@@ -75,18 +75,19 @@ const Banner = () => {
 
         <div className="pointer-events-auto flex space-x-3 mt-4 fade-in-up-delay">
           <Link
-            to={"/loan-application-form"}
+            to={"/all-loans"}
             className="cta-first-button btn-sm md:btn-md lg:btn-md"
+            aria-label="Explore loans"
+          >
+            
+            Explore Loans
+          </Link>
+          <Link
+            to={"/loan-application-form"}
+            className="cta-second-button btn-sm md:btn-md lg:btn-md"
             aria-label="Start application"
           >
             Apply for Loan
-          </Link>
-          <Link
-            to={"/all-loans"}
-            className="cta-second-button btn-sm md:btn-md lg:btn-md"
-            aria-label="Explore loans"
-          >
-            Explore Loans
           </Link>
         </div>
       </div>
