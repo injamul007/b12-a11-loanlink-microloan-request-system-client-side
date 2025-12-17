@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 const Contact = () => {
   const handleSubmitDummy = (e) => {
     e.preventDefault();
-    toast("Hello Sir/Madam ! This Section will Update Soon...", {
+    toast("Hello Sir/Madam ! This section is under development and will be available in future updates.", {
       icon: "⏳",
     });
   };
@@ -19,9 +19,6 @@ const Contact = () => {
         <div className="px-6">
           {/* Section Header */}
           <div className="text-center mb-10">
-            <span className="inline-block mb-3 rounded-full bg-primary/10 text-primary px-4 py-1 text-sm font-medium">
-              Contact Us
-            </span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-text dark:text-gray-300 py-2">
               Get in touch with Microloan
             </h2>

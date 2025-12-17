@@ -51,9 +51,6 @@ const AboutUs = () => {
 
             {/* Right: Content */}
             <div className="lg:col-span-7">
-              <span className="inline-block mb-3 rounded-full bg-primary/10 text-primary px-3 py-1 text-sm font-medium">
-                About Us
-              </span>
 
               <h2 className="text-3xl md:text-4xl font-extrabold text-text dark:text-gray-300">
                 Making microloans simple, transparent, and accessible
