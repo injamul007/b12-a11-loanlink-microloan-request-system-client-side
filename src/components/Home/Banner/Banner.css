@@ -1,0 +1,64 @@
+/* Fade + Slide Up animation for banner text */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Slight delay version (for paragraph) */
+.fade-in-up-delay {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* CTA buttons code */
+
+.cta-first-button {
+  background-color: #0B5FFF;
+  color: white;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.cta-first-button:hover {
+  transform: translateY(-2px) scale(1.03);
+  background-color: #FFB703;
+  box-shadow: 0 10px 25px rgba(77, 163, 255, 0.35);
+}
+
+
+
+.cta-second-button {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cta-second-button:hover {
+  background-color: white;
+  color: #111;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}

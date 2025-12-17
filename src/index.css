@@ -50,6 +50,11 @@ body {
   box-shadow: 0 0 0 3px rgba(14, 165, 164, 0.3);
 }
 
+.my-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.3);
+}
+
 .navbar .active {
   color: #0B5FFF;
   font-weight: 600;
@@ -62,7 +67,7 @@ body {
 .navbar .active:hover {
   box-shadow: 0 2px 6px rgba(41, 67, 155, 0.15);
 }
-
+  
 /* CTA Button CSS */
 .cta_btn {
   @apply inline-flex items-center gap-3 px-6 py-3 rounded-lg shadow-md bg-primary text-base-100 font-medium hover:bg-accent hover:text-black transition dark:hover:bg-[#FFB703]

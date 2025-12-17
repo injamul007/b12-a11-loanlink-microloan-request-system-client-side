@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import { SiGnuprivacyguard } from "react-icons/si";
 import { GrDocumentStore } from "react-icons/gr";
 import { RiLogoutBoxRLine } from "react-icons/ri";
+import "./Navbar.css"
 
 const Navbar = () => {
   const { user, setUser, loading, logOutFunc } = useAuth();
@@ -43,7 +44,7 @@ const Navbar = () => {
         <>
           <li>
             <NavLink to={"/about-us"}>
-              <FaUsers  size={24} /> About Us
+              <FaUsers size={24} /> About Us
             </NavLink>
           </li>
           <li>
@@ -88,7 +89,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar shadow-sm bg-base-200 dark:bg-[#303233] fixed top-0 left-0 w-full z-1000">
+    <div className="navbar shadow-sm glass-card dark:bg-[#303233] fixed top-0 left-0 w-full z-1000">
       <MyContainer>
         <div className="flex justify-between items-center py-1">
           <div className="navbar-start">
@@ -116,7 +117,7 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex="-1"
-                className="menu menu-sm dropdown-content bg-base-100 dark:bg-gray-700 rounded-box z-50 mt-3 w-40 p-2 shadow absolute gap-2"
+                className="menu menu-sm dropdown-content bg-base-200 dark:bg-gray-800 rounded-box z-50 mt-3 w-40 p-2 shadow absolute gap-2"
               >
                 {links}
               </ul>
@@ -125,7 +126,11 @@ const Navbar = () => {
               to="/"
               className="flex items-center gap-1 font-extrabold text-2xl sm:text-3xl group select-none"
             >
-                <img className="lg:w-10 w-9 hidden md:hidden lg:block" src={navLogo} alt="navLogo" />
+              <img
+                className="lg:w-10 w-9 hidden md:hidden lg:block"
+                src={navLogo}
+                alt="navLogo"
+              />
               <p className="text-primary group-hover:text-[#0B73FF] transition-colors duration-300 flex items-center text-xl lg:text-3xl hover:text-accent dark:hover:text-[#FFB703] -ml-1">
                 Micro
                 <span className="text-secondary relative transition-all duration-300 group-hover:scale-110 dark:text-[#FFB703] dark:hover:text-primary">
@@ -136,20 +141,20 @@ const Navbar = () => {
               </p>
             </Link>
           </div>
-          
+
           <div className="navbar-center gap-3">
             <div className="lg:flex md:flex items-center hidden">
-            <ul className="menu menu-horizontal px-1 gap-2">{links}</ul>
+              <ul className="menu menu-horizontal px-1 gap-2">{links}</ul>
             </div>
             {loading ? (
               <ClockLoader color="#0B5FFF" size={34} />
             ) : user ? (
               <>
-                <div className="dropdown dropdown-end z-50">
+                <div className="dropdown dropdown-end z-50 border-2 border-transparent hover:border-[#4DA3FF] hover:rounded-full duration-300">
                   <div
                     tabIndex={0}
                     role="button"
-                    className="btn btn-ghost btn-circle avatar"
+                    className="btn  btn-circle avatar"
                   >
                     <div className="w-10 h-10 border-2 border-gray-300 rounded-full">
                       <img
@@ -166,7 +171,17 @@ const Navbar = () => {
                     tabIndex="-1"
                     className="menu  menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-fit p-2 shadow"
                   >
-                    <div className=" pb-3 border-b border-b-gray-200">
+                    <div className=" pb-3 border-b border-b-gray-200 text-center">
+                      <div className="w-20 h-20 mx-auto border-2 border-gray-600">
+                        <img
+                          alt="Tailwind CSS Navbar component"
+                          referrerPolicy="no-referrer"
+                          src={
+                            user.photoURL ||
+                            "https://i.ibb.co.com/HLPwdmsS/User-Profile-PNG-Picture.png"
+                          }
+                        />
+                      </div>
                       <li className="text-sm font-bold">{user.displayName}</li>
                       <li className="text-xs">{user.email}</li>
                     </div>
@@ -204,7 +219,7 @@ const Navbar = () => {
 
                 <Link
                   to={"/register"}
-                  className="btn btn-sm md:btn-md hidden lg:flex lg:btn-md bg-secondary hover:bg-[#FFB703] rounded-xl dark:bg-[#4DA3FF]"
+                  className="btn btn-sm md:btn-md hidden lg:flex lg:btn-md register-btn"
                 >
                   {" "}
                   <SiGnuprivacyguard size={20} /> Register
@@ -213,20 +228,20 @@ const Navbar = () => {
             )}
 
             {/* daisyUi swap theme */}
-          <label className="swap swap-rotate">
-            <input
-              type="checkbox"
-              checked={theme === "dark"}
-              onChange={(e) => handleTheme(e.target.checked)}
-              aria-label="Toggle theme"
-            />
+            <label className="swap swap-rotate">
+              <input
+                type="checkbox"
+                checked={theme === "dark"}
+                onChange={(e) => handleTheme(e.target.checked)}
+                aria-label="Toggle theme"
+              />
 
-            {/* swap-on (dark mode) */}
-            <FaSun className="swap-on w-6 h-6" />
+              {/* swap-on (dark mode) */}
+              <FaSun className="swap-on w-6 h-6" />
 
-            {/* swap-off (light mode) */}
-            <FaMoon className="swap-off w-6 h-6" />
-          </label>
+              {/* swap-off (light mode) */}
+              <FaMoon className="swap-off w-6 h-6" />
+            </label>
           </div>
         </div>
       </MyContainer>
