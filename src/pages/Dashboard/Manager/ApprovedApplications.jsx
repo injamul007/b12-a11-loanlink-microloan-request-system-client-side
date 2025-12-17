@@ -47,7 +47,9 @@ const ApprovedApplications = () => {
             All the Approved Loan Applications
           </h1>
           <p className="bg-[#4DA3FF] p-1 font-semibold text-sm rounded-lg">
-            Showing: <span>{approvedApplication.length}</span>
+            {
+              approvedApplication.length ? `Showing: <span>${approvedApplication.length}</span>` : 'No Data Found'
+            }
           </p>
         </div>
 

@@ -75,7 +75,9 @@ const MyLoans = () => {
             All My Loan Applications
           </h1>
           <p className="bg-[#4DA3FF] p-1 text-sm font-semibold rounded-lg">
-            Showing: <span>{myLoans.length}</span>
+            {
+              myLoans.length ? `Showing: <span>${myLoans.length}</span>` : 'No Data Found'
+            }
           </p>
         </div>
 

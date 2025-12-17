@@ -256,7 +256,7 @@ const LoanApplicationForm = () => {
               <div>
                 <label className="label">
                   <span className="label-text font-medium">
-                    National ID / Passport Number
+                    NID / Passport Number
                   </span>
                 </label>
                 <input

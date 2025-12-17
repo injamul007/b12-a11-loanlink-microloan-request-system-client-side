@@ -109,7 +109,9 @@ const PendingApplications = () => {
             All the Pending Loan Applications
           </h1>
           <p className="bg-[#4DA3FF] p-1 text-sm font-semibold rounded-lg">
-            Showing: <span>{pendingApplication.length}</span>
+            {
+              pendingApplication.length ? `Showing: <span>${pendingApplication.length}</span>` : 'No Data Found'
+            }
           </p>
         </div>
 

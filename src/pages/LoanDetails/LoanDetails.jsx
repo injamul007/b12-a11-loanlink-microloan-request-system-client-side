@@ -59,8 +59,6 @@ const LoanDetails = () => {
   if (isLoading) return <BigLoadSpinnerWhite></BigLoadSpinnerWhite>;
   if (isError) return <ErrorPage></ErrorPage>;
 
-  const documents = required_documents ? required_documents.split(',').map(doc => doc.trim()) : [];
-
 
   return (
     <MyContainer className="lg:pt-14 pt-14 lg:pb-16 pb-10 px-6">
@@ -114,11 +112,7 @@ const LoanDetails = () => {
             <h3 className="font-semibold text-gray-800 dark:text-white mb-2">
               Required Documents
             </h3>
-            <ul className="list-disc list-inside text-gray-600 dark:text-gray-300">
-              {documents.map((doc, index) => (
-                <li key={index}>{doc}</li>
-              ))}
-            </ul>
+            <div className="flex flex-wrap gap-2">{required_documents}</div>
           </div>
 
           {/* EMI Plans */}

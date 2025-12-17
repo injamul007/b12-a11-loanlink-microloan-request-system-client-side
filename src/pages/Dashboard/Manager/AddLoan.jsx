@@ -31,7 +31,6 @@ const AddLoan = () => {
         payload
       ),
     onSuccess: (data) => {
-      console.log(data.data.result);
       if (data.data.result.insertedId) {
         toast.success("Loan Added Successfully");
         mutationReset();
@@ -42,10 +41,9 @@ const AddLoan = () => {
       console.log(error.message);
       toast.error(error.message);
     },
-    onMutate: (payload) => {
-      console.log("i will post this data --> ", payload);
-    },
-    retry: 3,
+    // onMutate: (payload) => {
+    //   console.log("i will post this data --> ", payload);
+    // },
   });
 
   const handleAddLoan = async (data) => {
@@ -234,27 +232,6 @@ const AddLoan = () => {
             </div>
 
             <div className="flex justify-between gap-2">
-              {/* Emi Plans */}
-              <div className="space-y-1 text-sm">
-                <label htmlFor="emi_plans" className="block text-gray-600">
-                  Emi Plans
-                </label>
-
-                <textarea
-                  id="emi_plans"
-                  placeholder="e.g. 3 weeks / 1 months"
-                  className="block focus:lime-300 w-full h-22 px-6 py-3 rounded-md text-gray-800 border border-blue-300 focus:outline-blue-600  bg-white dark:bg-[#2b3138] dark:text-white"
-                  {...register("emi_plans", {
-                    required: "Emi Plans is required",
-                  })}
-                ></textarea>
-                {errors.emi_plans?.message && (
-                  <p className="text-red-500 text-xs">
-                    {errors.emi_plans.message}
-                  </p>
-                )}
-              </div>
-
               {/* Required Documents */}
               <div className="space-y-1 text-sm">
                 <label
@@ -275,6 +252,27 @@ const AddLoan = () => {
                 {errors.required_documents?.message && (
                   <p className="text-red-500 text-xs">
                     {errors.required_documents.message}
+                  </p>
+                )}
+              </div>
+              
+              {/* Emi Plans */}
+              <div className="space-y-1 text-sm">
+                <label htmlFor="emi_plans" className="block text-gray-600">
+                  Emi Plans
+                </label>
+
+                <textarea
+                  id="emi_plans"
+                  placeholder="e.g. 3 weeks / 1 months"
+                  className="block focus:lime-300 w-full h-22 px-6 py-3 rounded-md text-gray-800 border border-blue-300 focus:outline-blue-600  bg-white dark:bg-[#2b3138] dark:text-white"
+                  {...register("emi_plans", {
+                    required: "Emi Plans is required",
+                  })}
+                ></textarea>
+                {errors.emi_plans?.message && (
+                  <p className="text-red-500 text-xs">
+                    {errors.emi_plans.message}
                   </p>
                 )}
               </div>
