@@ -44,6 +44,7 @@ const LoanDetails = () => {
     show_on_home
   } = singleLoan || {};
 
+  
   const handleApplyNow = (loanData) => {
     const LoanInfoWithUserEmail = {
       userEmail: user?.email || "",
@@ -51,12 +52,15 @@ const LoanDetails = () => {
       loan_title: loanData?.loan_title,
       interest_rate: loanData?.interest_rate
     }
-
+    
     navigate('/loan-application-form', {state:{LoanInfoWithUserEmail}})
   }
-
+  
   if (isLoading) return <BigLoadSpinnerWhite></BigLoadSpinnerWhite>;
   if (isError) return <ErrorPage></ErrorPage>;
+
+  const documents = required_documents ? required_documents.split(',').map(doc => doc.trim()) : [];
+
 
   return (
     <MyContainer className="lg:pt-14 pt-14 lg:pb-16 pb-10 px-6">
@@ -111,7 +115,7 @@ const LoanDetails = () => {
               Required Documents
             </h3>
             <ul className="list-disc list-inside text-gray-600 dark:text-gray-300">
-              {required_documents.map((doc, index) => (
+              {documents.map((doc, index) => (
                 <li key={index}>{doc}</li>
               ))}
             </ul>
