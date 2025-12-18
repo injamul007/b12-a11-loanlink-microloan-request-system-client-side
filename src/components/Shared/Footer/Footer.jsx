@@ -202,7 +202,7 @@ export default function Footer() {
                     href="tel:+880123456789"
                     className="text-primary dark:text-primary hover:underline"
                   >
-                    +880 1234 56789
+                    +880 1234 567 890
                   </a>
                 </div>
                 <div>Address: 24/B Finance Street, Dhaka, Bangladesh</div>

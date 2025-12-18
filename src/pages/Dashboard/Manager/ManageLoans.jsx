@@ -7,6 +7,7 @@ import SpinnerForDashboardRoute from "../../../components/Shared/SpinnerForDashb
 import DashboardErrorPage from "../DashboardErrorPage/DashboardErrorPage";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
+import toast from "react-hot-toast";
 
 const ManageLoans = () => {
   const { user } = useAuth();
@@ -24,6 +25,15 @@ const ManageLoans = () => {
       return res.data.result;
     },
   });
+
+  const handleEdit = async(id)=> {
+    try {
+      console.log(id)
+    } catch (error) {
+      console.log(error.message)
+      toast.error(error.message)
+    }
+  }
 
   if (isLoading) return <SpinnerForDashboardRoute></SpinnerForDashboardRoute>;
   if (isError) return <DashboardErrorPage></DashboardErrorPage>;
@@ -99,7 +109,7 @@ const ManageLoans = () => {
                           data-tip="Update"
                         >
                           <button
-                            // onClick={() => handleApproved(pending._id)}
+                            onClick={() => handleEdit(manageLoan._id)}
                             className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
                           >
                             <FaRegEdit size={22} />
