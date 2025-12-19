@@ -72,8 +72,8 @@ const MyLoans = () => {
       <title>MicroLoan || MyLoans</title>
       <div>
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-center my-10">
-            All My Loan Applications
+          <h1 className="lg:text-2xl text-xl font-bold text-center my-10">
+            My Loan Applications
           </h1>
           <p className="bg-[#4DA3FF] p-1 text-sm font-semibold rounded-lg">
             {myLoans.length
@@ -155,7 +155,7 @@ const MyLoans = () => {
                           <div
                             className="tooltip before:bg-red-400 before:text-black
     dark:before:bg-red-400 dark:before:text-white"
-                            data-tip="Reject"
+                            data-tip="Cancel"
                           >
                             <button
                               onClick={() => handleCancelPending(loan._id)}

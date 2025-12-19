@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import React from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router";
@@ -8,10 +7,12 @@ import ErrorPage from "../Error404Page/ErrorPage";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
 import useAuth from "../../hooks/useAuth";
 import useRole from "../../hooks/useRole";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const LoanDetails = () => {
   const { id } = useParams();
   const {user} = useAuth();
+  const axiosInstance = useAxiosSecure()
   const navigate = useNavigate()
   const {role, isRoleLoading} = useRole();
 
@@ -23,8 +24,8 @@ const LoanDetails = () => {
     queryKey: ["singleLoan", id],
     queryFn: async () => {
       try {
-        const result = await axios.get(
-          `${import.meta.env.VITE_SERVER_API_URL_KEY}/all-loans/${id}`
+        const result = await axiosInstance.get(
+          `/all-loans/${id}`
         );
         return result.data.result;
       } catch (error) {

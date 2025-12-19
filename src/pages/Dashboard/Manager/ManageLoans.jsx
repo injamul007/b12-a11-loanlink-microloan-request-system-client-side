@@ -72,7 +72,7 @@ const ManageLoans = () => {
       <title>MicroLoan || Manage Loans</title>
       <div>
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-center my-10">
+          <h1 className="lg:text-2xl text-xl font-bold text-center my-10">
             Loans Added by Manager
           </h1>
           <p className="bg-[#4DA3FF] p-1 text-sm font-semibold rounded-lg">
