@@ -8,6 +8,8 @@ import DashboardErrorPage from "../DashboardErrorPage/DashboardErrorPage";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { Link } from "react-router";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const ManageLoans = () => {
   const { user } = useAuth();
@@ -17,7 +19,7 @@ const ManageLoans = () => {
     data: manageLoans = [],
     isLoading,
     isError,
-    // refetch,
+    refetch,
   } = useQuery({
     queryKey: ["manage-loans", user?.email],
     queryFn: async () => {
@@ -25,6 +27,35 @@ const ManageLoans = () => {
       return res.data.result;
     },
   });
+
+  const handleDeleteLoan = async(id) => {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure to Delete?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Delete it!",
+        customClass: {
+          popup: "confirmation-swal-popup",
+        },
+      });
+
+      if (result.isConfirmed) {
+        const res = await axiosInstance.delete(
+          `/manage-loans/deleted/${id}`
+        );
+        if (res.data.result.deletedCount) {
+          toast.success("Loan Deleted Successful");
+          refetch();
+        }
+      }
+    } catch (error) {
+      console.log(error.message)
+      toast.error(error.message)
+    }
+  }
 
   if (isLoading) return <SpinnerForDashboardRoute></SpinnerForDashboardRoute>;
   if (isError) return <DashboardErrorPage></DashboardErrorPage>;
@@ -112,7 +143,9 @@ const ManageLoans = () => {
     dark:before:bg-red-400 dark:before:text-black"
                           data-tip="Delete"
                         >
-                          <button className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-error">
+                          <button
+                          onClick={()=> handleDeleteLoan(manageLoan._id)}
+                          className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-error">
                             <FaRegTrashCan size={22} />
                           </button>
                         </div>
