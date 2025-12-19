@@ -7,8 +7,10 @@ import { useMutation } from "@tanstack/react-query";
 import SpinnerForDashboardRoute from "../../../components/Shared/SpinnerForDashboardRoute/SpinnerForDashboardRoute.jsx";
 import DashboardErrorPage from "../DashboardErrorPage/DashboardErrorPage.jsx";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useState } from "react";
 
 const AddLoan = () => {
+  const [preview, setPreview] = useState(null);
   const {
     register,
     handleSubmit,
@@ -16,7 +18,7 @@ const AddLoan = () => {
     reset,
   } = useForm({ defaultValues: { show_on_home: false } });
   const { user } = useAuth();
-  const axiosInstance = useAxiosSecure()
+  const axiosInstance = useAxiosSecure();
 
   //? useMutation hook
   const {
@@ -26,10 +28,7 @@ const AddLoan = () => {
     mutateAsync,
   } = useMutation({
     mutationFn: async (payload) =>
-      await axiosInstance.post(
-        `/add-loan`,
-        payload
-      ),
+      await axiosInstance.post(`/add-loan`, payload),
     onSuccess: (data) => {
       if (data.data.result.insertedId) {
         toast.success("Loan Added Successfully");
@@ -77,6 +76,7 @@ const AddLoan = () => {
 
       await mutateAsync(loanData);
       reset();
+      setPreview(null)
     } catch (error) {
       console.log(error.message);
       toast.error(error.message);
@@ -255,7 +255,7 @@ const AddLoan = () => {
                   </p>
                 )}
               </div>
-              
+
               {/* Emi Plans */}
               <div className="space-y-1 text-sm">
                 <label htmlFor="emi_plans" className="block text-gray-600">
@@ -282,6 +282,16 @@ const AddLoan = () => {
             <div className=" p-4  w-full  m-auto rounded-lg grow">
               <div className="file_upload px-5 py-3 relative border-4 border-dotted border-gray-300 dark:border-gray-500 rounded-lg">
                 <div className="flex flex-col w-max mx-auto text-center">
+                  {/* //? image preview section */}
+                  <div className="flex justify-center items-center">
+                    {preview && (
+                      <img
+                        src={preview}
+                        alt="Image Preview"
+                        className="w-32 h-32 object-cover rounded mt-2"
+                      />
+                    )}
+                  </div>
                   <label>
                     <input
                       className="text-sm cursor-pointer w-56 mx-auto text-gray-500 dark:text-gray-400"
@@ -306,6 +316,10 @@ const AddLoan = () => {
                           return true;
                         },
                       })}
+                      onChange={(e) => {
+                        const file = e.target.files[0];
+                        if (file) setPreview(URL.createObjectURL(file));
+                      }}
                     />
                     <div className="bg-[#4DA3FF] text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-[#FFB703]">
                       Image Upload
@@ -330,7 +344,9 @@ const AddLoan = () => {
                 {...register("show_on_home")}
                 className="w-6 h-6 accent-[#4DA3FF]"
               />
-              <label className="text-gray-500 dark:text-gray-400 font-medium">Show on Home</label>
+              <label className="text-gray-500 dark:text-gray-400 font-medium">
+                Show on Home
+              </label>
             </div>
 
             {/* Submit Button */}
