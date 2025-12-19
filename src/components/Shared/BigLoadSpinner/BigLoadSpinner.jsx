@@ -1,5 +1,5 @@
 import React from "react";
-import reactSpinnerLogo from "../../../assets/React_Logo_Spinner.png"
+import reactSpinnerLogo from "../../../assets/React_Logo_Spinner.png";
 
 const BigLoadSpinner = () => {
   return (
