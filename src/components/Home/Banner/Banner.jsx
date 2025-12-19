@@ -7,7 +7,6 @@ import BannerImg3 from "../../../assets/banner image/banner (3).png";
 import BannerImg4 from "../../../assets/banner image/banner (4).png";
 import BannerImg5 from "../../../assets/banner image/banner (5).png";
 import BannerImg6 from "../../../assets/banner image/banner (6).png";
-import BannerImg7 from "../../../assets/banner image/banner (7).png";
 import { Link } from "react-router";
 import "./Banner.css"
 
@@ -19,6 +18,7 @@ const Banner = () => {
         infiniteLoop={true}
         showThumbs={false}
         showStatus={false}
+        interval={5000}
       >
         <div className="h-[560px]">
           <img src={BannerImg1} className="h-full w-full " />
@@ -51,17 +51,12 @@ const Banner = () => {
 
           <div className="absolute inset-0 bg-linear-to-b from-black/70 to-black/70"></div>
         </div>
-        <div className="h-[560px]">
-          <img src={BannerImg7} className="h-full w-full " />
-
-          <div className="absolute inset-0 bg-linear-to-b from-black/70 to-black/70"></div>
-        </div>
       </Carousel>
 
       {/* buttons positions centered */}
       <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none flex-col">
         <div className="px-6 text-center">
-          <h1 className="text-4xl font-extrabold leading-tight text-primary dark:text-gray-200 fade-in-up">
+          <h1 className="lg:text-4xl text-3xl font-extrabold leading-tight text-primary dark:text-gray-200 fade-in-up">
             Get the microloan you need — fast, secure & simple.
           </h1>
 
