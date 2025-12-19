@@ -7,7 +7,7 @@ import SpinnerForDashboardRoute from "../../../components/Shared/SpinnerForDashb
 import DashboardErrorPage from "../DashboardErrorPage/DashboardErrorPage";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
-import toast from "react-hot-toast";
+import { Link } from "react-router";
 
 const ManageLoans = () => {
   const { user } = useAuth();
@@ -26,15 +26,6 @@ const ManageLoans = () => {
     },
   });
 
-  const handleEdit = async(id)=> {
-    try {
-      console.log(id)
-    } catch (error) {
-      console.log(error.message)
-      toast.error(error.message)
-    }
-  }
-
   if (isLoading) return <SpinnerForDashboardRoute></SpinnerForDashboardRoute>;
   if (isError) return <DashboardErrorPage></DashboardErrorPage>;
 
@@ -44,7 +35,7 @@ const ManageLoans = () => {
       <div>
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-center my-10">
-            All the Loans Added by Manager
+            Loans Added by Manager
           </h1>
           <p className="bg-[#4DA3FF] p-1 text-sm font-semibold rounded-lg">
             {manageLoans.length
@@ -108,12 +99,12 @@ const ManageLoans = () => {
     dark:before:bg-blue-400 dark:before:text-black"
                           data-tip="Update"
                         >
-                          <button
-                            onClick={() => handleEdit(manageLoan._id)}
+                          <Link
+                            to={`/dashboard/update-loan/${manageLoan._id}`}
                             className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
                           >
                             <FaRegEdit size={22} />
-                          </button>
+                          </Link>
                         </div>
 
                         <div
@@ -131,7 +122,6 @@ const ManageLoans = () => {
                 ))}
               </tbody>
             </table>
-            {/* Pending loan application details by Modal */}
           </div>
         </div>
       </div>

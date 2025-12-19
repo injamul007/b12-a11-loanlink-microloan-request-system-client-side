@@ -23,6 +23,7 @@ import Contact from "../pages/Contact/Contact";
 import LoanDetails from "../pages/LoanDetails/LoanDetails";
 import LoanApplicationForm from "../pages/LoanApplicationForm/LoanApplicationForm";
 import TermsAndPrivacy from "../pages/TermsAndCondition/TermsAndPrivacy";
+import UpdateLoanEditPage from "../pages/UpdateLoanEditPage/UpdateLoanEditPage";
 
 const router = createBrowserRouter([
   {
@@ -104,6 +105,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/manage-loans",
         element: <ManageLoans></ManageLoans>,
+      },
+      {
+        path: "/dashboard/update-loan/:id",
+        element: <UpdateLoanEditPage></UpdateLoanEditPage>
       },
       {
         path: "/dashboard/pending-loans",
