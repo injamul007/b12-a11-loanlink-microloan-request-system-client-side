@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MyContainer from "../../../components/Shared/MyContainer/MyContainer";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -10,10 +10,19 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { Link } from "react-router";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import ViewLoanModalInManageLoans from "../../../components/Modal/ViewLoanModalInManageLoans";
 
 const ManageLoans = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [selectedLoan, setSelectedLoan] = useState(null)
   const { user } = useAuth();
   const axiosInstance = useAxiosSecure();
+
+  const closeModal = () => {
+    setSelectedLoan(null)
+    setIsOpen(false)
+  }
 
   const {
     data: manageLoans = [],
@@ -28,7 +37,7 @@ const ManageLoans = () => {
     },
   });
 
-  const handleDeleteLoan = async(id) => {
+  const handleDeleteLoan = async (id) => {
     try {
       const result = await Swal.fire({
         title: "Are you sure to Delete?",
@@ -43,19 +52,17 @@ const ManageLoans = () => {
       });
 
       if (result.isConfirmed) {
-        const res = await axiosInstance.delete(
-          `/manage-loans/deleted/${id}`
-        );
+        const res = await axiosInstance.delete(`/manage-loans/deleted/${id}`);
         if (res.data.result.deletedCount) {
           toast.success("Loan Deleted Successful");
           refetch();
         }
       }
     } catch (error) {
-      console.log(error.message)
-      toast.error(error.message)
+      console.log(error.message);
+      toast.error(error.message);
     }
-  }
+  };
 
   if (isLoading) return <SpinnerForDashboardRoute></SpinnerForDashboardRoute>;
   if (isError) return <DashboardErrorPage></DashboardErrorPage>;
@@ -144,9 +151,26 @@ const ManageLoans = () => {
                           data-tip="Delete"
                         >
                           <button
-                          onClick={()=> handleDeleteLoan(manageLoan._id)}
-                          className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-error">
+                            onClick={() => handleDeleteLoan(manageLoan._id)}
+                            className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-error"
+                          >
                             <FaRegTrashCan size={22} />
+                          </button>
+                        </div>
+
+                        <div
+                          className="tooltip before:bg-yellow-400 before:text-black
+                            dark:before:bg-yellow-400 dark:before:text-white"
+                          data-tip="View"
+                        >
+                          <button
+                            onClick={() => {
+                              setSelectedLoan(manageLoan);
+                              setIsOpen(true);
+                            }}
+                            className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
+                          >
+                            <MdOutlineRemoveRedEye size={24} />
                           </button>
                         </div>
                       </div>
@@ -155,6 +179,12 @@ const ManageLoans = () => {
                 ))}
               </tbody>
             </table>
+            {/* //? Modal for view loan details */}
+            <ViewLoanModalInManageLoans
+            isOpen={isOpen}
+            closeModal={closeModal}
+            loan={selectedLoan}
+            ></ViewLoanModalInManageLoans>
           </div>
         </div>
       </div>
