@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, Outlet } from "react-router";
 import { FiX } from "react-icons/fi";
-import useAuth from "../hooks/useAuth";
 import dashboardLogo from "../assets/microloan_logo.png";
 import MyContainer from "../components/Shared/MyContainer/MyContainer";
 import DashboardNavbar from "../components/Dashboard/DashboardNavbar";
@@ -10,7 +9,6 @@ import DashboardFooter from "../components/Dashboard/DashboardFooter";
 
 const DashboardLayout = () => {
   const [open, setOpen] = useState(false);
-  const { user } = useAuth();
 
   return (
     <div className="min-h-screen  flex flex-col">
@@ -20,9 +18,11 @@ const DashboardLayout = () => {
 
       <div className="flex flex-1">
         {/* Desktop sidebar */}
-        <div className="hidden lg:block">
-          <DashboardSidebar />
-        </div>
+        {/* <div className=" fixed h-full"> */}
+          <div className="hidden lg:block fixed left-0 top-15 h-[calc(100vh-3rem)] w-72">
+            <DashboardSidebar />
+          </div>
+        {/* </div> */}
 
         {/* Mobile sidebar */}
         {open && (
@@ -64,19 +64,9 @@ const DashboardLayout = () => {
 
         {/* Main content */}
         <MyContainer>
-          <main className="flex-1 p-6 lg:p-10">
+          <main className="flex-1 p-4 lg:p-0 lg:ml-64">
             <div className="container mx-auto">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <h2 className="text-2xl font-bold">Dashboard</h2>
-                  <p className="text-sm">
-                    Welcome back{user && `, ${user?.displayName || ""}`} — Track
-                    your loan applications and payment status.
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-6">
+              <div className="space-y-4 lg:space-y-2">
                 <Outlet></Outlet>
               </div>
             </div>

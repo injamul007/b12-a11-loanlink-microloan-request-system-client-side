@@ -2,12 +2,15 @@ import MyContainer from "../../../components/Shared/MyContainer/MyContainer";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { RiLogoutBoxRLine } from "react-icons/ri";
-import profileCoverImg from "../../../assets/profile_cover_img.png";
-// import useRole from '../../../hooks/useRole'
+import profileCoverImg from "../../../assets/user_cover_img.png";
+import managerCoverImg from "../../../assets/manager_cover.jpg";
+import adminCoverImg from "../../../assets/admin_cover.jpg";
+import useRole from "../../../hooks/useRole";
+import SpinnerForDashboardRoute from "../../../components/Shared/SpinnerForDashboardRoute/SpinnerForDashboardRoute";
 
 const Profile = () => {
   const { user, logOutFunc, setUser } = useAuth();
-  // const {role} = useRole()
+  const {role, isRoleLoading} = useRole();
 
   const handleLogout = async () => {
     try {
@@ -28,6 +31,7 @@ const Profile = () => {
     }
   };
 
+  if(isRoleLoading) return <SpinnerForDashboardRoute></SpinnerForDashboardRoute>
   return (
     <div className="py-12 px-18">
       <MyContainer>
@@ -36,7 +40,7 @@ const Profile = () => {
           <div className=" dark:bg-[#2b3138] shadow-lg rounded-2xl max-w-2xl mx-auto">
             <img
               alt="cover photo"
-              src={profileCoverImg}
+              src={role === 'admin' ? adminCoverImg : role === 'manager' ? managerCoverImg : profileCoverImg}
               className="w-full mb-4 rounded-t-lg h-56"
             />
             <div className="flex flex-col items-center justify-center p-4 -mt-16">
@@ -49,8 +53,7 @@ const Profile = () => {
               </a>
 
               <p className="p-2 px-4 text-xs text-white bg-primary rounded-full">
-                {/* {role} */}
-                Borrower
+                {role}
               </p>
 
               <p className="mt-2 lg:text-xl inline-flex flex-wrap font-medium text-gray-600 dark:text-white">

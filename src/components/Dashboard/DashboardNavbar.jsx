@@ -7,9 +7,11 @@ import MyContainer from "../Shared/MyContainer/MyContainer";
 import dashboardLogo from "../../assets/microloan_logo.png";
 import Swal from "sweetalert2";
 import { RiLogoutBoxRLine } from "react-icons/ri";
+import useRole from "../../hooks/useRole";
 
 const DashboardNavbar = ({ onOpenSidebar }) => {
   const { user, logOutFunc, setUser} = useAuth();
+  const {role} = useRole()
   const [theme, setTheme] = useState(() => {
     try {
       return localStorage.getItem("MicroLoan_theme") || "dark";
@@ -100,7 +102,7 @@ const DashboardNavbar = ({ onOpenSidebar }) => {
                     <div className="font-medium text-white/90">
                       {user.displayName || user.email.split("@")[0]}
                     </div>
-                    <div className="text-xs text-white/60">Instructor</div>
+                    <div className="text-xs text-white/60">{role}</div>
                   </div>
                 </div>
 

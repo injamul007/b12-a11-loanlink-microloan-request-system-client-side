@@ -7,11 +7,13 @@ import BigLoadSpinnerWhite from "../../components/Shared/BigLoadSpinnerWhite/Big
 import ErrorPage from "../Error404Page/ErrorPage";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
 import useAuth from "../../hooks/useAuth";
+import useRole from "../../hooks/useRole";
 
 const LoanDetails = () => {
   const { id } = useParams();
   const {user} = useAuth();
   const navigate = useNavigate()
+  const {role, isRoleLoading} = useRole();
 
   const {
     data: singleLoan = {},
@@ -57,6 +59,7 @@ const LoanDetails = () => {
   }
   
   if (isLoading) return <BigLoadSpinnerWhite></BigLoadSpinnerWhite>;
+  if(isRoleLoading) return <BigLoadSpinnerWhite></BigLoadSpinnerWhite>
   if (isError) return <ErrorPage></ErrorPage>;
 
 
@@ -124,11 +127,13 @@ const LoanDetails = () => {
           </div>
 
           {/* Action Button */}
-          <button
+          {
+            role === 'borrower' && <button
           onClick={()=>handleApplyNow(singleLoan)}
           className="w-full cta_btn inline-flex justify-center cursor-pointer">
             Apply Now
           </button>
+          }
         </div>
       </div>
     </MyContainer>

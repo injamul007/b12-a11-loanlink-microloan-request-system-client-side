@@ -24,6 +24,7 @@ import LoanDetails from "../pages/LoanDetails/LoanDetails";
 import LoanApplicationForm from "../pages/LoanApplicationForm/LoanApplicationForm";
 import TermsAndPrivacy from "../pages/TermsAndCondition/TermsAndPrivacy";
 import UpdateLoanEditPage from "../pages/UpdateLoanEditPage/UpdateLoanEditPage";
+import Dashboard from "../components/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
         index: false,
         path: "*",
         element: <DashboardErrorPage></DashboardErrorPage>,
+      },
+      {
+        index: true,
+        element: <Dashboard></Dashboard>,
       },
       {
         path: "/dashboard/manage-users",
