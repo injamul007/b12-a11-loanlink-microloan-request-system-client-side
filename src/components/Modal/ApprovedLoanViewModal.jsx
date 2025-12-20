@@ -4,7 +4,7 @@ const ApprovedLoanViewModal = ({ isOpen, closeModal, approvedLoan }) => {
   return (
     <Dialog open={isOpen} onClose={closeModal} className="relative z-50">
       {/* Overlay */}
-      <div className="fixed inset-0 bg-black/60" />
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
 
       {/* Centered modal */}
       <div className="fixed inset-0 flex items-center justify-center p-4">

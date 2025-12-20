@@ -8,23 +8,34 @@ import { useQuery } from "@tanstack/react-query";
 import SpinnerForDashboardRoute from "../../../components/Shared/SpinnerForDashboardRoute/SpinnerForDashboardRoute";
 import DashboardErrorPage from "../DashboardErrorPage/DashboardErrorPage";
 import ViewUsersInfoModal from "../../../components/Modal/ViewUsersInfoModal";
+import UpdateUserRoleModal from "../../../components/Modal/UpdateUserRoleModal";
 
 const ManageUsers = () => {
   const { user } = useAuth();
   const axiosInstance = useAxiosSecure();
   const [selectedLoan, setSelectedLoan] = useState(null);
+  const [userRole, setUserRole] = useState(null);
   let [isOpen, setIsOpen] = useState(false);
+  let [isOpen2, setIsOpen2] = useState(false);
 
+  //? this close modal function is for viewing user information
   const closeModal = () => {
     setIsOpen(false);
     setSelectedLoan(null);
   };
+  
+  //? this close modal function is for update user role
+  const closeModal2 = () => {
+    setIsOpen2(false);
+    setUserRole(null);
+  };
+
 
   const {
     data: allUsers = [],
     isLoading,
     isError,
-    // refetch,
+    refetch,
   } = useQuery({
     queryKey: ["all-users", user?.email],
     queryFn: async () => {
@@ -91,10 +102,10 @@ const ManageUsers = () => {
                           data-tip="Update Role"
                         >
                           <button
-                            // onClick={() => {
-                            //   setSelectedLoan(approved);
-                            //   setIsOpen(true);
-                            // }}
+                            onClick={() => {
+                              setUserRole(user);
+                              setIsOpen2(true);
+                            }}
                             className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
                           >
                             <FaUserCog size={24}></FaUserCog>
@@ -127,6 +138,14 @@ const ManageUsers = () => {
               closeModal={closeModal}
               user={selectedLoan}
             ></ViewUsersInfoModal>
+            {/* //? Update User Role Modal */}
+            <UpdateUserRoleModal
+            isOpen={isOpen2}
+            closeModal={closeModal2}
+            user={userRole}
+            refetch={refetch}
+            >
+            </UpdateUserRoleModal>
           </div>
         </div>
       </div>

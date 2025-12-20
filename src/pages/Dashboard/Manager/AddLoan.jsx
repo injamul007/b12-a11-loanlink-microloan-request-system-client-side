@@ -335,7 +335,7 @@ const AddLoan = () => {
                           if (file) setPreview(URL.createObjectURL(file));
                         }}
                       />
-                      <div className="bg-[#4DA3FF] text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-[#FFB703]">
+                      <div className="bg-[#4DA3FF] text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-[#0B5FFF] duration-300">
                         Image Upload
                       </div>
                       {errors.image?.message && (
@@ -366,7 +366,7 @@ const AddLoan = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full cursor-pointer p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-[#4DA3FF] hover:bg-[#FFB703] "
+                className="w-full cursor-pointer p-3 mt-5 text-center font-medium text-white transition rounded shadow-md bg-[#4DA3FF] hover:bg-[#0B5FFF] duration-300"
               >
                 {isPending ? (
                   <TbFidgetSpinner className=" animate-spin m-auto"></TbFidgetSpinner>

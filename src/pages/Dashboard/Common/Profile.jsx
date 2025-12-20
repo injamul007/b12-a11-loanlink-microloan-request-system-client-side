@@ -77,19 +77,19 @@ const Profile = () => {
                 <div>
                   <div className="grid lg:grid-cols-3 gap-2">
                     <div>
-                      <button className="bg-[#4DA3FF] font-bold  px-10 py-2 rounded-lg text-white cursor-pointer hover:bg-primary dark:hover:bg-[#FFB703] w-full block mb-1">
+                      <button className="bg-[#4DA3FF] font-bold  px-10 py-2 rounded-lg text-white cursor-pointer hover:bg-primary dark:hover:bg-[#FFB703] w-full block mb-1 duration-300">
                         Update Profile
                       </button>
                     </div>
                     <div>
-                      <button className="bg-[#4DA3FF] px-7 py-2 rounded-lg text-white cursor-pointer hover:bg-primary font-bold dark:hover:bg-[#FFB703] w-full block mb-1">
+                      <button className="bg-[#4DA3FF] px-7 py-2 rounded-lg text-white cursor-pointer hover:bg-primary font-bold dark:hover:bg-[#FFB703] w-full block mb-1 duration-300">
                         Change Password
                       </button>
                     </div>
                     <div>
                       <button
                         onClick={handleLogout}
-                        className="inline-flex justify-center items-center gap-2 bg-[#4DA3FF] hover:bg-primary cursor-pointer px-7 py-2 w-full rounded-lg text-white font-bold dark:hover:bg-[#FFB703]"
+                        className="inline-flex justify-center items-center gap-2 bg-[#4DA3FF] hover:bg-primary cursor-pointer px-7 py-2 w-full rounded-lg text-white duration-300 font-bold dark:hover:bg-[#FFB703]"
                       >
                         <RiLogoutBoxRLine size={20} /> Logout
                       </button>

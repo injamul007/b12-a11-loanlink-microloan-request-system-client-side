@@ -4,7 +4,7 @@ const ViewLoanModalInManageLoans = ({ isOpen, closeModal, loan }) => {
   return (
     <Dialog open={isOpen} onClose={closeModal} className="relative z-50">
       {/* Overlay */}
-      <div className="fixed inset-0 bg-black/60" />
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
 
       {/* Centered modal */}
       <div className="fixed inset-0 flex items-center justify-center p-4">
@@ -24,7 +24,7 @@ const ViewLoanModalInManageLoans = ({ isOpen, closeModal, loan }) => {
                 <img
                   src={loan.image}
                   alt="Loan Document"
-                  className="w-22 h-22 rounded-md"
+                  className="w-18 h-18 rounded-md hover:scale-200 duration-700"
                 />
               </div>
             )}

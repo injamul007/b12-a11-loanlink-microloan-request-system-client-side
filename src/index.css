@@ -29,7 +29,7 @@ body {
 
 .my-btn {
   background-color: #0B5FFF;
-  border: 2px solid #0B73FF;
+  border: 2px solid #0B5FFF;
   color: #fff;
   padding: 10px 18px;
   border-radius: 20px;
@@ -38,8 +38,8 @@ body {
 }
 
 .my-btn:hover {
-  background-color: #FFB703;
-  color: black;
+  background-color: #4DA3FF;
+  color: #fff;
   border-color: #0B5FFF;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
