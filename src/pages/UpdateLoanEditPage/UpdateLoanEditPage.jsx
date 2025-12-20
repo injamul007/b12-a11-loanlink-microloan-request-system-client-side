@@ -270,7 +270,7 @@ const UpdateLoanEditPage = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full cursor-pointer p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-[#4DA3FF] hover:bg-[#0B5FFF] duration-300"
+                className="w-full cursor-pointer p-3 mt-5 text-center font-medium text-white transition rounded shadow-md bg-[#4DA3FF] hover:bg-[#0B5FFF] duration-300"
               >
                 Update Loan
               </button>
