@@ -1,24 +1,45 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useEffect } from "react";
 
 const UpdateUserRoleModal = ({ isOpen, closeModal, user, refetch }) => {
-  const [updatedRole, setUpdatedRole] = useState(user?.role);
 
   const axiosInstance = useAxiosSecure();
 
-  const handleRoleUpdate = async () => {
+  const {register, handleSubmit, formState: {errors}, control, reset } = useForm({defaultValues: {role: user?.role}})
+
+  const selectRole = useWatch({control, name: 'role'});
+
+  useEffect(() => {
+  if (isOpen && user?.role) {
+    reset({
+      role: user.role,
+      suspend_reason: "",
+      suspend_feedback: ""
+    });
+  }
+}, [isOpen, user, reset]);
+
+  const handleRoleUpdate =  async(data) => {
     try {
-      await axiosInstance.patch(`/update-role`, {
+      const {role, suspend_reason,suspend_feedback} = data
+      const roleData = {
         email: user?.email,
-        role: updatedRole,
-      });
-      toast.success("Role Updated!");
-      refetch();
+        role,
+        suspend_reason,
+        suspend_feedback,
+      }
+      const res = await axiosInstance.patch(`/manage-users/update-role`, roleData);
+      if(res.data.result.modifiedCount) {
+        toast.success("Role Updated!"); 
+        refetch();
+      }
     } catch (error) {
       console.log(error?.message);
-      toast.error(error?.response?.data?.message);
+      toast.error(error?.message);
+      // toast.error(error?.response?.data?.message);
     } finally {
       closeModal();
     }
@@ -41,11 +62,14 @@ const UpdateUserRoleModal = ({ isOpen, closeModal, user, refetch }) => {
             Update User Role
           </DialogTitle>
 
-          <form>
+          <form
+           onSubmit={handleSubmit(handleRoleUpdate)}
+          >
             <div>
               <select
-                value={updatedRole}
-                onChange={(e) => setUpdatedRole(e.target.value)}
+                // value={updatedRole}
+                // onChange={(e) => setUpdatedRole(e.target.value)}
+                {...register("role", {required: {value: true, message: "Role is Required"}})}
                 className="w-full my-3 border border-gray-300 rounded-xl px-3 py-2"
                 name="role"
               >
@@ -54,6 +78,38 @@ const UpdateUserRoleModal = ({ isOpen, closeModal, user, refetch }) => {
                 <option value="admin">Admin</option>
                 <option value="suspend">Suspend</option>
               </select>
+              {errors?.role?.message && <p className="text-error text-xs font-semibold">{errors.role.message}</p>}
+
+              {/* //? suspend reason */}
+                {selectRole === 'suspend' && <>
+                <div className="mb-2">
+                <label className="label">
+                  <span className="label-text font-medium">Suspend Reason</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("suspend_reason", {required: {value: true, message: "Suspend Reason Required"}})}
+                  placeholder="Explain here suspend reason"
+                  className="input input-bordered w-full bg-base-200 rounded-xl"
+                />
+                {errors?.suspend_reason?.message && <p className="text-error text-xs font-semibold">{errors.suspend_reason.message}</p>}
+              </div>
+              {/* //? why suspend feedback */}
+              <div>
+                <label className="label">
+                  <span className="label-text font-medium">Suspend Feedback</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("suspend_feedback", {required: {value: true, message: "Suspend Feedback Required"}})}
+                  placeholder="Explain here suspend Feedback"
+                  className="input input-bordered w-full bg-base-200 rounded-xl"
+                />
+                {errors?.suspend_feedback?.message && <p className="text-error text-xs font-semibold">{errors.suspend_feedback.message}</p>}
+              </div>
+                </>} 
+
+              
             </div>
 
             <div className="flex mt-4 justify-around">
@@ -66,8 +122,8 @@ const UpdateUserRoleModal = ({ isOpen, closeModal, user, refetch }) => {
               </button>
 
               <button
-                onClick={handleRoleUpdate}
-                type="button"
+                // onSubmit={handleSubmit(handleRoleUpdate)}
+                type="submit"
                 className="cursor-pointer inline-flex justify-center rounded-md bg-[#4DA3FF] hover:bg-[#0B5FFF] px-4 py-2 text-sm font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 duration-300"
               >
                 Update
