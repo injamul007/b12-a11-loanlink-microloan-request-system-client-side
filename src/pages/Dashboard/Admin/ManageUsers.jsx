@@ -1,9 +1,41 @@
-import React from 'react';
-import { MdOutlineRemoveRedEye } from 'react-icons/md';
-import MyContainer from '../../../components/Shared/MyContainer/MyContainer';
-import { FaUserCog } from 'react-icons/fa';
+import React, { useState } from "react";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import MyContainer from "../../../components/Shared/MyContainer/MyContainer";
+import { FaUserCog } from "react-icons/fa";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import SpinnerForDashboardRoute from "../../../components/Shared/SpinnerForDashboardRoute/SpinnerForDashboardRoute";
+import DashboardErrorPage from "../DashboardErrorPage/DashboardErrorPage";
+import ViewUsersInfoModal from "../../../components/Modal/ViewUsersInfoModal";
 
 const ManageUsers = () => {
+  const { user } = useAuth();
+  const axiosInstance = useAxiosSecure();
+  const [selectedLoan, setSelectedLoan] = useState(null);
+  let [isOpen, setIsOpen] = useState(false);
+
+  const closeModal = () => {
+    setIsOpen(false);
+    setSelectedLoan(null);
+  };
+
+  const {
+    data: allUsers = [],
+    isLoading,
+    isError,
+    // refetch,
+  } = useQuery({
+    queryKey: ["all-users", user?.email],
+    queryFn: async () => {
+      const res = await axiosInstance.get(`/manage-users`);
+      return res.data.users;
+    },
+  });
+
+  if (isLoading) return <SpinnerForDashboardRoute></SpinnerForDashboardRoute>;
+  if (isError) return <DashboardErrorPage></DashboardErrorPage>;
+
   return (
     <MyContainer>
       <title>MicroLoan || Manage Users</title>
@@ -13,10 +45,9 @@ const ManageUsers = () => {
             User Management System
           </h1>
           <p className="bg-[#4DA3FF] p-1 font-semibold text-sm rounded-lg">
-            {/* {approvedApplication.length
-              ? `Total User: ${approvedApplication.length}`
-              : "No User Found"} */}
-              No User Found
+            {allUsers.length
+              ? `Total User: ${allUsers.length}`
+              : "No User Found"}
           </p>
         </div>
 
@@ -34,35 +65,21 @@ const ManageUsers = () => {
                 </tr>
               </thead>
               <tbody>
-                {/* {approvedApplication.map((approved, idx) => ( */}
-                  {/* <tr key={approved._id}> */}
-                    {/* <th>{idx + 1}</th> */}
+                {allUsers.map((user, idx) => (
+                  <tr key={user._id}>
+                    <th>{idx + 1}</th>
 
-                    {/* Loan ID */}
-                    <td className="md:table-cell max-w-[180px]">
-                      {/* {approved.loan_id} */}
+                    {/* user name */}
+                    <td className="md:table-cell max-w-[180px]">{user.name}</td>
+
+                    {/* user email */}
+                    <td className="md:table-cell max-w-[180px] truncate">
+                      {user.email}
                     </td>
 
-                    {/* Borrower Info */}
-                    <td className="max-w-[200px]">
-                      <div className="flex flex-col">
-                        <span className="font-medium">
-                          {/* {approved.borrower_name} */}
-                        </span>
-                        <span className="text-sm text-gray-500 break-all">
-                          {/* {approved.borrower_email} */}
-                        </span>
-                      </div>
-                    </td>
-
-                    {/* Amount */}
+                    {/* role */}
                     <td className="whitespace-nowrap font-semibold">
-                      {/* ৳{approved.loan_amount} */}
-                    </td>
-
-                    {/* Date */}
-                    <td className="md:table-cell max-w-[180px]">
-                      {/* {approved.created_at} */}
+                      {user.role}
                     </td>
 
                     {/* Actions */}
@@ -89,10 +106,10 @@ const ManageUsers = () => {
                           data-tip="View"
                         >
                           <button
-                            // onClick={() => {
-                            //   setSelectedLoan(approved);
-                            //   setIsOpen(true);
-                            // }}
+                            onClick={() => {
+                              setSelectedLoan(user);
+                              setIsOpen(true);
+                            }}
                             className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
                           >
                             <MdOutlineRemoveRedEye size={24} />
@@ -100,16 +117,16 @@ const ManageUsers = () => {
                         </div>
                       </div>
                     </td>
-                  {/* </tr> */}
-                {/* ))} */}
+                  </tr>
+                ))}
               </tbody>
             </table>
-            {/* //? Approved loan details view with Modal */}
-            {/* <ApprovedLoanViewModal
+            {/* //? View User details with Modal */}
+            <ViewUsersInfoModal
               isOpen={isOpen}
               closeModal={closeModal}
-              approvedLoan={selectedLoan}
-            ></ApprovedLoanViewModal> */}
+              user={selectedLoan}
+            ></ViewUsersInfoModal>
           </div>
         </div>
       </div>
