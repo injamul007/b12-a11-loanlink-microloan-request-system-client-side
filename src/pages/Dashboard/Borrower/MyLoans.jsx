@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { GiCrossMark } from "react-icons/gi";
-import { LuView } from "react-icons/lu";
 import MyContainer from "../../../components/Shared/MyContainer/MyContainer";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
@@ -69,7 +68,7 @@ const MyLoans = () => {
 
   return (
     <MyContainer>
-      <title>MicroLoan || MyLoans</title>
+      <title>LoanLink || My Loans</title>
       <div>
         <div className="flex items-center justify-between">
           <h1 className="lg:text-2xl text-xl font-bold text-center my-10">

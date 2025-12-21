@@ -16,11 +16,12 @@ const Contact = () => {
   return (
     <section className="py-16">
       <MyContainer>
+        <title>LoanLink || Contact</title>
         <div className="px-6">
           {/* Section Header */}
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-extrabold text-text dark:text-gray-300 py-2">
-              Get in touch with Microloan
+              Get in touch with LoanLink
             </h2>
             <p className="mt-3 dark:text-gray-300 max-w-2xl mx-auto text-sm">
               Have questions about loans, eligibility, or applications? Our
@@ -43,7 +44,7 @@ const Contact = () => {
                     </span>
                     <div>
                       <div className="font-medium">Email</div>
-                      <div>support@microloan.com.bd</div>
+                      <div>support@loanlink.com.bd</div>
                     </div>
                   </li>
 

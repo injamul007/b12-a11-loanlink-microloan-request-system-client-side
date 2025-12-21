@@ -12,7 +12,7 @@ const DashboardLayout = () => {
 
   return (
     <div className="min-h-screen  flex flex-col">
-      <title>MicroLoan || Dashboard</title>
+      <title>LoanLink || Dashboard</title>
 
       <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
 
@@ -45,7 +45,7 @@ const DashboardLayout = () => {
                       alt="dashboardLogo"
                       className="lg:w-10 w-8"
                     />{" "}
-                    Micro<span className="text-[#FFB703]">Loan</span>
+                    Loan<span className="text-[#FFB703]">Link</span>
                   </span>
                 </Link>
 

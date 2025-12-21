@@ -69,7 +69,7 @@ const UpdateLoanEditPage = () => {
   return (
     <MyContainer>
       <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl lg:pt-1 lg:pb-14 py-6">
-        <title>Microloan || Update Loan</title>
+        <title>LoanLink || Update Loan</title>
         <h2 className="lg:text-2xl text-xl font-bold text-center lg:my-10 my-4">
           Update Loan
         </h2>

@@ -28,6 +28,7 @@ const AllLoans = () => {
   return (
     <div>
       <MyContainer className="lg:pt-14 pt-14 lg:pb-16 pb-10 px-6">
+        <title>LoanLink || All Loans</title>
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl font-bold text-text">
             All Loans

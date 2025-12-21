@@ -49,7 +49,7 @@ const ManageUsers = () => {
 
   return (
     <MyContainer>
-      <title>MicroLoan || Manage Users</title>
+      <title>LoanLink || Manage Users</title>
       <div>
         <div className="flex items-center justify-between">
           <h1 className="lg:text-2xl text-xl font-bold text-center my-10">

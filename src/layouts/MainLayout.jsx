@@ -6,6 +6,7 @@ import Footer from '../components/Shared/Footer/Footer';
 const MainLayout = () => {
   return (
     <div className="bg-base-200 dark:bg-[#1d232a]">
+      <title>LoanLink || Home</title>
       <header>
       <Navbar></Navbar>
       </header>

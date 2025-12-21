@@ -132,9 +132,9 @@ const Navbar = () => {
                 alt="navLogo"
               />
               <p className="text-primary group-hover:text-[#0B73FF] transition-colors duration-300 flex items-center text-xl lg:text-3xl hover:text-accent dark:hover:text-[#FFB703] -ml-1">
-                Micro
+                Loan
                 <span className="text-secondary relative transition-all duration-300 group-hover:scale-110 dark:text-[#FFB703] dark:hover:text-primary">
-                  Loan
+                  Link
                   {/* subtle glowing underline */}
                   <span className="absolute left-0 bottom-0 w-full h-[3px] bg-[#FFB703] opacity-0 group-hover:opacity-100 rounded-full transition-opacity duration-300"></span>
                 </span>

@@ -19,7 +19,7 @@ const CustomerFeedback = ({customersFeedbackData}) => {
           </h2>
           <img className="mx-auto w-50" src={customersTopImg} alt="" />
           <p className="text-center max-w-3xl mx-auto mt-4 mb-6 text-gray-500 font-semibold">
-            Real experiences from borrowers who trusted our microloan system for
+            Real experiences from borrowers who trusted our LoanLink system for
             fast, secure, and transparent financial support.
           </p>
         </div>

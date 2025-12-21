@@ -35,7 +35,7 @@ const Profile = () => {
   return (
     <div className="py-12 px-18">
       <MyContainer>
-        <title>MicroLoan || Profile</title>
+        <title>LoanLink || Profile</title>
         <div className="flex justify-center items-center h-screen">
           <div className=" dark:bg-[#2b3138] shadow-lg rounded-2xl max-w-2xl mx-auto">
             <img

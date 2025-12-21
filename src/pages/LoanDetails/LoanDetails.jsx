@@ -66,6 +66,7 @@ const LoanDetails = () => {
 
   return (
     <MyContainer className="lg:pt-14 pt-14 lg:pb-16 pb-10 px-6">
+      <title>LoanLink || Loan Details</title>
       <div className="bg-white dark:bg-[#292d35] rounded-2xl shadow-xl overflow-hidden max-w-3xl mx-auto hover:shadow-lg hover:shadow-gray-600 dark:hover:shadow-lg dark:hover:shadow-white duration-700">
         {/* Image Section */}
         <div className="relative lg:h-[400px] md:h-84">

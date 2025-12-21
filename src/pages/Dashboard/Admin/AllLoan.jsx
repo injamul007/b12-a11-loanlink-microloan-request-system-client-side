@@ -67,7 +67,7 @@ const AllLoan = () => {
 
   return (
     <MyContainer>
-      <title>MicroLoan || All Loan</title>
+      <title>LoanLink || All Loan</title>
       <div>
         <div className="flex items-center justify-between">
           <h1 className="lg:text-2xl text-xl font-bold text-center my-10">

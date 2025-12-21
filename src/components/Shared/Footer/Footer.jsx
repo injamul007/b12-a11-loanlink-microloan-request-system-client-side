@@ -51,9 +51,9 @@ export default function Footer() {
                 </div>
                 <div>
                   <h3 className="text-2xl text-primary font-bold">
-                    Micro
+                    Loan
                     <span className="text-secondary dark:text-[#FFB703]">
-                      Loan
+                    Link
                     </span>{" "}
                   </h3>
                   <p className="mt-1 text-sm text-text/80 dark:text-base-400/80">
@@ -193,7 +193,7 @@ export default function Footer() {
                     href="mailto:support@microloan.example"
                     className="text-primary dark:text-primary hover:underline"
                   >
-                    support@microloan.com.bd
+                    support@loanlink.com.bd
                   </a>
                 </div>
                 <div>
@@ -236,7 +236,7 @@ export default function Footer() {
 
           <div className="mt-10 border-t border-[#0B5FFF]/10 dark:border-[#0B5FFF]/20 pt-6 text-sm text-text/70 dark:text-base-400/70 flex flex-col md:flex-row md:items-center md:justify-center gap-3">
             <div>
-              © {new Date().getFullYear()} MicroLoan. All rights reserved.
+              © {new Date().getFullYear()} LoanLink. All rights reserved.
             </div>
           </div>
         </div>

@@ -141,7 +141,7 @@ const Register = () => {
                 Register Here!
               </h2>
               <p className="mt-4 text-center text-sm text-white/80 leading-relaxed">
-                To join our MicroLoan community and Explore exclusive Loans and
+                To join our LoanLink community and Explore exclusive Loans and
                 Apply for Loans.
               </p>
 

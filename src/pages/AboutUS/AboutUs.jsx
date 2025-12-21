@@ -7,6 +7,7 @@ const AboutUs = () => {
   return (
     <section className="py-18">
       <MyContainer>
+        <title>LoanLink || About Us</title>
         <div className="px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Left: Visual */}
@@ -19,7 +20,7 @@ const AboutUs = () => {
                     </div>
                     <div>
                       <h4 className="font-bold text-text dark:text-gray-300">
-                        MicroLoan
+                        LoanLink
                       </h4>
                       <p className="text-sm text-text/70 dark:text-gray-300">
                         Microloan Request & Approval Tracker
@@ -57,7 +58,7 @@ const AboutUs = () => {
               </h2>
 
               <p className="mt-4 text-text/70 dark:text-gray-300 max-w-2xl">
-                MicroLoan is a digital micro-loan platform designed to help
+                LoanLink is a digital micro-loan platform designed to help
                 individuals, students, freelancers, and small businesses access
                 short-term funding with clarity and confidence. We focus on
                 simple applications, transparent terms, and fast

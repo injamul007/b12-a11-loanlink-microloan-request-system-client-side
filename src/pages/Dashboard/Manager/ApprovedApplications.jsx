@@ -41,7 +41,7 @@ const ApprovedApplications = () => {
 
   return (
     <MyContainer>
-      <title>MicroLoan || Approved Application</title>
+      <title>LoanLink || Approved Application</title>
       <div>
         <div className="flex items-center justify-between">
           <h1 className="lg:text-2xl text-xl font-bold text-center my-10">

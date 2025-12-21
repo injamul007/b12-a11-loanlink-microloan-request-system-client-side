@@ -61,7 +61,7 @@ const Banner = () => {
           </h1>
 
           <p className="my-4 text-md font-semibold max-w-2xl mx-auto text-white dark:text-gray-200 fade-in-up-delay">
-            Microloan helps micro-entrepreneurs, students and freelancers access
+            LoanLink helps micro-entrepreneurs, students and freelancers access
             short-term funding with transparent terms and quick approval.
             Compare plans, apply in minutes, and track disbursement from your
             dashboard.

@@ -1,6 +1,7 @@
 const Settings = () => {
   return (
     <div className="max-w-3xl mx-auto p-6">
+      <title>LoanLink || Settings</title>
       <h1 className="text-2xl font-bold mb-4">Settings</h1>
 
       <p className="text-gray-600 mb-6 dark:text-gray-300">

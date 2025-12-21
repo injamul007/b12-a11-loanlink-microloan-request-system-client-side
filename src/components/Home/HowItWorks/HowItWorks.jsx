@@ -33,7 +33,7 @@ export default function HowItWorks() {
         <div className="px-6">
           <div className="text-center max-w-2xl mx-auto lg:mb-14 mb-10">
             <h2 className="text-3xl font-bold text-text">
-              How Microloan Works
+              How LoanLink Works
             </h2>
             <p className="mt-6 text-md text-gray-500 dark:text-gray-400 font-semibold">
               A simple, secure, and fast five-step process to get microloans —
