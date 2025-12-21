@@ -14,7 +14,7 @@ const ErrorPage = () => {
   }, [theme]);
   return (
     <>
-      <title>MicroLoan || Error-404</title>
+      <title>LoanLink || Error-404</title>
       <MyContainer>
         <div className={theme === "dark" ? "min-h-screen bg-[#1d232a] text-gray-100 flex items-center justify-center flex-col" : "min-h-screen bg-white text-gray-900 flex items-center justify-center flex-col"}>
           <img className="lg:w-fit w-80" src={pageNotFound} alt="error_img" />

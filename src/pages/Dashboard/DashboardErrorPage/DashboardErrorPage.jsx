@@ -33,7 +33,7 @@ const DashboardErrorPage = () => {
 
   return (
     <>
-      <title>MicroLoan || Dashboard Error-404</title>
+      <title>LoanLink || Dashboard Error-404</title>
 
       <MyContainer>
         <div
