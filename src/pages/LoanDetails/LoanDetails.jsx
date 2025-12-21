@@ -53,6 +53,7 @@ const LoanDetails = () => {
       userEmail: user?.email || "",
       loan_id: loanData?.loanId,
       loan_title: loanData?.loan_title,
+      category: loanData?.category,
       interest_rate: loanData?.interest_rate
     }
     

@@ -19,7 +19,9 @@ const LoanApplications = () => {
     queryKey: ["loan-applications"],
     queryFn: async () => {
       try {
-        const res = await axiosInstance.get("/pending-application");
+        const res = await axiosInstance.get(
+          "/manage-users/all-loan-application"
+        );
         return res.data.result;
       } catch (error) {
         console.log(error.message);
@@ -85,7 +87,7 @@ const LoanApplications = () => {
 
                     {/* Category */}
                     <td className="whitespace-nowrap font-semibold">
-                      {application.category} Category
+                      {application.category}
                     </td>
 
                     {/* Amount */}
@@ -94,7 +96,15 @@ const LoanApplications = () => {
                     </td>
 
                     {/* Status */}
-                    <td className="md:table-cell max-w-[180px] font-semibold">
+                    <td
+                      className={`lg:table-cell whitespace-nowrap font-semibold ${
+                        application.status === "approved"
+                          ? "text-success"
+                          : application.status === "rejected"
+                          ? "text-error"
+                          : "text-[#FFB703]"
+                      }`}
+                    >
                       {application.status}
                     </td>
 

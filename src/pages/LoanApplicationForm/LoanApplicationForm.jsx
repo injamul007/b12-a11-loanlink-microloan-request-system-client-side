@@ -25,6 +25,7 @@ const LoanApplicationForm = () => {
       setValue("userEmail", prefilledData.userEmail);
       setValue("loan_id", prefilledData.loan_id);
       setValue("loan_title", prefilledData.loan_title);
+      setValue("category", prefilledData.category);
       setValue("interest_rate", prefilledData.interest_rate);
     }
   }, [prefilledData, setValue]);
@@ -35,6 +36,7 @@ const LoanApplicationForm = () => {
         userEmail,
         loan_id,
         loan_title,
+        category,
         interest_rate,
         first_name,
         last_name,
@@ -53,6 +55,7 @@ const LoanApplicationForm = () => {
         borrower_email: userEmail,
         loan_id,
         loan_title,
+        category,
         interest_rate,
         contact_number,
         nid_or_passport_number,
@@ -123,7 +126,7 @@ const LoanApplicationForm = () => {
             >
               {/*  ------------- Auto Filled (Read Only) --------- */}
               {/* User Email */}
-              <div>
+              <div className="col-span-2">
                 <label className="label">
                   <span className="label-text font-medium">User Email</span>
                 </label>
@@ -156,6 +159,19 @@ const LoanApplicationForm = () => {
                 <input
                   type="text"
                   {...register("loan_title")}
+                  readOnly
+                  className="input input-bordered w-full bg-base-200 cursor-not-allowed"
+                />
+              </div>
+
+              {/* Loan Category */}
+              <div>
+                <label className="label">
+                  <span className="label-text font-medium">Loan Category</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("category")}
                   readOnly
                   className="input input-bordered w-full bg-base-200 cursor-not-allowed"
                 />
