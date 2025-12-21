@@ -1,14 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import SpinnerForDashboardRoute from "../../../components/Shared/SpinnerForDashboardRoute/SpinnerForDashboardRoute";
 import DashboardErrorPage from "../DashboardErrorPage/DashboardErrorPage";
 import MyContainer from "../../../components/Shared/MyContainer/MyContainer";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import ViewLoanApplicationDetailsModal from "../../../components/Modal/ViewLoanApplicationDetailsModal";
 
 const LoanApplications = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedLoan ,setSelectedLoan] = useState(null);
   const axiosInstance = useAxiosSecure();
+
+  const closeModal = () => {
+    setIsOpen(false)
+    setSelectedLoan(null)
+  }
 
   const {
     data: loanApplications = [],
@@ -117,10 +125,10 @@ const LoanApplications = () => {
                           data-tip="View"
                         >
                           <button
-                            // onClick={() => {
-                            //   setSelectedLoan(application);
-                            //   setIsOpen(true);
-                            // }}
+                            onClick={() => {
+                              setSelectedLoan(application);
+                              setIsOpen(true);
+                            }}
                             className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
                             title="View"
                           >
@@ -134,11 +142,11 @@ const LoanApplications = () => {
               </tbody>
             </table>
             {/* loan application details by Modal */}
-            {/* <PendingLoanViewModal
+            <ViewLoanApplicationDetailsModal
               isOpen={isOpen}
               closeModal={closeModal}
               application={selectedLoan}
-            ></PendingLoanViewModal> */}
+            ></ViewLoanApplicationDetailsModal>
           </div>
         </div>
       </div>

@@ -5,27 +5,27 @@ import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router";
 import { imageUploadCloudinary } from "../../utills";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const UpdateLoanEditPage = () => {
   const { id } = useParams();
   const [newImage, setNewImage] = useState(null);
   const [prevImage, setPrevImage] = useState(null);
   const navigate = useNavigate();
+  const axiosInstance = useAxiosSecure()
 
   const { register, handleSubmit, reset } = useForm();
 
   // loan data fetch + prefill
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_SERVER_API_URL_KEY}/manage-loans/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status) {
-          reset(data.loan);
-          setPrevImage(data.loan.image);
+    axiosInstance.get(`/manage-loans/${id}`).then((data) => {
+        if (data.data.status) {
+          reset(data.data.loan);
+          setPrevImage(data.data.loan.image);
         }
       })
       .catch((err) => console.log(err.message));
-  }, [id, reset]);
+  }, [id, reset,axiosInstance]);
 
   const handleUpdateLoan = async (data) => {
     try {
