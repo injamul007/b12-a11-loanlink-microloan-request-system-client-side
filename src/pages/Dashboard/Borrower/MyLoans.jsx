@@ -12,16 +12,25 @@ import Swal from "sweetalert2";
 import MyLoanViewModal from "../../../components/Modal/MyLoanViewModal";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import axios from "axios";
+import paidBadgeImg from "../../../assets/Paid_Badge.png";
+import LoanPaymentInfoModal from "../../../components/Modal/LoanPaymentInfoModal";
 
 const MyLoans = () => {
   const { user } = useAuth();
   const axiosInstance = useAxiosSecure();
   const [selectedLoan, setSelectedLoan] = useState(null);
+  const [paymentInfo, setPaymentInfo] = useState(null);
   let [isOpen, setIsOpen] = useState(false);
+  let [isOpen2, setIsOpen2] = useState(false);
 
   const closeModal = () => {
     setIsOpen(false);
     setSelectedLoan(null);
+  };
+
+  const closeModal2 = () => {
+    setIsOpen2(false);
+    setPaymentInfo(null);
   };
 
   const {
@@ -64,24 +73,27 @@ const MyLoans = () => {
     }
   };
 
-  const handlePayment = async(loan) => {
+  const handlePayment = async (loan) => {
     try {
       const paymentInfo = {
-        loan_id: loan.loan_id,
+        loan_id: loan._id,
         loan_title: loan.loan_title,
         category: loan.category,
         customer_name: loan.borrower_name,
         customer_email: loan.borrower_email,
-      }
-      const result = await axios.post(`${import.meta.env.VITE_SERVER_API_URL_KEY}/create-checkout-session`, paymentInfo)
-      if(result.data.url) {
-        window.location.assign(result.data.url)
+      };
+      const result = await axios.post(
+        `${import.meta.env.VITE_SERVER_API_URL_KEY}/create-checkout-session`,
+        paymentInfo
+      );
+      if (result.data.url) {
+        window.location.assign(result.data.url);
       }
     } catch (error) {
-      console.log(error.message)
-      toast.error(error.message)
+      console.log(error.message);
+      toast.error(error.message);
     }
-  }
+  };
 
   if (isLoading) return <SpinnerForDashboardRoute></SpinnerForDashboardRoute>;
   if (isError) return <DashboardErrorPage></DashboardErrorPage>;
@@ -185,22 +197,39 @@ const MyLoans = () => {
                           </div>
                         )}
 
-                        <div
-                          className="tooltip before:bg-yellow-400 before:text-black
-    dark:before:bg-yellow-400 dark:before:text-white"
-                          data-tip="Please Pay"
-                        >
-                          <button
-                          onClick={()=>handlePayment(loan)}
-                            className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
+                        {loan.application_fee_status === "paid" ? (
+                          <div
+                            className="tooltip before:bg-green-400 before:text-black
+    dark:before:bg-green-400 dark:before:text-white"
+                            data-tip="Paid"
                           >
-                            <img
-                              src={paymentIcon}
-                              alt="paymentIcon"
-                              className="dark:invert"
-                            />
-                          </button>
-                        </div>
+                            <button
+                              onClick={()=> {
+                              setPaymentInfo(loan)
+                              setIsOpen2(true)
+                              }}
+                              className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-green-400">
+                              <img src={paidBadgeImg} alt="paidBadge" />
+                            </button>
+                          </div>
+                        ) : (
+                          <div
+                            className="tooltip before:bg-yellow-400 before:text-black
+    dark:before:bg-yellow-400 dark:before:text-white"
+                            data-tip="Please Pay"
+                          >
+                            <button
+                              onClick={() => handlePayment(loan)}
+                              className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
+                            >
+                              <img
+                                src={paymentIcon}
+                                alt="paymentIcon"
+                                className="dark:invert"
+                              />
+                            </button>
+                          </div>
+                        )}
                       </div>
                     </td>
                   </tr>
@@ -212,7 +241,13 @@ const MyLoans = () => {
               isOpen={isOpen}
               closeModal={closeModal}
               loan={selectedLoan}
-            ></MyLoanViewModal>
+              ></MyLoanViewModal>
+              {/* //? Loan Payment info View Modal */}
+              <LoanPaymentInfoModal
+              isOpen={isOpen2}
+              closeModal={closeModal2}
+              paymentInfo={paymentInfo}
+              ></LoanPaymentInfoModal>
           </div>
         </div>
       </div>
