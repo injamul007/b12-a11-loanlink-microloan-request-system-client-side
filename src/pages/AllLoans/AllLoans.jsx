@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -8,22 +8,35 @@ import ErrorPage from "../Error404Page/ErrorPage";
 import LoanCard from "../../components/Card/LoanCard";
 
 const AllLoans = () => {
+  const [page, setPage] = useState(1);
+  const limit = 10;
 
-  const {data: allLoans =[], isLoading, isError} = useQuery({
-    queryKey: ['all-loans'],
-    queryFn: async()=> {
+  const {
+    data,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["all-loans", page],
+    queryFn: async () => {
       try {
-        const result = await axios.get(`${import.meta.env.VITE_SERVER_API_URL_KEY}/all-loans`)
-        return result.data.result;
+        const res = await axios.get(
+          `${
+            import.meta.env.VITE_SERVER_API_URL_KEY
+          }/all-loans?page=${page}&limit=${limit}`
+        );
+        return res.data;
       } catch (error) {
-        console.log(error.message)
-        toast.error(error.message)
+        console.log(error.message);
+        toast.error(error.message);
       }
-    }
-  })
+    },
+  });
 
-  if(isLoading) return <BigLoadSpinnerWhite></BigLoadSpinnerWhite>
-  if(isError) return <ErrorPage></ErrorPage>
+  if (isLoading) return <BigLoadSpinnerWhite></BigLoadSpinnerWhite>;
+  if (isError) return <ErrorPage></ErrorPage>;
+
+  const allLoans = data?.result || [];
+  const totalPages = data?.totalPages || 0;
 
   return (
     <div>
@@ -39,9 +52,22 @@ const AllLoans = () => {
         </div>
 
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
-          {
-            allLoans.map(loan => <LoanCard key={loan._id} loan={loan}></LoanCard>)
-          }
+          {allLoans.map((loan) => (
+            <LoanCard key={loan._id} loan={loan}></LoanCard>
+          ))}
+        </div>
+
+        <div className="flex justify-center gap-2 mt-10">
+          {[...Array(totalPages).keys()].map((num) => (
+            <button
+              key={num}
+              onClick={() => setPage(num + 1)}
+              className={`px-4 py-2 rounded font-semibold cursor-pointer hover:bg-[#4DA3FF] duration-200
+              ${page === num + 1 ? "bg-primary text-white" : "bg-gray-200"}`}
+            >
+              {num + 1}
+            </button>
+          ))}
         </div>
       </MyContainer>
     </div>
