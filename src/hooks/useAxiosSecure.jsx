@@ -9,34 +9,51 @@ const axiosInstance = axios.create({
   withCredentials: true,
 })
 
+let tokenPromise = null // token cache
+
 const useAxiosSecure = () => {
   const { logOutFunc } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
-    // REQUEST interceptor
     const requestInterceptor = axiosInstance.interceptors.request.use(
       async config => {
         const currentUser = auth.currentUser
+        if (!currentUser) return config
 
-        if (currentUser) {
-          // ALWAYS get fresh Firebase ID token
-          const token = await currentUser.getIdToken(true)
-          config.headers.authorization = `Bearer ${token}`
+        // reuse token promise (prevents multiple refresh calls)
+        if (!tokenPromise) {
+          tokenPromise = currentUser.getIdToken(false)
+            .finally(() => {
+              tokenPromise = null
+            })
         }
 
+        const token = await tokenPromise
+        config.headers.authorization = `Bearer ${token}`
+
         return config
-      },
-      error => Promise.reject(error)
+      }
     )
 
-    // RESPONSE interceptor
     const responseInterceptor = axiosInstance.interceptors.response.use(
       res => res,
       async err => {
         const status = err?.response?.status
 
-        if (status === 401 || status === 403) {
+        // token expired → try ONE refresh
+        if (status === 401 && auth.currentUser) {
+          try {
+            const newToken = await auth.currentUser.getIdToken(true)
+            err.config.headers.authorization = `Bearer ${newToken}`
+            return axiosInstance(err.config) // retry request
+          } catch {
+            await logOutFunc()
+            navigate('/login')
+          }
+        }
+
+        if (status === 403) {
           await logOutFunc()
           navigate('/login')
         }
@@ -45,7 +62,6 @@ const useAxiosSecure = () => {
       }
     )
 
-    // Cleanup
     return () => {
       axiosInstance.interceptors.request.eject(requestInterceptor)
       axiosInstance.interceptors.response.eject(responseInterceptor)
