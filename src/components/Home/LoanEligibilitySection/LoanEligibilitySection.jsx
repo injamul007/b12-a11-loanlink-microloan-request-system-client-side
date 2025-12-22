@@ -1,10 +1,17 @@
 import React from "react";
 import { Link } from "react-router";
 import MyContainer from "../../Shared/MyContainer/MyContainer";
+import { motion } from "framer-motion";
 
 const LoanEligibilitySection = () => {
   return (
-    <section className="lg:pt-18 md:pt-18 pt-12 lg:pb-18">
+    <motion.section
+      className="lg:pt-18 md:pt-18 pt-12 lg:pb-18"
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      viewport={{ once: false, amount: 0.2 }}
+    >
       <MyContainer>
         <div className="px-6">
           <div className="text-center lg:mb-12 mb-8">
@@ -15,7 +22,7 @@ const LoanEligibilitySection = () => {
               Check the common eligibility criteria and documents required
               before applying — this helps speed up approval.
             </p>
-          </div>
+          </div> 
 
           <div className="grid gap-6 md:grid-cols-3">
             {/* Eligibility Criteria */}
@@ -94,7 +101,7 @@ const LoanEligibilitySection = () => {
           </div>
         </div>
       </MyContainer>
-    </section>
+    </motion.section>
   );
 };
 

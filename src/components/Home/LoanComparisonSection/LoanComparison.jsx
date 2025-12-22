@@ -1,5 +1,6 @@
 import React from "react";
 import MyContainer from "../../Shared/MyContainer/MyContainer";
+import { motion } from "framer-motion";
 
 function Row({ loanType, maxAmount, interest, time, eligibility, tag }) {
   return (
@@ -10,7 +11,11 @@ function Row({ loanType, maxAmount, interest, time, eligibility, tag }) {
       <td className="px-4 py-3">{time}</td>
       <td className="px-4 py-3">{eligibility}</td>
       <td className="px-4 py-3">
-        {tag && <span className="badge outline lg:py-2 py-6  lg:text-md text-sm">{tag}</span>}
+        {tag && (
+          <span className="badge outline lg:py-2 py-6 lg:text-md text-sm">
+            {tag}
+          </span>
+        )}
       </td>
     </tr>
   );
@@ -18,7 +23,13 @@ function Row({ loanType, maxAmount, interest, time, eligibility, tag }) {
 
 const LoanComparison = () => {
   return (
-    <section className="py-20">
+    <motion.section
+      className="py-20"
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      viewport={{ once: false, amount: 0.2 }}
+    >
       <MyContainer>
         <div className="px-6">
           <div className="text-center lg:mb-12 mb-8">
@@ -92,7 +103,7 @@ const LoanComparison = () => {
           </div>
         </div>
       </MyContainer>
-    </section>
+    </motion.section>
   );
 };
 

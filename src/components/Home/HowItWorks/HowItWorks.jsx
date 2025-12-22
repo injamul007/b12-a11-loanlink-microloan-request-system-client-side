@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import MyContainer from "../../Shared/MyContainer/MyContainer";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { Link } from "react-router";
@@ -28,7 +29,13 @@ const Step = ({ number, title, text, img }) => (
 
 export default function HowItWorks() {
   return (
-    <section className="lg:pt-36 pt-22 lg:pb-18 pb-8">
+    <motion.section
+      className="lg:pt-36 pt-22 lg:pb-18 pb-8"
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+    >
       <MyContainer>
         <div className="px-6">
           <div className="text-center max-w-2xl mx-auto lg:mb-14 mb-10">
@@ -42,28 +49,19 @@ export default function HowItWorks() {
           </div>
 
           <div className="grid gap-6 md:gap-4 md:grid-cols-3 lg:grid-cols-5 items-start">
-            {/* Step 1 */}
             <div className="md:col-span-1 bg-white dark:bg-[#292d35] rounded-2xl p-6 shadow-sm">
-              <Step
-                number="1"
-                img={loanOptionImg}
-                title="Explore Loan Options"
+              <Step number="1" img={loanOptionImg} title="Explore Loan Options"
                 text="Browse curated loan packages — compare limits, interest, and repayment plans. Use filters to find the best fit."
               />
             </div>
 
-            {/* Connector for large screens */}
             <div className="hidden md:flex md:items-center min-h-[50vh] md:justify-center">
               <div className="w-full h-0.5 bg-[#0B5FFF]/10 rounded-full"></div>
               <FaLongArrowAltRight className="text-[#0B5FFF]/50" />
             </div>
 
-            {/* Step 2 */}
             <div className="md:col-span-1 bg-white dark:bg-[#292d35] rounded-2xl p-6 shadow-sm">
-              <Step
-                number="2"
-                img={quickApplicationImg}
-                title="Complete Quick Application"
+              <Step number="2" img={quickApplicationImg} title="Complete Quick Application"
                 text="Fill a short online form with basic info and upload required documents — takes just a few minutes."
               />
             </div>
@@ -73,12 +71,8 @@ export default function HowItWorks() {
               <FaLongArrowAltRight className="text-[#0B5FFF]/50" />
             </div>
 
-            {/* Step 3 */}
             <div className="md:col-span-1 bg-white dark:bg-[#292d35] rounded-2xl p-6 shadow-sm">
-              <Step
-                number="3"
-                img={secureLoanImg}
-                title="Secure Verification"
+              <Step number="3" img={secureLoanImg} title="Secure Verification"
                 text="We securely verify identity and documents. Status updates are sent by email and shown in your dashboard."
               />
             </div>
@@ -88,12 +82,8 @@ export default function HowItWorks() {
               <FaLongArrowAltRight className="text-[#0B5FFF]/50" />
             </div>
 
-            {/* Step 4 */}
             <div className="md:col-span-1 bg-white dark:bg-[#292d35] rounded-2xl p-6 shadow-sm">
-              <Step
-                number="4"
-                img={fastPaymentImg}
-                title="Fast Approval & Disbursement"
+              <Step number="4" img={fastPaymentImg} title="Fast Approval & Disbursement"
                 text="Once approved, funds are disbursed directly to your chosen account — usually within 24–72 hours."
               />
             </div>
@@ -103,30 +93,20 @@ export default function HowItWorks() {
               <FaLongArrowAltRight className="text-[#0B5FFF]/50" />
             </div>
 
-            {/* Step 5 */}
             <div className="md:col-span-1 bg-white dark:bg-[#292d35] rounded-2xl p-6 shadow-sm">
-              <Step
-                number="5"
-                img={repaymentImg}
-                title="Repayment & Ongoing Support"
+              <Step number="5" img={repaymentImg} title="Repayment & Ongoing Support"
                 text="Repay easily through scheduled EMIs, track from dashboard, and contact support for any help."
               />
             </div>
           </div>
 
-          {/* CTA Button*/}
           <div className="mt-10 text-center">
-            <Link
-              to={"/all-loans"}
-              className="cta_btn"
-              aria-label="Start application"
-            >
-              See Our Loans
-              <FaLongArrowAltRight />
+            <Link to={"/all-loans"} className="cta_btn">
+              See Our Loans <FaLongArrowAltRight />
             </Link>
           </div>
         </div>
       </MyContainer>
-    </section>
+    </motion.section>
   );
 }

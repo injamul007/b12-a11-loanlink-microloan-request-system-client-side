@@ -1,4 +1,7 @@
 import React from 'react';
+import { motion } from "framer-motion";
+import useScrollDirection from "../../hooks/useScrollDirection";
+
 import CustomerFeedback from '../../components/Home/CustomerFeedback/CustomerFeedback';
 import HowItWorks from '../../components/Home/HowItWorks/HowItWorks';
 import LoanEligibilitySection from '../../components/Home/LoanEligibilitySection/LoanEligibilitySection';
@@ -7,18 +10,49 @@ import Banner from '../../components/Home/Banner/Banner';
 import AllLoansLogo from '../../components/Home/AllLoansLogo/AllLoansLogo';
 import AvailableLoans from '../../components/Home/AvailableLoans/AvailableLoans';
 
-const customersFeedbackData = fetch('/CustomerFeedback.json').then(res=>res.json())
+const customersFeedbackData = fetch('/CustomerFeedback.json').then(res => res.json());
 
 const Home = () => {
+  const direction = useScrollDirection();
+
+  const animation = {
+    hidden: { opacity: 0, y: direction === "down" ? 80 : -80 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: "easeOut" }
+    }
+  };
+
   return (
     <div>
-      <Banner></Banner>
-      <AvailableLoans></AvailableLoans>
-      <HowItWorks></HowItWorks>
-      <AllLoansLogo></AllLoansLogo>
-      <CustomerFeedback customersFeedbackData={customersFeedbackData}></CustomerFeedback>
-      <LoanEligibilitySection></LoanEligibilitySection>
-      <LoanComparison></LoanComparison>
+      <motion.div variants={animation} initial="hidden" whileInView="visible" viewport={{ once: false }}>
+        <Banner />
+      </motion.div>
+
+      <motion.div variants={animation} initial="hidden" whileInView="visible" viewport={{ once: false }}>
+        <AvailableLoans />
+      </motion.div>
+
+      <motion.div variants={animation} initial="hidden" whileInView="visible" viewport={{ once: false }}>
+        <HowItWorks />
+      </motion.div>
+
+      <motion.div variants={animation} initial="hidden" whileInView="visible" viewport={{ once: false }}>
+        <AllLoansLogo />
+      </motion.div>
+
+      <motion.div variants={animation} initial="hidden" whileInView="visible" viewport={{ once: false }}>
+        <CustomerFeedback customersFeedbackData={customersFeedbackData} />
+      </motion.div>
+
+      <motion.div variants={animation} initial="hidden" whileInView="visible" viewport={{ once: false }}>
+        <LoanEligibilitySection />
+      </motion.div>
+
+      <motion.div variants={animation} initial="hidden" whileInView="visible" viewport={{ once: false }}>
+        <LoanComparison />
+      </motion.div>
     </div>
   );
 };
