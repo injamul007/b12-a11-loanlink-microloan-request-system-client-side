@@ -25,6 +25,8 @@ import LoanApplicationForm from "../pages/LoanApplicationForm/LoanApplicationFor
 import TermsAndPrivacy from "../pages/TermsAndCondition/TermsAndPrivacy";
 import UpdateLoanEditPage from "../pages/UpdateLoanEditPage/UpdateLoanEditPage";
 import Dashboard from "../components/Dashboard/Dashboard";
+import AdminRoute from "./AdminRoute";
+import ManagerRoute from "./ManagerRoute";
 
 const router = createBrowserRouter([
   {
@@ -93,35 +95,35 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/manage-users",
-        element: <ManageUsers></ManageUsers>,
+        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>,
       },
       {
         path: "/dashboard/all-loan",
-        element: <AllLoan></AllLoan>,
+        element: <AdminRoute><AllLoan></AllLoan></AdminRoute>,
       },
       {
         path: "/dashboard/loan-applications",
-        element: <LoanApplications></LoanApplications>,
+        element: <AdminRoute><LoanApplications></LoanApplications></AdminRoute>,
       },
       {
         path: "/dashboard/add-loan",
-        element: <AddLoan></AddLoan>,
+        element: <ManagerRoute><AddLoan></AddLoan></ManagerRoute>,
       },
       {
         path: "/dashboard/manage-loans",
-        element: <ManageLoans></ManageLoans>,
+        element: <ManagerRoute><ManageLoans></ManageLoans></ManagerRoute>,
       },
       {
         path: "/dashboard/update-loan/:id",
-        element: <UpdateLoanEditPage></UpdateLoanEditPage>
+        element: <ManagerRoute><UpdateLoanEditPage></UpdateLoanEditPage></ManagerRoute>
       },
       {
         path: "/dashboard/pending-loans",
-        element: <PendingApplications></PendingApplications>,
+        element: <ManagerRoute><PendingApplications></PendingApplications></ManagerRoute>,
       },
       {
         path: "/dashboard/approved-loans",
-        element: <ApprovedApplications></ApprovedApplications>,
+        element: <ManagerRoute><ApprovedApplications></ApprovedApplications></ManagerRoute>,
       },
       {
         path: "/dashboard/my-loans",
