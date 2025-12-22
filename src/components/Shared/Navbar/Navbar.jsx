@@ -17,7 +17,7 @@ import { RiLogoutBoxRLine } from "react-icons/ri";
 import "./Navbar.css";
 
 const Navbar = () => {
-  const { user, setUser, loading, setLoading, logOutFunc } = useAuth();
+  const { user, loading, logOutFunc } = useAuth();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   // const navigate = useNavigate();
   const links = (
@@ -70,6 +70,7 @@ const Navbar = () => {
   const handleLogOutUser = async () => {
     try {
       await logOutFunc();
+
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -80,20 +81,10 @@ const Navbar = () => {
           popup: "small-swal-popup",
         },
       });
-        setUser(null);
     } catch (error) {
-      console.log(error.message)
-      toast.error(error.message)
-    } finally {
-      setLoading(false)
+      console.log(error.message);
+      toast.error(error.message);
     }
-    // .then(() => {
-
-    //   // navigate("/");
-    // })
-    // .catch((error) => {
-    //   toast.error(error.message);
-    // })
   };
 
   return (

@@ -2,51 +2,57 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
 import useAuth from './useAuth'
+import { auth } from '../firebase/firebase.config'
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_SERVER_API_URL_KEY,
   withCredentials: true,
-}) 
+})
 
 const useAxiosSecure = () => {
-  const { user, logOutFunc, loading, setLoading } = useAuth()
+  const { logOutFunc } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!loading && user?.accessToken) {
-      // Add request interceptor
-      const requestInterceptor = axiosInstance.interceptors.request.use(
-        config => {
-          config.headers.Authorization = `Bearer ${user.accessToken}`
-          return config
-        }
-      )
+    // REQUEST interceptor
+    const requestInterceptor = axiosInstance.interceptors.request.use(
+      async config => {
+        const currentUser = auth.currentUser
 
-      // Add response interceptor
-      const responseInterceptor = axiosInstance.interceptors.response.use(
-        res => res,
-        err => {
-          if (err?.response?.status === 401 || err?.response?.status === 403) {
-            logOutFunc()
-              .then(() => {
-                console.log('Logged out successfully.')
-                setLoading(false)
-              })
-              .catch(console.error)
-            navigate('/login')
-          }
-          return Promise.reject(err)
+        if (currentUser) {
+          // ALWAYS get fresh Firebase ID token
+          const token = await currentUser.getIdToken(true)
+          config.headers.authorization = `Bearer ${token}`
         }
-      )
 
-      // Cleanup to prevent multiple interceptors on re-renders
-      return () => {
-        axiosInstance.interceptors.request.eject(requestInterceptor)
-        axiosInstance.interceptors.response.eject(responseInterceptor)
+        return config
+      },
+      error => Promise.reject(error)
+    )
+
+    // RESPONSE interceptor
+    const responseInterceptor = axiosInstance.interceptors.response.use(
+      res => res,
+      async err => {
+        const status = err?.response?.status
+
+        if (status === 401 || status === 403) {
+          await logOutFunc()
+          navigate('/login')
+        }
+
+        return Promise.reject(err)
       }
+    )
+
+    // Cleanup
+    return () => {
+      axiosInstance.interceptors.request.eject(requestInterceptor)
+      axiosInstance.interceptors.response.eject(responseInterceptor)
     }
-  }, [user, loading, logOutFunc, navigate, setLoading])
+  }, [logOutFunc, navigate])
 
   return axiosInstance
 }
+
 export default useAxiosSecure

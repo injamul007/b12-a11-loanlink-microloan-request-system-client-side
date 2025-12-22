@@ -10,7 +10,7 @@ import { RiLogoutBoxRLine } from "react-icons/ri";
 import useRole from "../../hooks/useRole";
 
 const DashboardNavbar = ({ onOpenSidebar }) => {
-  const { user, logOutFunc, setUser} = useAuth();
+  const { user, logOutFunc} = useAuth();
   const {role} = useRole()
   const [theme, setTheme] = useState(() => {
     try {
@@ -41,7 +41,6 @@ const DashboardNavbar = ({ onOpenSidebar }) => {
           popup: "small-swal-popup",
         },
       });
-      setUser(null);
     } catch (err) {
       console.error(err);
     }

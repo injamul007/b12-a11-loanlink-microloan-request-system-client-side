@@ -9,7 +9,7 @@ import managerCoverImg from "../../../assets/manager_cover.jpg";
 import adminCoverImg from "../../../assets/admin_cover.jpg";
 
 const Profile = () => {
-  const { user, logOutFunc, setUser } = useAuth();
+  const { user, logOutFunc } = useAuth();
   const { role, isRoleLoading } = useRole();
 
   const handleLogout = async () => {
@@ -24,7 +24,6 @@ const Profile = () => {
         popup: "small-swal-popup",
       },
     });
-    setUser(null);
   };
 
   if (isRoleLoading) return <SpinnerForDashboardRoute />;
