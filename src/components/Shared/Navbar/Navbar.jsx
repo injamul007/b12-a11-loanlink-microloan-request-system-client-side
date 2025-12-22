@@ -14,10 +14,10 @@ import toast from "react-hot-toast";
 import { SiGnuprivacyguard } from "react-icons/si";
 import { GrDocumentStore } from "react-icons/gr";
 import { RiLogoutBoxRLine } from "react-icons/ri";
-import "./Navbar.css"
+import "./Navbar.css";
 
 const Navbar = () => {
-  const { user, setUser, loading, logOutFunc } = useAuth();
+  const { user, setUser, loading, setLoading, logOutFunc } = useAuth();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   // const navigate = useNavigate();
   const links = (
@@ -67,25 +67,33 @@ const Navbar = () => {
     setTheme(checked ? "dark" : "light");
   };
 
-  const handleLogOutUser = () => {
-    logOutFunc()
-      .then(() => {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "LogOut Successful",
-          showConfirmButton: false,
-          timer: 1500,
-          customClass: {
-            popup: "small-swal-popup",
-          },
-        });
-        setUser(null);
-        // navigate("/");
-      })
-      .catch((error) => {
-        toast.error(error.message);
+  const handleLogOutUser = async () => {
+    try {
+      await logOutFunc();
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "LogOut Successful",
+        showConfirmButton: false,
+        timer: 1500,
+        customClass: {
+          popup: "small-swal-popup",
+        },
       });
+        setUser(null);
+    } catch (error) {
+      console.log(error.message)
+      toast.error(error.message)
+    } finally {
+      setLoading(false)
+    }
+    // .then(() => {
+
+    //   // navigate("/");
+    // })
+    // .catch((error) => {
+    //   toast.error(error.message);
+    // })
   };
 
   return (

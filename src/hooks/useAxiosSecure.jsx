@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
 }) 
 
 const useAxiosSecure = () => {
-  const { user, logOutFunc, loading } = useAuth()
+  const { user, logOutFunc, loading, setLoading } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -30,6 +30,7 @@ const useAxiosSecure = () => {
             logOutFunc()
               .then(() => {
                 console.log('Logged out successfully.')
+                setLoading(false)
               })
               .catch(console.error)
             navigate('/login')
@@ -44,7 +45,7 @@ const useAxiosSecure = () => {
         axiosInstance.interceptors.response.eject(responseInterceptor)
       }
     }
-  }, [user, loading, logOutFunc, navigate])
+  }, [user, loading, logOutFunc, navigate, setLoading])
 
   return axiosInstance
 }
