@@ -126,7 +126,7 @@ const LoanApplicationForm = () => {
             >
               {/*  ------------- Auto Filled (Read Only) --------- */}
               {/* User Email */}
-              <div className="col-span-2">
+              <div className="lg:col-span-2">
                 <label className="label">
                   <span className="label-text font-medium">User Email</span>
                 </label>
@@ -373,7 +373,7 @@ const LoanApplicationForm = () => {
               </div>
 
               {/* Reason for Loan */}
-              <div>
+              <div className="md:col-span-2 lg:col-span-1 col-span-1">
                 <label className="label">
                   <span className="label-text font-medium">
                     Reason for Loan
