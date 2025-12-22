@@ -28,6 +28,8 @@ import Dashboard from "../components/Dashboard/Dashboard";
 import AdminRoute from "./AdminRoute";
 import ManagerRoute from "./ManagerRoute";
 import UpdateLoanEditPageAdmin from "../pages/UpdateLoanEditPageAdmin/UpdateLoanEditPageAdmin";
+import PaymentSuccess from "../pages/Payments/PaymentSuccess";
+import PaymentCancelled from "../pages/Payments/PaymentCancelled";
 
 const router = createBrowserRouter([
   {
@@ -133,6 +135,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/my-loans",
         element: <MyLoans></MyLoans>,
+      },
+      {
+        path: "/dashboard/my-loans/payment-success",
+        element: <PaymentSuccess></PaymentSuccess>,
+      },
+      {
+        path: "/dashboard/my-loans/payment-cancel",
+        element: <PaymentCancelled></PaymentCancelled>,
       },
       {
         path: "/dashboard/profile",

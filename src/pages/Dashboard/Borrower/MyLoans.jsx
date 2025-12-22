@@ -11,6 +11,7 @@ import paymentIcon from "../../../assets/payment_icon.png";
 import Swal from "sweetalert2";
 import MyLoanViewModal from "../../../components/Modal/MyLoanViewModal";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import axios from "axios";
 
 const MyLoans = () => {
   const { user } = useAuth();
@@ -62,6 +63,25 @@ const MyLoans = () => {
       toast.error(error.message);
     }
   };
+
+  const handlePayment = async(loan) => {
+    try {
+      const paymentInfo = {
+        loan_id: loan.loan_id,
+        loan_title: loan.loan_title,
+        category: loan.category,
+        customer_name: loan.borrower_name,
+        customer_email: loan.borrower_email,
+      }
+      const result = await axios.post(`${import.meta.env.VITE_SERVER_API_URL_KEY}/create-checkout-session`, paymentInfo)
+      if(result.data.url) {
+        window.location.assign(result.data.url)
+      }
+    } catch (error) {
+      console.log(error.message)
+      toast.error(error.message)
+    }
+  }
 
   if (isLoading) return <SpinnerForDashboardRoute></SpinnerForDashboardRoute>;
   if (isError) return <DashboardErrorPage></DashboardErrorPage>;
@@ -171,6 +191,7 @@ const MyLoans = () => {
                           data-tip="Please Pay"
                         >
                           <button
+                          onClick={()=>handlePayment(loan)}
                             className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
                           >
                             <img
