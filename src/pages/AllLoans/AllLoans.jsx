@@ -58,16 +58,18 @@ const AllLoans = () => {
         </div>
 
         <div className="flex justify-center gap-2 mt-10">
+          {page > 1 && <button onClick={()=>setPage(page-1)} className="btn">Prev</button>}
           {[...Array(totalPages).keys()].map((num) => (
             <button
-              key={num}
-              onClick={() => setPage(num + 1)}
-              className={`px-4 py-2 rounded font-semibold cursor-pointer hover:bg-[#4DA3FF] duration-200
+            key={num}
+            onClick={() => setPage(num + 1)}
+            className={`px-4 py-2 rounded font-semibold cursor-pointer hover:bg-[#4DA3FF] duration-200
               ${page === num + 1 ? "bg-primary text-white" : "bg-gray-200"}`}
-            >
+              >
               {num + 1}
             </button>
           ))}
+          {page < totalPages && <button onClick={()=>setPage(page+1)} className="btn">Next</button>}
         </div>
       </MyContainer>
     </div>
