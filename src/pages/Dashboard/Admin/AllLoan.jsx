@@ -148,7 +148,7 @@ const AllLoan = () => {
                           data-tip="Update"
                         >
                           <Link
-                            to={`/dashboard/update-loan/${loan._id}`}
+                            to={`/dashboard/all-loan/update-loan/${loan._id}`}
                             className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
                           >
                             <FaRegEdit size={22} />

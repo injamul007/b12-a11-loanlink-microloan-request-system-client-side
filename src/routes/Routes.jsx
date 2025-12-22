@@ -27,6 +27,7 @@ import UpdateLoanEditPage from "../pages/UpdateLoanEditPage/UpdateLoanEditPage";
 import Dashboard from "../components/Dashboard/Dashboard";
 import AdminRoute from "./AdminRoute";
 import ManagerRoute from "./ManagerRoute";
+import UpdateLoanEditPageAdmin from "../pages/UpdateLoanEditPageAdmin/UpdateLoanEditPageAdmin";
 
 const router = createBrowserRouter([
   {
@@ -100,6 +101,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/all-loan",
         element: <AdminRoute><AllLoan></AllLoan></AdminRoute>,
+      },
+      {
+        path: "/dashboard/all-loan/update-loan/:id",
+        element: <AdminRoute><UpdateLoanEditPageAdmin></UpdateLoanEditPageAdmin></AdminRoute>,
       },
       {
         path: "/dashboard/loan-applications",
