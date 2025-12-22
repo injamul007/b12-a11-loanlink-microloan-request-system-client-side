@@ -91,7 +91,7 @@ const AddLoan = () => {
     <MyContainer>
       <div className="w-full flex flex-col justify-center items-center text-gray-800 rounded-xl lg:pt-1 lg:pb-14 py-6">
         <title>LoanLink || Add Loan</title>
-        <h2 className="lg:text-2xl text-xl font-bold text-center lg:my-10 my-4">Add Loan</h2>
+        <h2 className="lg:text-2xl text-xl text-gray-700 dark:text-gray-300 font-bold text-center lg:my-10 my-4">Add Loan</h2>
         <form onSubmit={handleSubmit(handleAddLoan)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <div className="space-y-6">
