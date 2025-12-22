@@ -14,7 +14,7 @@ It provides a secure and user-friendly environment for borrowers to explore loan
 ---
 
 ## 🌐 Live URL
-🔗 **Live Site:** *( site link here)*
+🔗 **Live Site:** *(https://loanlink-loan-management-systm.web.app/)*
 
 ---
 
@@ -66,7 +66,7 @@ It provides a secure and user-friendly environment for borrowers to explore loan
 | **Backend** | Node.js, Express.js, MongoDB |
 | **Authentication** | Firebase (Email/Password, Google Sign-In) |
 | **Image Upload** | Hosted via URL ( Imgbb & Cloudinary) |
-| **Hosting** | Netlify (Client), Vercel (Server) |
+| **Hosting** | Firebase (Client), Vercel (Server) |
 | **Utilities & Tools** | Axios, Framer Motion, SweetAlert2, React Hot Toast, React Responsive Carousel, Swiper |
 
 ---
@@ -116,8 +116,9 @@ It provides a secure and user-friendly environment for borrowers to explore loan
   "swiper": "^12.0.3",
   "tailwindcss": "^4.1.17"
 }
+```
 
-
+## 📥 Installation & Setup
 
 # Clone the repository
 git clone https://github.com/injamul007/b12-a11-loanlink-microloan-request-system-client-side
