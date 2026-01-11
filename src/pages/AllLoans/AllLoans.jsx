@@ -11,15 +11,17 @@ const AllLoans = () => {
   const [page, setPage] = useState(1);
   const limit = 10;
   const [category, setCategory] = useState("");
+  const [minLoanLimit, setMinLoanLimit] = useState('');
+  const [maxLoanLimit, setMaxLoanLimit] = useState('');
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["all-loans", page, category],
+    queryKey: ["all-loans", page, category, minLoanLimit , maxLoanLimit],
     queryFn: async () => {
       try {
         const res = await axios.get(
           `${
             import.meta.env.VITE_SERVER_API_URL_KEY
-          }/all-loans?page=${page}&limit=${limit}&category=${category}`
+          }/all-loans?page=${page}&limit=${limit}&category=${category}&minLoanLimit=${minLoanLimit}&maxLoanLimit=${maxLoanLimit}`
         );
         return res.data;
       } catch (error) {
@@ -34,9 +36,23 @@ const AllLoans = () => {
 
   const allLoans = data?.result || [];
   const totalPages = data?.totalPages || 0;
+  const total = data?.total || 0;
 
   const handleCategoryFilter = (e) => {
     setCategory(e.target.value);
+    setPage(1);
+  };
+
+  const handleLoanLimitFilter = (e) => {
+    const value = e.target.value;
+    if (!value) {
+      setMinLoanLimit("");
+      setMaxLoanLimit("");
+    } else {
+      const {min, max} = JSON.parse(value);
+      setMinLoanLimit(min);
+      setMaxLoanLimit(max);
+    }
     setPage(1);
   };
 
@@ -49,7 +65,7 @@ const AllLoans = () => {
             All Loans
           </h2>
           <p className="mt-6 text-md text-gray-600 dark:text-gray-300 font-semibold max-w-2xl mx-auto">
-            Explore all our microloans
+            Explore all our microloans <span>(Loan Found {total})</span>
           </p>
         </div>
 
@@ -73,7 +89,20 @@ const AllLoans = () => {
               <option value={"vendor"}>Vendor</option>
             </select>
           </div>
-          <div> Filter By Max Loan Limit</div>
+          <div>
+            <select onChange={handleLoanLimitFilter} className="select">
+              <option value="">Filter By Loan Limit</option>
+              <option value={JSON.stringify({ min: 0, max: 3000 })}>Under ৳3000</option>
+              <option value={JSON.stringify({ min: 3000, max: 8000 })}>৳3000 - ৳8000</option>
+              <option value={JSON.stringify({ min: 8000, max: 12000 })}>৳8000 - ৳12000</option>
+              <option value={JSON.stringify({ min: 12000, max: 16000 })}>৳12000 - ৳16000</option>
+              <option value={JSON.stringify({ min: 16000, max: 20000 })}>৳16000 - ৳20000</option>
+              <option value={JSON.stringify({ min: 20000, max: 25000 })}>৳20000 - ৳25000</option>
+              <option value={JSON.stringify({ min: 25000, max: 30000 })}>৳25000 - ৳30000</option>
+              <option value={JSON.stringify({ min: 30000, max: 35000 })}>৳30000 - ৳35000</option>
+              <option value={JSON.stringify({ min: 35000, max: 99999 })}>৳35000+</option>
+            </select>
+          </div>
           <div>Search</div>
           <div>Sort</div>
         </div>
