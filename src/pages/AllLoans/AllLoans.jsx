@@ -28,7 +28,7 @@ const AllLoans = () => {
     },
   });
 
-  if (isLoading) return <BigLoadSpinnerWhite></BigLoadSpinnerWhite>;
+  // if (isLoading) return <BigLoadSpinnerWhite></BigLoadSpinnerWhite>;
   if (isError) return <ErrorPage></ErrorPage>;
 
   const allLoans = data?.result || [];
