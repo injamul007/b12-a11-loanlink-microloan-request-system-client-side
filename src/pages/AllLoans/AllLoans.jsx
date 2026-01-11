@@ -11,11 +11,7 @@ const AllLoans = () => {
   const [page, setPage] = useState(1);
   const limit = 10;
 
-  const {
-    data,
-    isLoading,
-    isError,
-  } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["all-loans", page],
     queryFn: async () => {
       try {
@@ -51,25 +47,47 @@ const AllLoans = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
-          {allLoans.map((loan) => (
-            <LoanCard key={loan._id} loan={loan}></LoanCard>
-          ))}
-        </div>
+        {isLoading ? (
+          <BigLoadSpinnerWhite></BigLoadSpinnerWhite>
+        ) : (
+          <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6">
+            {allLoans.map((loan) => (
+              <LoanCard key={loan._id} loan={loan}></LoanCard>
+            ))}
+          </div>
+        )}
 
         <div className="flex justify-center gap-2 mt-10">
-          {page > 1 && <button onClick={()=>setPage(page-1)} className="btn">Prev</button>}
+          {page > 1 && (
+            <button
+              onClick={() => setPage(page - 1)}
+              className="btn bg-gray-200 hover:bg-[#4DA3FF] dark:bg-gray-600 dark:text-white "
+            >
+              Prev
+            </button>
+          )}
           {[...Array(totalPages).keys()].map((num) => (
             <button
-            key={num}
-            onClick={() => setPage(num + 1)}
-            className={`px-4 py-2 rounded font-semibold cursor-pointer hover:bg-[#4DA3FF] duration-200
-              ${page === num + 1 ? "bg-primary text-white" : "bg-gray-200"}`}
-              >
+              key={num}
+              onClick={() => setPage(num + 1)}
+              className={`px-4 py-2 rounded font-semibold cursor-pointer hover:bg-[#4DA3FF] duration-200
+              ${
+                page === num + 1
+                  ? "bg-primary text-white"
+                  : "bg-gray-200 dark:bg-gray-600 dark:text-white"
+              } `}
+            >
               {num + 1}
             </button>
           ))}
-          {page < totalPages && <button onClick={()=>setPage(page+1)} className="btn">Next</button>}
+          {page < totalPages && (
+            <button
+              onClick={() => setPage(page + 1)}
+              className="btn bg-gray-200 hover:bg-[#4DA3FF] dark:bg-gray-600 dark:text-white"
+            >
+              Next
+            </button>
+          )}
         </div>
       </MyContainer>
     </div>
