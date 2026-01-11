@@ -10,15 +10,16 @@ import LoanCard from "../../components/Card/LoanCard";
 const AllLoans = () => {
   const [page, setPage] = useState(1);
   const limit = 10;
+  const [category, setCategory] = useState("");
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["all-loans", page],
+    queryKey: ["all-loans", page, category],
     queryFn: async () => {
       try {
         const res = await axios.get(
           `${
             import.meta.env.VITE_SERVER_API_URL_KEY
-          }/all-loans?page=${page}&limit=${limit}`
+          }/all-loans?page=${page}&limit=${limit}&category=${category}`
         );
         return res.data;
       } catch (error) {
@@ -34,6 +35,11 @@ const AllLoans = () => {
   const allLoans = data?.result || [];
   const totalPages = data?.totalPages || 0;
 
+  const handleCategoryFilter = (e) => {
+    setCategory(e.target.value);
+    setPage(1);
+  };
+
   return (
     <div>
       <MyContainer className="lg:pt-14 pt-14 lg:pb-16 pb-10 px-6">
@@ -42,9 +48,34 @@ const AllLoans = () => {
           <h2 className="text-2xl md:text-3xl font-bold text-text">
             All Loans
           </h2>
-          <p className="mt-6 text-md text-gray-500 font-semibold max-w-2xl mx-auto">
+          <p className="mt-6 text-md text-gray-600 dark:text-gray-300 font-semibold max-w-2xl mx-auto">
             Explore all our microloans
           </p>
+        </div>
+
+        <div className="flex flex-wrap gap-4 justify-center mb-14 dark:text-gray-300 text-gray-600 font-semibold">
+          <div>
+            <select onChange={handleCategoryFilter} className="select">
+              <option value={""}>Filter by Category</option>
+              <option value={"beginner"}>Beginner</option>
+              <option value={"emergency"}>Emergency</option>
+              <option value={"business"}>Business</option>
+              <option value={"freelancer"}>Freelancer</option>
+              <option value={"education"}>Education</option>
+              <option value={"women"}>Women</option>
+              <option value={"agriculture"}>Agriculture</option>
+              <option value={"health"}>Health</option>
+              <option value={"personal"}>Personal</option>
+              <option value={"worker"}>Worker</option>
+              <option value={"startup"}>Startup</option>
+              <option value={"housing"}>Housing</option>
+              <option value={"online"}>Online</option>
+              <option value={"vendor"}>Vendor</option>
+            </select>
+          </div>
+          <div> Filter By Max Loan Limit</div>
+          <div>Search</div>
+          <div>Sort</div>
         </div>
 
         {isLoading ? (
