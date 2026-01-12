@@ -30,7 +30,7 @@ const DashboardSidebar = ({ onClose }) => {
 
   return (
     <aside className="bg-[#071422] text-white lg:w-64 w-60 h-full p-2 lg:p-4 lg:block">
-      <nav className="space-y-48">
+      <nav className="space-y-8">
         <div className=" space-y-2">
           <div className="text-xs text-white/60 uppercase mb-2">Dashboard</div>
 
