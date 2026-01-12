@@ -18,7 +18,7 @@ const CustomerFeedback = ({ customersFeedbackData }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false }}
       transition={{ duration: 0.6 }}
-      className="lg:py-14 py-6"
+      className="lg:pt-14 pt-6 pb-4"
     >
       <MyContainer>
         <div className="px-6">
