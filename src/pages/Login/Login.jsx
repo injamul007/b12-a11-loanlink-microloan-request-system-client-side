@@ -35,15 +35,15 @@ const Login = () => {
     const demoCredentials = {
       user: {
         email: "hiroshima@gmail.com",
-        password: "bossBD007#",
+        password: `${import.meta.env.VITE_USER_PASSWORD}`,
       },
       manager: {
         email: "manager007@loanlink.com",
-        password: "manager007Manager#",
+        password: `${import.meta.env.VITE_MANAGER_PASSWORD}`,
       },
       admin: {
         email: "admin007@loanlink.com",
-        password: "admin007Admin#",
+        password: `${import.meta.env.VITE_ADMIN_PASSWORD}`,
       },
     };
 
