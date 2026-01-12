@@ -71,6 +71,7 @@ It provides a secure and user-friendly environment for borrowers to explore loan
 | **Frontend** | React.js, Tailwind CSS, React Router, TanStack React Query |
 | **Backend** | Node.js, Express.js, MongoDB |
 | **Authentication** | Firebase (Email/Password, Google Sign-In) |
+| **Stripe Payment System** | Stripe Payment Method System integration |
 | **Image Upload** | Hosted via URL ( Imgbb & Cloudinary) |
 | **Hosting** | Firebase (Client), Vercel (Server) |
 | **Utilities & Tools** | Axios, Framer Motion, SweetAlert2, React Hot Toast, React Responsive Carousel, Swiper |
@@ -89,6 +90,7 @@ It provides a secure and user-friendly environment for borrowers to explore loan
 | **tailwindcss** | Utility-first CSS framework for styling |
 | **@tailwindcss/vite** | Tailwind integration with Vite |
 | **framer-motion** | Smooth page transitions and animations |
+| **lucide-react** | React Icons for UI enhancement |
 | **react-hook-form** | Form handling and validation |
 | **react-hot-toast** | Toast notifications |
 | **sweetalert2** | Custom alerts and confirmation dialogs |
@@ -110,6 +112,7 @@ It provides a secure and user-friendly environment for borrowers to explore loan
   "axios": "^1.13.2",
   "firebase": "^12.6.0",
   "framer-motion": "^12.23.26",
+  "lucide-react": "^0.562.0",
   "react": "^19.2.0",
   "react-dom": "^19.2.0",
   "react-hook-form": "^7.68.0",

@@ -10,6 +10,7 @@ import BannerImg5 from "../../../assets/banner image/banner (5).png";
 import BannerImg6 from "../../../assets/banner image/banner (6).png";
 import { Link } from "react-router";
 import "./Banner.css";
+import { ArrowDown } from "lucide-react";
 
 const Banner = () => {
   return (
@@ -19,9 +20,9 @@ const Banner = () => {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      <Carousel autoPlay infiniteLoop showThumbs={false} showStatus={false} interval={5000}>
+      <Carousel autoPlay infiniteLoop showThumbs={false} showStatus={false} interval={5000} showIndicators={false}>
         {[BannerImg1, BannerImg2, BannerImg3, BannerImg4, BannerImg5, BannerImg6].map((img, i) => (
-          <div key={i} className="h-[560px]">
+          <div key={i} className="lg:h-[392px] md:h-[440px] h-[520px]">
             <img src={img} className="h-full w-full" />
             <div className="absolute inset-0 bg-linear-to-b from-black/70 to-black/70"></div>
           </div>
@@ -30,11 +31,11 @@ const Banner = () => {
 
       <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none flex-col">
         <div className="px-6 text-center">
-          <h1 className="lg:text-4xl text-3xl font-extrabold leading-tight text-primary dark:text-gray-200">
+          <h1 className="lg:text-5xl text-3xl font-extrabold leading-tight text-primary dark:text-gray-200">
             Get the microloan you need — fast, secure & simple.
           </h1>
 
-          <p className="my-4 text-md font-semibold max-w-2xl mx-auto text-white dark:text-gray-200">
+          <p className="my-4 lg:text-lg font-semibold max-w-2xl mx-auto text-white dark:text-gray-200">
             LoanLink helps micro-entrepreneurs, students and freelancers access
             short-term funding with transparent terms and quick approval.
           </p>
@@ -44,11 +45,20 @@ const Banner = () => {
           <Link to="/all-loans" className="cta-first-button btn-sm md:btn-md">
             Explore Loans
           </Link>
-          <Link to="/loan-application-form" className="cta-second-button btn-sm md:btn-md">
+          <Link to="/loan-application-form" className="cta-second-button lg:btn-md md:btn-md btn-sm">
             Apply for Loan
           </Link>
         </div>
       </div>
+
+      {/* Animated Arrow for Scroll */}
+      <motion.div
+        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10 cursor-pointer"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 1.2, repeat: Infinity }}
+      >
+        <ArrowDown size={36} className="text-white animate-bounce" />
+      </motion.div>
     </motion.div>
   );
 };
