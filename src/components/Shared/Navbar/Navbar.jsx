@@ -42,7 +42,7 @@ const Navbar = () => {
       {user && user?.email && (
         <>
           <li>
-            <NavLink to={"/contact"}>
+            <NavLink to={"/contact"} className={'md:hidden lg:flex'}>
               <MdContacts size={22} /> Contact
             </NavLink>
           </li>
