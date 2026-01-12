@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
-import { useQuery } from "@tanstack/react-query";
+import {  useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import axios from "axios";
 import BigLoadSpinnerWhite from "../../components/Shared/BigLoadSpinnerWhite/BigLoadSpinnerWhite";
@@ -17,6 +17,8 @@ const AllLoans = () => {
   const [maxLoanLimit, setMaxLoanLimit] = useState("");
   const [searchText, setSearchText] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [sort, setSort] = useState("created_at");
+  const [order, setOrder] = useState("desc");
 
   //? Debounce Effect
   useEffect(() => {
@@ -26,7 +28,7 @@ const AllLoans = () => {
     return () => clearTimeout(searchTimer);
   }, [searchText]);
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isFetching, isError } = useQuery({
     queryKey: [
       "all-loans",
       page,
@@ -34,28 +36,32 @@ const AllLoans = () => {
       minLoanLimit,
       maxLoanLimit,
       debouncedSearch,
+      sort,
+      order,
     ],
     queryFn: async () => {
       try {
         const res = await axios.get(
           `${
             import.meta.env.VITE_SERVER_API_URL_KEY
-          }/all-loans?page=${page}&limit=${limit}&category=${category}&minLoanLimit=${minLoanLimit}&maxLoanLimit=${maxLoanLimit}&search=${debouncedSearch}`
+          }/all-loans?page=${page}&limit=${limit}&category=${category}&minLoanLimit=${minLoanLimit}&maxLoanLimit=${maxLoanLimit}&search=${debouncedSearch}&sort=${sort}&order=${order}`
         );
         return res.data;
       } catch (error) {
         console.log(error.message);
         toast.error(error.message);
+        toast.error(error.response?.data?.message || error.message);
+        throw error;
       }
     },
   });
 
-  // if (isLoading) return <BigLoadSpinnerWhite></BigLoadSpinnerWhite>;
+
   if (isError) return <ErrorPage></ErrorPage>;
 
-  const allLoans = data?.result || [];
-  const totalPages = data?.totalPages || 0;
-  const total = data?.total || 0;
+  const allLoans = data?.result ?? [];
+  const totalPages = data?.totalPages ?? 0;
+  const total = data?.total ?? 0;
 
   const handleCategoryFilter = (e) => {
     setCategory(e.target.value);
@@ -77,6 +83,17 @@ const AllLoans = () => {
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
+    setPage(1);
+  };
+
+  const handleSorting = (e) => {
+    const value = e.target.value;
+    if (!value) return;
+
+    const [sortField, sortOrder] = value.split("-");
+
+    setSort(sortField);
+    setOrder(sortOrder);
     setPage(1);
   };
 
@@ -171,10 +188,36 @@ const AllLoans = () => {
               />
             </label>
           </div>
-          <div>Sort</div>
+          <div>
+            <select
+              value={`${sort}-${order}`}
+              onChange={handleSorting}
+              className="select"
+            >
+              <option value="" disabled>
+                Sort by
+              </option>
+
+              <option value="created_at-desc">Loan → New - Old</option>
+              <option value="created_at-asc">Loan → Old - New</option>
+
+              <option value="max_loan_limit-asc">Max Loan Limit → Low - High</option>
+              <option value="max_loan_limit-desc">Max Loan Limit → High - Low</option>
+
+              <option value="interest_rate-asc">Interest Rate → Low - High</option>
+              <option value="interest_rate-desc">Interest Rate → High - Low</option>
+            </select>
+          </div>
         </div>
 
-        {isLoading ? (
+        {/* Sub loading on sorting */}
+        {isFetching && (
+          <p className="text-center text-sm text-gray-400 mb-4">
+            Updating loan data...
+          </p>
+        )}
+
+        {isFetching ? (
           <BigLoadSpinnerWhite></BigLoadSpinnerWhite>
         ) : allLoans.length === 0 &&
           (category || minLoanLimit || maxLoanLimit || searchText) ? (
@@ -192,7 +235,7 @@ const AllLoans = () => {
             viewport={{ once: false }}
             transition={{ duration: 0.7 }}
           >
-            <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-5">
+            <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-5 mb-16">
               {allLoans.map((loan) => (
                 <motion.div key={loan._id} variants={fadeUp}>
                   <LoanCard loan={loan}></LoanCard>
