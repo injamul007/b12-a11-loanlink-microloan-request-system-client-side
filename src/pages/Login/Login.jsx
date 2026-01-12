@@ -20,6 +20,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
@@ -28,6 +29,27 @@ const Login = () => {
   if (user && user?.email) {
     return <Navigate to={from} replace={true}></Navigate>;
   }
+
+  // demo credential handler
+  const handleDemoFill = (role) => {
+    const demoCredentials = {
+      user: {
+        email: "hiroshima@gmail.com",
+        password: "bossBD007#",
+      },
+      manager: {
+        email: "manager007@loanlink.com",
+        password: "manager007Manager#",
+      },
+      admin: {
+        email: "admin007@loanlink.com",
+        password: "admin007Admin#",
+      },
+    };
+
+    setValue("email", demoCredentials[role].email);
+    setValue("password", demoCredentials[role].password);
+  };
 
   const handleLogin = async (data) => {
     try {
@@ -51,11 +73,10 @@ const Login = () => {
       const userData = {
         name: result.user?.displayName,
         email: result.user?.email,
-        photo: result.user?.photoURL
-      }
+        photo: result.user?.photoURL,
+      };
 
-      await saveOrUpdateUsers(userData)
-
+      await saveOrUpdateUsers(userData);
     } catch (error) {
       console.log(error);
       console.log(error?.response?.data?.message);
@@ -160,6 +181,31 @@ const Login = () => {
               >
                 Forget password?
               </button>
+
+              {/* Add Demo Login Buttons */}
+              <div className="flex lg:gap-4 md:gap-3 gap-1 justify-center">
+                <button
+                  type="button"
+                  onClick={() => handleDemoFill("user")}
+                  className="btn btn-xs btn-outline text-white hover:bg-gray-600"
+                >
+                  Demo User
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDemoFill("manager")}
+                  className="btn btn-xs btn-outline text-white hover:bg-gray-600"
+                >
+                  Demo Manager
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDemoFill("admin")}
+                  className="btn btn-xs btn-outline text-white hover:bg-gray-600"
+                >
+                  Demo Admin
+                </button>
+              </div>
 
               <button
                 type="submit"
