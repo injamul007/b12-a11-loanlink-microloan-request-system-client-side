@@ -68,7 +68,7 @@ const ManageLoans = () => {
     }
   };
 
-  if (isLoading) return <SpinnerForDashboardRoute />;
+  // if (isLoading) return <SpinnerForDashboardRoute />;
   if (isError) return <DashboardErrorPage />;
 
   return (
@@ -113,81 +113,89 @@ const ManageLoans = () => {
           </thead>
 
           <tbody>
-            {manageLoans.map((manageLoan, idx) => (
-              <tr key={manageLoan._id}>
-                <th>{idx + 1}</th>
+            {isLoading ? (
+              <SpinnerForDashboardRoute></SpinnerForDashboardRoute>
+            ) : (
+              <>
+                {manageLoans.map((manageLoan, idx) => (
+                  <tr key={manageLoan._id}>
+                    <th>{idx + 1}</th>
 
-                {/* Loan Image */}
-                <td className="md:table-cell max-w-[180px]">
-                  <img
-                    src={manageLoan.image}
-                    alt="loanImage"
-                    className="w-14 h-14 object-cover hover:scale-200 duration-500 rounded-xl"
-                  />
-                </td>
+                    {/* Loan Image */}
+                    <td className="md:table-cell max-w-[180px]">
+                      <img
+                        src={manageLoan.image}
+                        alt="loanImage"
+                        className="w-14 h-14 object-cover hover:scale-200 duration-500 rounded-xl"
+                      />
+                    </td>
 
-                {/* Loan Title */}
-                <td className="max-w-[200px]">
-                  <div className="flex flex-col">
-                    <span className="font-medium">{manageLoan.loan_title}</span>
-                  </div>
-                </td>
+                    {/* Loan Title */}
+                    <td className="max-w-[200px]">
+                      <div className="flex flex-col">
+                        <span className="font-medium">
+                          {manageLoan.loan_title}
+                        </span>
+                      </div>
+                    </td>
 
-                {/* Interest Rate */}
-                <td className="whitespace-nowrap font-semibold">
-                  {manageLoan.interest_rate}
-                </td>
+                    {/* Interest Rate */}
+                    <td className="whitespace-nowrap font-semibold">
+                      {manageLoan.interest_rate}
+                    </td>
 
-                {/* Category */}
-                <td className="md:table-cell max-w-[180px] font-semibold">
-                  {manageLoan.category}
-                </td>
+                    {/* Category */}
+                    <td className="md:table-cell max-w-[180px] font-semibold">
+                      {manageLoan.category}
+                    </td>
 
-                {/* Actions */}
-                <td>
-                  <div className="flex flex-wrap gap-2">
-                    <div
-                      className="tooltip before:bg-blue-400 before:text-white dark:before:bg-blue-400 dark:before:text-black"
-                      data-tip="Update"
-                    >
-                      <Link
-                        to={`/dashboard/update-loan/${manageLoan._id}`}
-                        className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
-                      >
-                        <FaRegEdit size={22} />
-                      </Link>
-                    </div>
+                    {/* Actions */}
+                    <td>
+                      <div className="flex flex-wrap gap-2">
+                        <div
+                          className="tooltip before:bg-blue-400 before:text-white dark:before:bg-blue-400 dark:before:text-black"
+                          data-tip="Update"
+                        >
+                          <Link
+                            to={`/dashboard/update-loan/${manageLoan._id}`}
+                            className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#4DA3FF]"
+                          >
+                            <FaRegEdit size={22} />
+                          </Link>
+                        </div>
 
-                    <div
-                      className="tooltip before:bg-red-400 before:text-white dark:before:bg-red-400 dark:before:text-black"
-                      data-tip="Delete"
-                    >
-                      <button
-                        onClick={() => handleDeleteLoan(manageLoan._id)}
-                        className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-error"
-                      >
-                        <FaRegTrashCan size={22} />
-                      </button>
-                    </div>
+                        <div
+                          className="tooltip before:bg-red-400 before:text-white dark:before:bg-red-400 dark:before:text-black"
+                          data-tip="Delete"
+                        >
+                          <button
+                            onClick={() => handleDeleteLoan(manageLoan._id)}
+                            className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-error"
+                          >
+                            <FaRegTrashCan size={22} />
+                          </button>
+                        </div>
 
-                    <div
-                      className="tooltip before:bg-yellow-400 before:text-black dark:before:bg-yellow-400 dark:before:text-white"
-                      data-tip="View"
-                    >
-                      <button
-                        onClick={() => {
-                          setSelectedLoan(manageLoan);
-                          setIsOpen(true);
-                        }}
-                        className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
-                      >
-                        <MdOutlineRemoveRedEye size={24} />
-                      </button>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            ))}
+                        <div
+                          className="tooltip before:bg-yellow-400 before:text-black dark:before:bg-yellow-400 dark:before:text-white"
+                          data-tip="View"
+                        >
+                          <button
+                            onClick={() => {
+                              setSelectedLoan(manageLoan);
+                              setIsOpen(true);
+                            }}
+                            className="btn btn-square btn-sm dark:bg-gray-800 hover:bg-[#FFB703]"
+                          >
+                            <MdOutlineRemoveRedEye size={24} />
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </>
+            )}
           </tbody>
         </table>
 
