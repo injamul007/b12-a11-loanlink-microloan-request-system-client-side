@@ -15,6 +15,7 @@ import { SiGnuprivacyguard } from "react-icons/si";
 import { GrDocumentStore } from "react-icons/gr";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import "./Navbar.css";
+import { TbBrandBlogger } from "react-icons/tb";
 
 const Navbar = () => {
   const { user, loading, logOutFunc } = useAuth();
@@ -36,6 +37,11 @@ const Navbar = () => {
       <li>
         <NavLink to={"/about-us"}>
           <FaUsers size={24} /> About Us
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to={"/blog"} className={'lg:flex md:hidden'}>
+          <TbBrandBlogger size={24} /> Blog
         </NavLink>
       </li>
 

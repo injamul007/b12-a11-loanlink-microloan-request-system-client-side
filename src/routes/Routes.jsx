@@ -30,6 +30,7 @@ import ManagerRoute from "./ManagerRoute";
 import UpdateLoanEditPageAdmin from "../pages/UpdateLoanEditPageAdmin/UpdateLoanEditPageAdmin";
 import PaymentSuccess from "../pages/Payments/PaymentSuccess";
 import PaymentCancelled from "../pages/Payments/PaymentCancelled";
+import Blogs from "../pages/Blog/Blogs";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "/about-us",
         element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "/blog",
+        element: <Blogs></Blogs>,
       },
       {
         path: "/contact",
