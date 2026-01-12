@@ -3,9 +3,10 @@ import { motion } from "framer-motion";
 import MyContainer from "../../Shared/MyContainer/MyContainer";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import BigLoadSpinnerWhite from "../../Shared/BigLoadSpinnerWhite/BigLoadSpinnerWhite";
+// import BigLoadSpinnerWhite from "../../Shared/BigLoadSpinnerWhite/BigLoadSpinnerWhite";
 import LoanCard from "../../Card/LoanCard";
 import toast from "react-hot-toast";
+import LoanSkeleton from "../../Shared/LoanSkeleton/LoanSkeleton";
 
 const AvailableLoans = () => {
   const { data: availableLoans = [], isLoading } = useQuery({
@@ -22,7 +23,7 @@ const AvailableLoans = () => {
     },
   });
 
-  if (isLoading) return <BigLoadSpinnerWhite />;
+  if (isLoading) return <LoanSkeleton count={6}></LoanSkeleton>
 
   return (
     <motion.div
@@ -41,7 +42,7 @@ const AvailableLoans = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-5">
           {availableLoans.map((loan) => (
             <LoanCard key={loan._id} loan={loan} />
           ))}

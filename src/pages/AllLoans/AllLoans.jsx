@@ -3,11 +3,12 @@ import MyContainer from "../../components/Shared/MyContainer/MyContainer";
 import {  useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import axios from "axios";
-import BigLoadSpinnerWhite from "../../components/Shared/BigLoadSpinnerWhite/BigLoadSpinnerWhite";
+// import BigLoadSpinnerWhite from "../../components/Shared/BigLoadSpinnerWhite/BigLoadSpinnerWhite";
 import ErrorPage from "../Error404Page/ErrorPage";
 import LoanCard from "../../components/Card/LoanCard";
 import { IoSearchOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
+import LoanSkeleton from "../../components/Shared/LoanSkeleton/LoanSkeleton";
 
 const AllLoans = () => {
   const [page, setPage] = useState(1);
@@ -218,7 +219,8 @@ const AllLoans = () => {
         )}
 
         {isFetching ? (
-          <BigLoadSpinnerWhite></BigLoadSpinnerWhite>
+          // <BigLoadSpinnerWhite></BigLoadSpinnerWhite>
+          <LoanSkeleton count={8}></LoanSkeleton>
         ) : allLoans.length === 0 &&
           (category || minLoanLimit || maxLoanLimit || searchText) ? (
           <div className="text-center text-gray-500 my-20">
