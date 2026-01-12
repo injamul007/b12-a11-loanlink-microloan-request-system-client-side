@@ -43,6 +43,12 @@ It provides a secure and user-friendly environment for borrowers to explore loan
 - Real-time data fetching using **React Query**  
 - Role-based route protection  
 
+### 💸 Stripe Payment System
+- **Fully integrated Stripe payment system** for seamless loan application fee transactions
+  - Loan Application fee payment  
+  - Secure checkout flow
+  - Payment confirmation and status updates
+
 ### 🧾 Loan Management & CRUD
 - Managers/Admins can add, edit, update, and delete loans  
 - Loan details include title, category, interest rate, max loan limit, documents required, EMI plans, and featured image  
