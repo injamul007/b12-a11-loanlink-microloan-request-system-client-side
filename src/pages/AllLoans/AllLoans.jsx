@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -6,22 +6,41 @@ import axios from "axios";
 import BigLoadSpinnerWhite from "../../components/Shared/BigLoadSpinnerWhite/BigLoadSpinnerWhite";
 import ErrorPage from "../Error404Page/ErrorPage";
 import LoanCard from "../../components/Card/LoanCard";
+import { IoSearchOutline } from "react-icons/io5";
+import { motion } from "framer-motion";
 
 const AllLoans = () => {
   const [page, setPage] = useState(1);
   const limit = 10;
   const [category, setCategory] = useState("");
-  const [minLoanLimit, setMinLoanLimit] = useState('');
-  const [maxLoanLimit, setMaxLoanLimit] = useState('');
+  const [minLoanLimit, setMinLoanLimit] = useState("");
+  const [maxLoanLimit, setMaxLoanLimit] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  //? Debounce Effect
+  useEffect(() => {
+    const searchTimer = setTimeout(() => {
+      setDebouncedSearch(searchText);
+    }, 500);
+    return () => clearTimeout(searchTimer);
+  }, [searchText]);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["all-loans", page, category, minLoanLimit , maxLoanLimit],
+    queryKey: [
+      "all-loans",
+      page,
+      category,
+      minLoanLimit,
+      maxLoanLimit,
+      debouncedSearch,
+    ],
     queryFn: async () => {
       try {
         const res = await axios.get(
           `${
             import.meta.env.VITE_SERVER_API_URL_KEY
-          }/all-loans?page=${page}&limit=${limit}&category=${category}&minLoanLimit=${minLoanLimit}&maxLoanLimit=${maxLoanLimit}`
+          }/all-loans?page=${page}&limit=${limit}&category=${category}&minLoanLimit=${minLoanLimit}&maxLoanLimit=${maxLoanLimit}&search=${debouncedSearch}`
         );
         return res.data;
       } catch (error) {
@@ -49,11 +68,29 @@ const AllLoans = () => {
       setMinLoanLimit("");
       setMaxLoanLimit("");
     } else {
-      const {min, max} = JSON.parse(value);
+      const { min, max } = JSON.parse(value);
       setMinLoanLimit(min);
       setMaxLoanLimit(max);
     }
     setPage(1);
+  };
+
+  const handleSearch = (e) => {
+    setSearchText(e.target.value);
+    setPage(1);
+  };
+
+  // motion variants
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.15 },
+    },
+  };
+
+  const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
 
   return (
@@ -65,7 +102,9 @@ const AllLoans = () => {
             All Loans
           </h2>
           <p className="mt-6 text-md text-gray-600 dark:text-gray-300 font-semibold max-w-2xl mx-auto">
-            Explore all our microloans <span>(Loan Found {total})</span>
+            Explore all our microloans (
+            <span className="text-[#4DA3FF] font-bold">Loan Found {total}</span>
+            )
           </p>
         </div>
 
@@ -92,29 +131,75 @@ const AllLoans = () => {
           <div>
             <select onChange={handleLoanLimitFilter} className="select">
               <option value="">Filter By Loan Limit</option>
-              <option value={JSON.stringify({ min: 0, max: 3000 })}>Under ৳3000</option>
-              <option value={JSON.stringify({ min: 3000, max: 8000 })}>৳3000 - ৳8000</option>
-              <option value={JSON.stringify({ min: 8000, max: 12000 })}>৳8000 - ৳12000</option>
-              <option value={JSON.stringify({ min: 12000, max: 16000 })}>৳12000 - ৳16000</option>
-              <option value={JSON.stringify({ min: 16000, max: 20000 })}>৳16000 - ৳20000</option>
-              <option value={JSON.stringify({ min: 20000, max: 25000 })}>৳20000 - ৳25000</option>
-              <option value={JSON.stringify({ min: 25000, max: 30000 })}>৳25000 - ৳30000</option>
-              <option value={JSON.stringify({ min: 30000, max: 35000 })}>৳30000 - ৳35000</option>
-              <option value={JSON.stringify({ min: 35000, max: 99999 })}>৳35000+</option>
+              <option value={JSON.stringify({ min: 0, max: 3000 })}>
+                Under ৳3000
+              </option>
+              <option value={JSON.stringify({ min: 3000, max: 8000 })}>
+                ৳3000 - ৳8000
+              </option>
+              <option value={JSON.stringify({ min: 8000, max: 12000 })}>
+                ৳8000 - ৳12000
+              </option>
+              <option value={JSON.stringify({ min: 12000, max: 16000 })}>
+                ৳12000 - ৳16000
+              </option>
+              <option value={JSON.stringify({ min: 16000, max: 20000 })}>
+                ৳16000 - ৳20000
+              </option>
+              <option value={JSON.stringify({ min: 20000, max: 25000 })}>
+                ৳20000 - ৳25000
+              </option>
+              <option value={JSON.stringify({ min: 25000, max: 30000 })}>
+                ৳25000 - ৳30000
+              </option>
+              <option value={JSON.stringify({ min: 30000, max: 35000 })}>
+                ৳30000 - ৳35000
+              </option>
+              <option value={JSON.stringify({ min: 35000, max: 99999 })}>
+                ৳35000+
+              </option>
             </select>
           </div>
-          <div>Search</div>
+          <div>
+            <label className="input">
+              <IoSearchOutline size={20} />
+              <input
+                onChange={handleSearch}
+                type="search"
+                className="grow"
+                placeholder="Search by Loan Title"
+              />
+            </label>
+          </div>
           <div>Sort</div>
         </div>
 
         {isLoading ? (
           <BigLoadSpinnerWhite></BigLoadSpinnerWhite>
-        ) : (
-          <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6">
-            {allLoans.map((loan) => (
-              <LoanCard key={loan._id} loan={loan}></LoanCard>
-            ))}
+        ) : allLoans.length === 0 &&
+          (category || minLoanLimit || maxLoanLimit || searchText) ? (
+          <div className="text-center text-gray-500 my-20">
+            <h3 className="text-2xl font-semibold">No Loan found 😕</h3>
+            <p className="mt-2">
+              Try searching or filtering with a different value
+            </p>
           </div>
+        ) : (
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-5">
+              {allLoans.map((loan) => (
+                <motion.div key={loan._id} variants={fadeUp}>
+                  <LoanCard loan={loan}></LoanCard>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         )}
 
         <div className="flex justify-center gap-2 mt-10">
