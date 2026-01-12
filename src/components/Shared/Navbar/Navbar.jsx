@@ -33,23 +33,22 @@ const Navbar = () => {
           <GrDocumentStore size={20} /> All Loans
         </NavLink>
       </li>
+      <li>
+        <NavLink to={"/about-us"}>
+          <FaUsers size={24} /> About Us
+        </NavLink>
+      </li>
 
-      {user && user?.email ? (
-        <li>
-          <NavLink to={"/dashboard"}>
-            <MdDashboard size={24} /> Dashboard
-          </NavLink>
-        </li>
-      ) : (
+      {user && user?.email && (
         <>
-          <li>
-            <NavLink to={"/about-us"}>
-              <FaUsers size={24} /> About Us
-            </NavLink>
-          </li>
           <li>
             <NavLink to={"/contact"}>
               <MdContacts size={22} /> Contact
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/dashboard"}>
+              <MdDashboard size={24} /> Dashboard
             </NavLink>
           </li>
         </>
