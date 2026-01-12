@@ -45,9 +45,9 @@ const Banner = () => {
           <Link to="/all-loans" className="cta-first-button btn-sm md:btn-md">
             Explore Loans
           </Link>
-          <Link to="/loan-application-form" className="cta-second-button lg:btn-md md:btn-md btn-sm">
+          {/* <Link to="/loan-application-form" className="cta-second-button lg:btn-md md:btn-md btn-sm">
             Apply for Loan
-          </Link>
+          </Link> */}
         </div>
       </div>
 
