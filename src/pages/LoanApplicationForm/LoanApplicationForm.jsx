@@ -194,7 +194,7 @@ const LoanApplicationForm = () => {
               {/* First Name */}
               <div>
                 <label className="label">
-                  <span className="label-text font-medium">First Name</span>
+                  <span className="label-text font-medium">First Name<sup className="text-error text-[13px]">*</sup></span>
                 </label>
                 <input
                   type="text"
@@ -221,7 +221,7 @@ const LoanApplicationForm = () => {
               {/* Last Name */}
               <div>
                 <label className="label">
-                  <span className="label-text font-medium">Last Name</span>
+                  <span className="label-text font-medium">Last Name<sup className="text-error text-[13px]">*</sup></span>
                 </label>
                 <input
                   type="text"
@@ -245,7 +245,7 @@ const LoanApplicationForm = () => {
               {/* Contact Number */}
               <div>
                 <label className="label">
-                  <span className="label-text font-medium">Contact Number</span>
+                  <span className="label-text font-medium">Contact Number<sup className="text-error text-[13px]">*</sup></span>
                 </label>
                 <input
                   type="text"
@@ -273,8 +273,7 @@ const LoanApplicationForm = () => {
               <div>
                 <label className="label">
                   <span className="label-text font-medium">
-                    NID / Passport Number
-                  </span>
+                    NID / Passport Number</span><sup className="text-error text-[13px]">*</sup>
                 </label>
                 <input
                   type="text"
@@ -297,7 +296,7 @@ const LoanApplicationForm = () => {
               {/* Income Source */}
               <div>
                 <label className="label">
-                  <span className="label-text font-medium">Income Source</span>
+                  <span className="label-text font-medium">Income Source<sup className="text-error text-[13px]">*</sup></span>
                 </label>
                 <select
                   className="select select-bordered w-full"
@@ -326,7 +325,7 @@ const LoanApplicationForm = () => {
               <div>
                 <label className="label">
                   <span className="label-text font-medium">
-                    Monthly Income (BDT)
+                    Monthly Income (BDT)<sup className="text-error text-[13px]">*</sup>
                   </span>
                 </label>
                 <input
@@ -351,7 +350,7 @@ const LoanApplicationForm = () => {
               <div>
                 <label className="label">
                   <span className="label-text font-medium">
-                    Loan Amount (BDT)
+                    Loan Amount (BDT)<sup className="text-error text-[13px]">*</sup>
                   </span>
                 </label>
                 <input
@@ -376,7 +375,7 @@ const LoanApplicationForm = () => {
               <div className="md:col-span-2 lg:col-span-1 col-span-1">
                 <label className="label">
                   <span className="label-text font-medium">
-                    Reason for Loan
+                    Reason for Loan<sup className="text-error text-[13px]">*</sup>
                   </span>
                 </label>
                 <select
@@ -412,7 +411,7 @@ const LoanApplicationForm = () => {
               {/* Address */}
               <div className="md:col-span-2">
                 <label className="label">
-                  <span className="label-text font-medium">Address</span>
+                  <span className="label-text font-medium">Address<sup className="text-error text-[13px]">*</sup></span>
                 </label>
                 <textarea
                   rows="2"
@@ -432,7 +431,7 @@ const LoanApplicationForm = () => {
               {/* Extra Notes */}
               <div className="md:col-span-2">
                 <label className="label">
-                  <span className="label-text font-medium">Extra Notes</span>
+                  <span className="label-text font-medium">Extra Notes<sup className="text-error text-[13px]">*</sup></span>
                 </label>
                 <textarea
                   rows="3"
